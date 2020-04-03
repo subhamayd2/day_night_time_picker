@@ -25,15 +25,17 @@ class SunMoon extends StatelessWidget {
             ? Container(
                 key: ValueKey(1),
                 child: sunAsset ??
-                    Image.asset(
+                    AssetImage(
                       "assets/sun.png",
+                      package: 'day_night_time_picker',
                     ),
               )
             : Container(
                 key: ValueKey(2),
                 child: moonAsset ??
-                    Image.asset(
+                    AssetImage(
                       "assets/moon.png",
+                      package: 'day_night_time_picker',
                     ),
               ),
         transitionBuilder: (child, anim) {

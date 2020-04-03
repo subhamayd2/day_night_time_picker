@@ -3,7 +3,7 @@ description: A day night time picker for Flutter.
 version: 0.1.0
 authors:
   - Subhamay Dutta<bloodyshower@gmail.com>
-homepage:
+homepage: https://github.com/subhamayd2/day_night_time_picker
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -23,8 +23,8 @@ dev_dependencies:
 flutter:
   # To add assets to your package, add an assets section, like this:
   # assets:
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
+  #   - path/to/asset
+  #   - path/to/asset
   #
   # For details regarding assets in packages, see
   # https://flutter.dev/assets-and-images/#from-packages

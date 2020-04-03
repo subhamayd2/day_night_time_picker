@@ -1,8 +1,6 @@
 name: day_night_time_picker
 description: A day night time picker for Flutter.
 version: 0.1.0
-authors:
-  - Subhamay Dutta<bloodyshower@gmail.com>
 homepage: https://github.com/subhamayd2/day_night_time_picker
 
 environment:

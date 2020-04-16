@@ -16,6 +16,7 @@ PageRouteBuilder showPicker({
   String okText = "ok",
   Image sunAsset,
   Image moonAsset,
+  bool blurredBackground = false,
 }) {
   return PageRouteBuilder(
     pageBuilder: (context, _, __) => _DayNightTimePicker(
@@ -27,6 +28,7 @@ PageRouteBuilder showPicker({
       okText: okText,
       sunAsset: sunAsset,
       moonAsset: moonAsset,
+      blurredBackground: blurredBackground,
     ),
     transitionDuration: Duration(milliseconds: 200),
     transitionsBuilder: (context, anim, secondAnim, child) => SlideTransition(

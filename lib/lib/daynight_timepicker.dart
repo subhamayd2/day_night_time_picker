@@ -185,7 +185,7 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
     final color = widget.accentColor ?? Theme.of(context).accentColor;
     final unselectedOpacity = 1.0;
 
-    final double blurAmount = widget.blurredBackground ?? false ? 0 : 5;
+    final double blurAmount = widget.blurredBackground ?? false ? 5 : 0;
 
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: blurAmount, sigmaY: blurAmount),

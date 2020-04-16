@@ -1,3 +1,7 @@
+## [0.1.3+2] - 16th April 2020.
+
+- Typo.
+
 ## [0.1.3+1] - 16th April 2020.
 
 - Minor patches.

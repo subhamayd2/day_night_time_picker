@@ -1,6 +1,6 @@
 name: day_night_time_picker
 description: A day night time picker for Flutter. Beautiful day and night animation with Sun and Moon assets.
-version: 0.1.3+1
+version: 0.1.3+2
 homepage: https://github.com/subhamayd2/day_night_time_picker
 
 environment:

@@ -57,6 +57,7 @@ class _DayNightTimePicker extends StatefulWidget {
   final String okText;
   final Image sunAsset;
   final Image moonAsset;
+  final bool blurredBackground;
 
   _DayNightTimePicker({
     Key key,
@@ -68,6 +69,7 @@ class _DayNightTimePicker extends StatefulWidget {
     this.okText = "ok",
     this.sunAsset,
     this.moonAsset,
+    this.blurredBackground = false,
   }) : super(key: key);
 
   @override
@@ -181,8 +183,10 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
     final color = widget.accentColor ?? Theme.of(context).accentColor;
     final unselectedOpacity = 1.0;
 
+    final double blurAmount = widget.blurredBackground ?? false ? 0 : 5;
+
     return BackdropFilter(
-      filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+      filter: ImageFilter.blur(sigmaX: blurAmount, sigmaY: blurAmount),
       child: Dialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(_BORDER_RADIUS),

@@ -1,4 +1,8 @@
-## [0.1.2] - 3rd April 2020.
+## [0.1.3] - 16th April 2020.
+
+- Added more blur customization.
+
+## [0.1.2] - 16th April 2020.
 
 - Minor optimizations.
 

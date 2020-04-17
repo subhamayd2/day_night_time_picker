@@ -1,3 +1,7 @@
+## [0.1.3+3] - 17th April 2020.
+
+- Barrier color.
+
 ## [0.1.3+2] - 16th April 2020.
 
 - Typo.

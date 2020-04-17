@@ -17,6 +17,7 @@ PageRouteBuilder showPicker({
   Image sunAsset,
   Image moonAsset,
   bool blurredBackground = false,
+  Color barrierColor = Colors.black45,
 }) {
   return PageRouteBuilder(
     pageBuilder: (context, _, __) => _DayNightTimePicker(
@@ -47,6 +48,7 @@ PageRouteBuilder showPicker({
     ),
     barrierDismissible: true,
     opaque: false,
+    barrierColor: barrierColor,
   );
 }
 

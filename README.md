@@ -1,6 +1,6 @@
 # DayNightTimePicker
 
-A day night time picker for Flutter.
+A day night time picker for Flutter with **Zero Dependencies**.
 
 <img src="https://raw.githubusercontent.com/subhamayd2/day_night_time_picker/master/example.gif" />
 
@@ -40,6 +40,25 @@ FlatButton(
     ),
 ),
 ```
+
+## Props
+
+| Name                   | Description                                                        |             Default             |
+| :--------------------- | :----------------------------------------------------------------- | :-----------------------------: |
+| **value**              | **`Required`** Display value. It takes in [TimeOfDay].             |
+| **onChange**           | **`Required`** Return the new time the user picked as [TimeOfDay]. |
+| **onChangeDateTime**   | _`Optional`_ Return the new time the user picked as [DateTime].    |
+| **is24HrFormat**       | Show the time in TimePicker in 24 hour format.                     |             `false`             |
+| **accentColor**        | Accent color of the TimePicker.                                    | `Theme.of(context).accentColor` |
+| **cancelText**         | Text displayed for the Cancel button.                              |            `cancel`             |
+| **okText**             | Text displayed for the Ok button.                                  |              `ok`               |
+| **sunAsset**           | Image asset used for the Sun.                                      |         Asset provided          |
+| **moonAsset**          | Image asset used for the Moon.                                     |         Asset provided          |
+| **blurredBackground**  | Whether to blur the background of the [Modal].                     |             `false`             |
+| **barrierColor**       | Color of the background of the [Modal].                            |        `Colors.black45`         |
+| **borderRadius**       | Border radius of the [Container] in [double].                      |             `10.0`              |
+| **elevation**          | Elevation of the [Modal] in [double].                              |             `12.0`              |
+| **barrierDismissible** | Whether clicking outside should dismiss the [Modal].               |             `true`              |
 
 ## LICENCE
 

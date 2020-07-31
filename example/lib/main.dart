@@ -40,7 +40,8 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             Text(
               _time.format(context),
-              style: Theme.of(context).textTheme.display1,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headline1,
             ),
             SizedBox(height: 10),
             FlatButton(
@@ -52,6 +53,10 @@ class _HomeState extends State<Home> {
                     value: _time,
                     onChange: onTimeChanged,
                     is24HrFormat: false,
+                    // Optional onChange to receive value as DateTime
+                    onChangeDateTime: (DateTime dateTime) {
+                      print(dateTime);
+                    },
                   ),
                 );
               },

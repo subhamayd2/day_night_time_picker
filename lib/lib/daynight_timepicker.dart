@@ -5,11 +5,46 @@ import './daynight_banner.dart';
 import './utils.dart';
 
 const _BORDER_RADIUS = 10.0;
+const _ELEVATION = 12.0;
 
+///
+/// The function that shows the *DayNightTimePicker*
+///
+/// This function takes in the following parameters:
+///
+/// **value** - `Required` Display value. It takes in [TimeOfDay].
+///
+/// **onChange** - `Required` Return the new time the user picked as [TimeOfDay].
+///
+/// **onChangeDateTime** - Return the new time the user picked as [DateTime].
+///
+/// **is24HrFormat** - Show the time in TimePicker in 24 hour format. Defaults to `false`.
+///
+/// **accentColor** - Accent color of the TimePicker. Defaults to `Theme.of(context).accentColor`.
+///
+/// **cancelText** - Text displayed for the Cancel button. Defaults to `cancel`.
+///
+/// **okText** - Text displayed for the Ok button. Defaults to `ok`.
+///
+/// **sunAsset** - Image asset used for the Sun. Default asset provided.
+///
+/// **moonAsset** - Image asset used for the Moon. Default asset provided.
+///
+/// **blurredBackground** - Whether to blur the background of the [Modal]. Defaults to `false`.
+///
+/// **barrierColor** - Color of the background of the [Modal]. Defaults to `Colors.black45`.
+///
+/// **borderRadius** - Border radius of the [Container] in `double`. Defaults to `10.0`.
+///
+/// **elevation** - Elevation of the [Modal] in double. Defaults to `12.0`.
+///
+/// **barrierDismissible** - Whether clicking outside should dismiss the [Modal]. Defaults to `true`.
+///
 PageRouteBuilder showPicker({
   BuildContext context,
   @required TimeOfDay value,
   @required void Function(TimeOfDay) onChange,
+  void Function(DateTime) onChangeDateTime,
   bool is24HrFormat = false,
   Color accentColor,
   String cancelText = "cancel",
@@ -18,11 +53,15 @@ PageRouteBuilder showPicker({
   Image moonAsset,
   bool blurredBackground = false,
   Color barrierColor = Colors.black45,
+  double borderRadius,
+  double elevation,
+  bool barrierDismissible = true,
 }) {
   return PageRouteBuilder(
     pageBuilder: (context, _, __) => _DayNightTimePicker(
       value: value,
       onChange: onChange,
+      onChangeDateTime: onChangeDateTime,
       is24HrFormat: is24HrFormat,
       accentColor: accentColor,
       cancelText: cancelText,
@@ -30,6 +69,8 @@ PageRouteBuilder showPicker({
       sunAsset: sunAsset,
       moonAsset: moonAsset,
       blurredBackground: blurredBackground,
+      borderRadius: borderRadius,
+      elevation: elevation,
     ),
     transitionDuration: Duration(milliseconds: 200),
     transitionsBuilder: (context, anim, secondAnim, child) => SlideTransition(
@@ -46,7 +87,7 @@ PageRouteBuilder showPicker({
         child: child,
       ),
     ),
-    barrierDismissible: true,
+    barrierDismissible: barrierDismissible,
     opaque: false,
     barrierColor: barrierColor,
   );
@@ -55,6 +96,7 @@ PageRouteBuilder showPicker({
 class _DayNightTimePicker extends StatefulWidget {
   final TimeOfDay value;
   final void Function(TimeOfDay) onChange;
+  final void Function(DateTime) onChangeDateTime;
   final bool is24HrFormat;
   final Color accentColor;
   final String cancelText;
@@ -62,11 +104,14 @@ class _DayNightTimePicker extends StatefulWidget {
   final Image sunAsset;
   final Image moonAsset;
   final bool blurredBackground;
+  final double borderRadius;
+  final double elevation;
 
   _DayNightTimePicker({
     Key key,
     @required this.value,
     @required this.onChange,
+    this.onChangeDateTime,
     this.is24HrFormat = false,
     this.accentColor,
     this.cancelText = "cancel",
@@ -74,6 +119,8 @@ class _DayNightTimePicker extends StatefulWidget {
     this.sunAsset,
     this.moonAsset,
     this.blurredBackground = false,
+    this.borderRadius,
+    this.elevation,
   }) : super(key: key);
 
   @override
@@ -150,6 +197,12 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
       minute: minute,
     );
     widget.onChange(time);
+    if (widget.onChangeDateTime != null) {
+      final now = DateTime.now();
+      final dateTime =
+          DateTime(now.year, now.month, now.day, time.hour, time.minute);
+      widget.onChangeDateTime(dateTime);
+    }
     onCancel();
   }
 
@@ -159,7 +212,7 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final _commonTimeStyles = Theme.of(context).textTheme.display3.copyWith(
+    final _commonTimeStyles = Theme.of(context).textTheme.headline2.copyWith(
           fontSize: 62,
           fontWeight: FontWeight.bold,
         );
@@ -189,15 +242,18 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
 
     final double blurAmount = widget.blurredBackground ?? false ? 5 : 0;
 
+    final borderRadius = widget.borderRadius ?? _BORDER_RADIUS;
+    final elevation = widget.elevation ?? _ELEVATION;
+
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: blurAmount, sigmaY: blurAmount),
       child: Dialog(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(_BORDER_RADIUS),
+          borderRadius: BorderRadius.circular(borderRadius),
         ),
-        elevation: 12,
+        elevation: elevation,
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(_BORDER_RADIUS),
+          borderRadius: BorderRadius.circular(borderRadius),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,

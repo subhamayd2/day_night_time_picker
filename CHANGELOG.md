@@ -1,3 +1,8 @@
+## [0.2.0] - 31st July 2020.
+
+- Added optional callback to return data in DateTime.
+- Added other bunch of parameters to customize the picker
+
 ## [0.1.3+3] - 17th April 2020.
 
 - Barrier color.

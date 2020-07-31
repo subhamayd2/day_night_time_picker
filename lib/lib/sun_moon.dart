@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import './utils.dart';
 
+/// [Widget] for rendering the Sun and Moon Asset
 class SunMoon extends StatelessWidget {
+  /// Whether currently the Sun is displayed
   final bool isSun;
 
+  /// The Image asset for the sun
   final Image sunAsset;
+
+  /// The Image asset for the moon
   final Image moonAsset;
 
+  /// Initialize the Class
   SunMoon({
     this.isSun,
     this.sunAsset,

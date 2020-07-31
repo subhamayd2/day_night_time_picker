@@ -4,7 +4,10 @@ import './ampm.dart';
 import './daynight_banner.dart';
 import './utils.dart';
 
+/// Default Border radius value in [double]
 const _BORDER_RADIUS = 10.0;
+
+/// Default Elevation value in [double]
 const _ELEVATION = 12.0;
 
 ///
@@ -93,20 +96,45 @@ PageRouteBuilder showPicker({
   );
 }
 
+/// Private class. [StatefulWidget] that renders the content of the picker.
 class _DayNightTimePicker extends StatefulWidget {
+  /// **`Required`** Display value. It takes in [TimeOfDay].
   final TimeOfDay value;
+
+  /// **`Required`** Return the new time the user picked as [TimeOfDay].
   final void Function(TimeOfDay) onChange;
+
+  /// _`Optional`_ Return the new time the user picked as [DateTime].
   final void Function(DateTime) onChangeDateTime;
+
+  /// Show the time in TimePicker in 24 hour format.
   final bool is24HrFormat;
+
+  /// Accent color of the TimePicker.
   final Color accentColor;
+
+  /// Text displayed for the Cancel button.
   final String cancelText;
+
+  /// Text displayed for the Ok button.
   final String okText;
+
+  /// Image asset used for the Sun.
   final Image sunAsset;
+
+  /// Image asset used for the Moon.
   final Image moonAsset;
+
+  /// Whether to blur the background of the [Modal].
   final bool blurredBackground;
+
+  /// Border radius of the [Container] in [double].
   final double borderRadius;
+
+  /// Elevation of the [Modal] in [double].
   final double elevation;
 
+  /// Initialize the picker [Widget]
   _DayNightTimePicker({
     Key key,
     @required this.value,
@@ -127,13 +155,21 @@ class _DayNightTimePicker extends StatefulWidget {
   _DayNightTimePickerState createState() => _DayNightTimePickerState();
 }
 
+/// Picker state class
 class _DayNightTimePickerState extends State<_DayNightTimePicker> {
+  /// Current selected hour
   int hour;
+
+  /// Current selected minute
   int minute;
+
+  /// Current selected AM/PM
   String a;
 
+  /// Currently changing the hour section
   bool changingHour = true;
 
+  /// Default Ok/Cancel [TextStyle]
   final okCancelStyle = TextStyle(fontWeight: FontWeight.bold);
 
   @override
@@ -151,6 +187,7 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
     }
   }
 
+  /// Separate out the hour and minute from a string
   void separateHoursAndMinutes() {
     int _h = widget.value.hour;
     int _m = widget.value.minute;
@@ -173,6 +210,7 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
     });
   }
 
+  /// Change handler for picker
   onChangeTime(double value) {
     if (changingHour) {
       setState(() {
@@ -185,12 +223,14 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
     }
   }
 
+  /// Hnadle should change hour or minute
   changeCurrentSelector(bool isHour) {
     setState(() {
       changingHour = isHour;
     });
   }
 
+  /// [onChange] handler. Return [TimeOfDay]
   onOk() {
     var time = TimeOfDay(
       hour: getHours(hour, a, widget.is24HrFormat),
@@ -206,6 +246,7 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
     onCancel();
   }
 
+  /// Handler to close the picker
   onCancel() {
     Navigator.of(context).pop();
   }

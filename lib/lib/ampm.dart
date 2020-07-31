@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 
+/// [Widget] for rendering the AM/PM button
 class AmPm extends StatelessWidget {
+  /// Currently selected by user
   final String selected;
+
+  /// [onChange] handler for AM/PM
   final void Function(String) onChange;
+
+  /// Accent color to be used for the button
   final Color accentColor;
 
+  /// Default [TextStyle]
   final _style = TextStyle(fontSize: 20);
 
+  /// Initialize the buttons
   AmPm({this.selected, this.onChange, this.accentColor});
 
   @override

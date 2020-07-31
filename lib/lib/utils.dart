@@ -1,3 +1,4 @@
+/// Padding single digit number to be double digit
 String padNumber(int num) {
   if (num < 10) {
     return "0$num";
@@ -5,6 +6,7 @@ String padNumber(int num) {
   return "$num";
 }
 
+/// Get the hour either in 12Hr or 24Hr format
 int getHours(int h, String a, bool is24Hr) {
   if (is24Hr) {
     return h;
@@ -21,6 +23,7 @@ int getHours(int h, String a, bool is24Hr) {
   return h + 12;
 }
 
+/// Map a given value between a range
 double mapRange(
   double value,
   double iMin,

@@ -1,3 +1,7 @@
+## [0.2.0+1] - 31st July 2020.
+
+- Updated Documentation
+
 ## [0.2.0] - 31st July 2020.
 
 - Added optional callback to return data in DateTime.

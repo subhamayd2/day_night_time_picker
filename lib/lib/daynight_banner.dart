@@ -3,12 +3,21 @@ import 'package:flutter/material.dart';
 import './sun_moon.dart';
 import './utils.dart';
 
+/// [Widget] for rendering the box container of the sun and moon.
 class DayNightBanner extends StatelessWidget {
+  /// Current selected hour
   final int hour;
+
+  /// How much the Image is displaced from [left] based on the current hour
   final double displace;
+
+  /// Image asset of the sun
   final Image sunAsset;
+
+  /// Image asset of the moon
   final Image moonAsset;
 
+  /// Initialize the container
   DayNightBanner({
     this.hour,
     this.displace = 0,
@@ -16,6 +25,7 @@ class DayNightBanner extends StatelessWidget {
     this.moonAsset,
   });
 
+  /// Get the background color of the container, representing the time of day
   Color getColor(bool isDay, bool isDusk) {
     if (!isDay) {
       return Colors.blueGrey[900];

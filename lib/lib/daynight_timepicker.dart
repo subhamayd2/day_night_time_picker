@@ -50,6 +50,7 @@ PageRouteBuilder showPicker({
   void Function(DateTime) onChangeDateTime,
   bool is24HrFormat = false,
   Color accentColor,
+  Color unselectedColor,
   String cancelText = "cancel",
   String okText = "ok",
   Image sunAsset,
@@ -67,6 +68,7 @@ PageRouteBuilder showPicker({
       onChangeDateTime: onChangeDateTime,
       is24HrFormat: is24HrFormat,
       accentColor: accentColor,
+      unselectedColor: unselectedColor,
       cancelText: cancelText,
       okText: okText,
       sunAsset: sunAsset,
@@ -113,6 +115,9 @@ class _DayNightTimePicker extends StatefulWidget {
   /// Accent color of the TimePicker.
   final Color accentColor;
 
+  /// Accent color of unselected text.
+  final Color unselectedColor;
+
   /// Text displayed for the Cancel button.
   final String cancelText;
 
@@ -142,6 +147,7 @@ class _DayNightTimePicker extends StatefulWidget {
     this.onChangeDateTime,
     this.is24HrFormat = false,
     this.accentColor,
+    this.unselectedColor,
     this.cancelText = "cancel",
     this.okText = "ok",
     this.sunAsset,
@@ -279,6 +285,7 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
     final height = widget.is24HrFormat ? 200.0 : 240.0;
 
     final color = widget.accentColor ?? Theme.of(context).accentColor;
+    final unselectedColor = widget.unselectedColor ?? Colors.grey;
     final unselectedOpacity = 1.0;
 
     final double blurAmount = widget.blurredBackground ?? false ? 5 : 0;
@@ -317,6 +324,7 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
                     if (!widget.is24HrFormat)
                       AmPm(
                         accentColor: color,
+                        unselectedColor: unselectedColor,
                         selected: a,
                         onChange: (e) {
                           setState(() {
@@ -342,7 +350,9 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
                                   child: Text(
                                     "$hour",
                                     style: _commonTimeStyles.copyWith(
-                                        color: changingHour ? color : null),
+                                        color: changingHour
+                                            ? color
+                                            : unselectedColor),
                                   ),
                                 ),
                               ),
@@ -364,7 +374,9 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
                                   child: Text(
                                     "${padNumber(minute)}",
                                     style: _commonTimeStyles.copyWith(
-                                        color: !changingHour ? color : null),
+                                        color: !changingHour
+                                            ? color
+                                            : unselectedColor),
                                   ),
                                 ),
                               ),

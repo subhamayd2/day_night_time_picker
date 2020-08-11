@@ -11,11 +11,14 @@ class AmPm extends StatelessWidget {
   /// Accent color to be used for the button
   final Color accentColor;
 
+  /// Accent color to be used for the unselected button
+  final Color unselectedColor;
+
   /// Default [TextStyle]
   final _style = TextStyle(fontSize: 20);
 
   /// Initialize the buttons
-  AmPm({this.selected, this.onChange, this.accentColor});
+  AmPm({this.selected, this.onChange, this.accentColor, this.unselectedColor});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +45,7 @@ class AmPm extends StatelessWidget {
                   child: Text(
                     "am",
                     style: _style.copyWith(
-                      color: isAm ? accentColor : null,
+                      color: isAm ? accentColor : unselectedColor,
                       fontWeight: isAm ? FontWeight.bold : null,
                     ),
                   ),
@@ -66,7 +69,7 @@ class AmPm extends StatelessWidget {
                   child: Text(
                     "pm",
                     style: _style.copyWith(
-                      color: !isAm ? accentColor : null,
+                      color: !isAm ? accentColor : unselectedColor,
                       fontWeight: !isAm ? FontWeight.bold : null,
                     ),
                   ),

@@ -1,3 +1,7 @@
+## [0.2.1] - 11th August 2020.
+
+- Added optional `unselectedColor` for options
+
 ## [0.2.0+1] - 31st July 2020.
 
 - Updated Documentation

@@ -25,6 +25,8 @@ const _ELEVATION = 12.0;
 ///
 /// **accentColor** - Accent color of the TimePicker. Defaults to `Theme.of(context).accentColor`.
 ///
+/// **unselectedColor** - Color applied unselected options (am/pm, hour/minute). Defaults to `Colors.grey`.
+///
 /// **cancelText** - Text displayed for the Cancel button. Defaults to `cancel`.
 ///
 /// **okText** - Text displayed for the Ok button. Defaults to `ok`.

@@ -4,6 +4,10 @@ A day night time picker for Flutter with **Zero Dependencies**.
 
 <img src="https://raw.githubusercontent.com/subhamayd2/day_night_time_picker/master/example.gif" />
 
+> ### [View it on pub.dev](https://pub.dev/packages/day_night_time_picker)
+
+---
+
 ## Installation
 
 Add to pubspec.yaml.

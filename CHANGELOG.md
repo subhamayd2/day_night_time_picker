@@ -1,3 +1,7 @@
+## [0.3.0+2] - 08th October 2020.
+
+- Update img src in readme. Yeah twice, coz I am stupid.
+
 ## [0.3.0+1] - 08th October 2020.
 
 - Update img src in readme

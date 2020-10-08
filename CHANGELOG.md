@@ -1,3 +1,7 @@
+## [0.3.0] - 08th October 2020.
+
+- Added IOS style picker
+
 ## [0.2.1+1] - 08th October 2020.
 
 - Displacement issue fix for Sun and Moon assets

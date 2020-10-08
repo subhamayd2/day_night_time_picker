@@ -269,8 +269,8 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
     double min = 0;
     double max = 59;
     int divisions = 59;
-    double hourMinValue = 1;
-    double hourMaxValue = 12;
+    double hourMinValue = widget.is24HrFormat ? 0 : 1;
+    double hourMaxValue = widget.is24HrFormat ? 23 : 12;
     if (changingHour) {
       min = 1;
       max = 12;
@@ -279,8 +279,6 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
         min = 0;
         max = 23;
         divisions = 23;
-        hourMinValue = 0;
-        hourMaxValue = 23;
       }
     }
 

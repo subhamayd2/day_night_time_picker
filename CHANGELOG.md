@@ -1,3 +1,7 @@
+## [0.3.0+1] - 08th October 2020.
+
+- Update img src in readme
+
 ## [0.3.0] - 08th October 2020.
 
 - Added IOS style picker

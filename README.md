@@ -4,14 +4,14 @@ A day night time picker for Flutter with **Zero Dependencies**.
 
 > ### Default style:
 >
-> <img src="example.gif" style="width: 100%; max-width: 400px; height: auto" />
+> <img src="https://github.com/subhamayd2/day_night_time_picker/blob/master/example.gif" style="width: 100%; max-width: 400px; height: auto" />
 
 <br />
 <br />
 
 > ### IOS style:
 >
-> <img src="example_ios_style.png" style="width: 100%; max-width: 400px; height: auto" />
+> <img src="https://github.com/subhamayd2/day_night_time_picker/blob/master/example_ios_style.png" style="width: 100%; max-width: 400px; height: auto" />
 
 <br />
 <br />

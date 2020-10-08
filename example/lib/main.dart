@@ -52,7 +52,6 @@ class _HomeState extends State<Home> {
                     context: context,
                     value: _time,
                     onChange: onTimeChanged,
-                    is24HrFormat: false,
                     // Optional onChange to receive value as DateTime
                     onChangeDateTime: (DateTime dateTime) {
                       print(dateTime);

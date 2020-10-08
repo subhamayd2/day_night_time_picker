@@ -1,3 +1,7 @@
+## [0.2.1+1] - 08th October 2020.
+
+- Displacement issue fix for Sun and Moon assets
+
 ## [0.2.1] - 11th August 2020.
 
 - Added optional `unselectedColor` for options

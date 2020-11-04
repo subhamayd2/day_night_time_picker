@@ -1,4 +1,5 @@
 import 'package:day_night_time_picker/day_night_time_picker.dart';
+import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -52,6 +53,7 @@ class _HomeState extends State<Home> {
                     context: context,
                     value: _time,
                     onChange: onTimeChanged,
+                    minuteInterval: MinuteInterval.FIFTEEN,
                     // Optional onChange to receive value as DateTime
                     onChangeDateTime: (DateTime dateTime) {
                       print(dateTime);

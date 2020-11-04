@@ -85,6 +85,7 @@ FlatButton(
 | **iosStylePicker**     | Whether to display a IOS style picker (Not exactly the same).             |             `false`             |
 | **hourLabel**          | The label to be displayed for `hour` picker. Only for _iosStylePicker_.   |            `'hours'`            |
 | **minuteLabel**        | The label to be displayed for `minute` picker. Only for _iosStylePicker_. |           `'minutes'`           |
+| **minuteInterval**     | Steps interval while changing `minute`. Accepts `MinuteInterval` enum.    |      `MinuteInterval.ONE`       |
 
 ---
 

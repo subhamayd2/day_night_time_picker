@@ -1,3 +1,5 @@
+import 'package:day_night_time_picker/lib/constants.dart';
+
 /// Padding single digit number to be double digit
 String padNumber(int num) {
   if (num < 10) {
@@ -34,4 +36,16 @@ double mapRange(
   return ((value - iMin) * (oMax - oMin)) / (iMax - iMin) + oMin;
 }
 
-const SUN_MOON_WIDTH = 100.0;
+/// Map MinuteInterval enum to division values
+int getMinuteDivisions(MinuteInterval interval) {
+  switch (interval) {
+    case MinuteInterval.FIVE:
+      return 12;
+    case MinuteInterval.TEN:
+      return 6;
+    case MinuteInterval.FIFTEEN:
+      return 4;
+    default:
+      return 60;
+  }
+}

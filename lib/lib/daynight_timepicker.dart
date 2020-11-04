@@ -52,6 +52,8 @@ const _ELEVATION = ELEVATION;
 /// **hourLabel** - The label to be displayed for `hour` picker. Only for _iosStylePicker_. Defaults to `'hours'`.
 ///
 /// **minuteLabel** - The label to be displayed for `minute` picker. Only for _iosStylePicker_. Defaults to `'minutes'`.
+///
+/// **minuteInterval** - Steps interval while changing `minute`. Accepts `MinuteInterval` enum. Defaults to `MinuteInterval.ONE`.
 PageRouteBuilder showPicker({
   BuildContext context,
   @required TimeOfDay value,
@@ -72,6 +74,7 @@ PageRouteBuilder showPicker({
   bool iosStylePicker = false,
   String hourLabel = 'hours',
   String minuteLabel = 'minutes',
+  MinuteInterval minuteInterval = MinuteInterval.ONE,
 }) {
   return PageRouteBuilder(
     pageBuilder: (context, _, __) {
@@ -92,6 +95,7 @@ PageRouteBuilder showPicker({
           elevation: elevation,
           hourLabel: hourLabel,
           minuteLabel: minuteLabel,
+          minuteInterval: minuteInterval,
         );
       } else {
         return _DayNightTimePicker(
@@ -108,6 +112,7 @@ PageRouteBuilder showPicker({
           blurredBackground: blurredBackground,
           borderRadius: borderRadius,
           elevation: elevation,
+          minuteInterval: minuteInterval,
         );
       }
     },
@@ -173,6 +178,9 @@ class _DayNightTimePicker extends StatefulWidget {
   /// Elevation of the [Modal] in [double].
   final double elevation;
 
+  /// Steps interval while changing [minute].
+  final MinuteInterval minuteInterval;
+
   /// Initialize the picker [Widget]
   _DayNightTimePicker({
     Key key,
@@ -189,6 +197,7 @@ class _DayNightTimePicker extends StatefulWidget {
     this.blurredBackground = false,
     this.borderRadius,
     this.elevation,
+    this.minuteInterval,
   }) : super(key: key);
 
   @override
@@ -258,7 +267,7 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
       });
     } else {
       setState(() {
-        minute = value.round();
+        minute = value.ceil();
       });
     }
   }
@@ -300,7 +309,7 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
 
     double min = 0;
     double max = 59;
-    int divisions = 59;
+    int divisions = getMinuteDivisions(widget.minuteInterval);
     double hourMinValue = widget.is24HrFormat ? 0 : 1;
     double hourMaxValue = widget.is24HrFormat ? 23 : 12;
     if (changingHour) {

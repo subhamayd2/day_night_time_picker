@@ -1,5 +1,5 @@
+import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:flutter/material.dart';
-import './utils.dart';
 
 /// [Widget] for rendering the Sun and Moon Asset
 class SunMoon extends StatelessWidget {

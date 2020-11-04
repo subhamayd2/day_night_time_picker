@@ -60,6 +60,9 @@ class DayNightTimePickerIos extends StatefulWidget {
   /// Label for the `minute` text.
   final String minuteLabel;
 
+  /// Steps interval while changing [minute].
+  final MinuteInterval minuteInterval;
+
   /// Initialize the picker [Widget]
   DayNightTimePickerIos({
     Key key,
@@ -78,6 +81,7 @@ class DayNightTimePickerIos extends StatefulWidget {
     this.elevation,
     this.hourLabel,
     this.minuteLabel,
+    this.minuteInterval,
   }) : super(key: key);
 
   @override
@@ -231,6 +235,8 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
       hourListCount = 24;
     }
 
+    final minuteDiv = getMinuteDivisions(widget.minuteInterval);
+
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: blurAmount, sigmaY: blurAmount),
       child: Dialog(
@@ -323,21 +329,27 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                                 onSelectedItemChanged: (value) {
                                   onChangeTime(value + 0.0);
                                 },
-                                childDelegate: ListWheelChildBuilderDelegate(
-                                  childCount: 60,
-                                  builder: (context, index) {
-                                    final minuteVal = padNumber(index);
-                                    return Center(
-                                      child: Text(
-                                        "$minuteVal",
-                                        style: _commonTimeStyles.copyWith(
-                                          color: !changingHour
-                                              ? color
-                                              : unselectedColor,
+                                childDelegate:
+                                    ListWheelChildLoopingListDelegate(
+                                  children: List<Widget>.generate(
+                                    minuteDiv,
+                                    (index) {
+                                      final multiplier =
+                                          (60 / minuteDiv).round();
+                                      final minuteVal =
+                                          padNumber(index * multiplier);
+                                      return Center(
+                                        child: Text(
+                                          "$minuteVal",
+                                          style: _commonTimeStyles.copyWith(
+                                            color: !changingHour
+                                                ? color
+                                                : unselectedColor,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
                             ),

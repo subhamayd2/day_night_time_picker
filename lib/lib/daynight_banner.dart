@@ -1,7 +1,7 @@
 import 'dart:math';
+import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:flutter/material.dart';
 import './sun_moon.dart';
-import './utils.dart';
 
 /// [Widget] for rendering the box container of the sun and moon.
 class DayNightBanner extends StatelessWidget {

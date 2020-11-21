@@ -103,3 +103,27 @@ double getMaxMinute(double maxMinute, MinuteInterval interval) {
   }
   return max;
 }
+
+/// Generate a List of minutes
+List<int> generateMinutes(int divisions, MinuteInterval interval, min, max) {
+  final minutes = List<int>.generate(divisions + 1, (index) {
+    final val = min.round() + (getIntFromMinuteIntervalEnum(interval) * index);
+    if (val >= max) {
+      return max.round();
+    }
+    return val;
+  });
+  return minutes;
+}
+
+/// Generate a List of hours
+List<int> generateHours(int divisions, min, max) {
+  final hours = List<int>.generate(divisions, (index) {
+    final val = min.round() + index;
+    if (val >= max) {
+      return max.round();
+    }
+    return val;
+  });
+  return hours;
+}

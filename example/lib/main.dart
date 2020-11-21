@@ -24,7 +24,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  TimeOfDay _time = TimeOfDay.now();
+  TimeOfDay _time = TimeOfDay.now().replacing(minute: 30);
 
   void onTimeChanged(TimeOfDay newTime) {
     setState(() {
@@ -40,6 +40,10 @@ class _HomeState extends State<Home> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
+              "Popup Picker Style",
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            Text(
               _time.format(context),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline1,
@@ -53,7 +57,15 @@ class _HomeState extends State<Home> {
                     context: context,
                     value: _time,
                     onChange: onTimeChanged,
-                    minuteInterval: MinuteInterval.FIFTEEN,
+                    minuteInterval: MinuteInterval.FIVE,
+                    disableHour: false,
+                    disableMinute: false,
+                    iosStylePicker: true,
+                    is24HrFormat: false,
+                    minHour: 8,
+                    maxHour: 10,
+                    minMinute: 7,
+                    maxMinute: 56,
                     // Optional onChange to receive value as DateTime
                     onChangeDateTime: (DateTime dateTime) {
                       print(dateTime);
@@ -65,6 +77,18 @@ class _HomeState extends State<Home> {
                 "Open time picker",
                 style: TextStyle(color: Colors.white),
               ),
+            ),
+            SizedBox(height: 10),
+            Divider(),
+            SizedBox(height: 10),
+            Text(
+              "Inline Picker Style",
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            createInlinePicker(
+              value: _time,
+              onChange: onTimeChanged,
+              elevation: 1,
             ),
           ],
         ),

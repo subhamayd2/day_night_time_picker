@@ -1,11 +1,10 @@
 import 'dart:ui';
 
+import 'package:day_night_time_picker/lib/ampm.dart';
 import 'package:day_night_time_picker/lib/constants.dart';
+import 'package:day_night_time_picker/lib/daynight_banner.dart';
+import 'package:day_night_time_picker/lib/utils.dart';
 import 'package:flutter/material.dart';
-
-import 'ampm.dart';
-import 'daynight_banner.dart';
-import 'utils.dart';
 
 /// Default Border radius value in [double]
 const _BORDER_RADIUS = BORDER_RADIUS;
@@ -14,7 +13,7 @@ const _BORDER_RADIUS = BORDER_RADIUS;
 const _ELEVATION = ELEVATION;
 
 /// Private class. [StatefulWidget] that renders the content of the picker.
-class DayNightTimePickerIos extends StatefulWidget {
+class DayNightTimePickerAndroid extends StatefulWidget {
   /// **`Required`** Display value. It takes in [TimeOfDay].
   final TimeOfDay value;
 
@@ -54,12 +53,6 @@ class DayNightTimePickerIos extends StatefulWidget {
   /// Elevation of the [Modal] in [double].
   final double elevation;
 
-  /// Label for the `hour` text.
-  final String hourLabel;
-
-  /// Label for the `minute` text.
-  final String minuteLabel;
-
   /// Steps interval while changing [minute].
   final MinuteInterval minuteInterval;
 
@@ -85,7 +78,7 @@ class DayNightTimePickerIos extends StatefulWidget {
   final bool isInlineWidget;
 
   /// Initialize the picker [Widget]
-  DayNightTimePickerIos({
+  DayNightTimePickerAndroid({
     @required this.value,
     @required this.onChange,
     this.onChangeDateTime,
@@ -99,8 +92,6 @@ class DayNightTimePickerIos extends StatefulWidget {
     this.blurredBackground = false,
     this.borderRadius,
     this.elevation,
-    this.hourLabel,
-    this.minuteLabel,
     this.minuteInterval,
     this.disableMinute,
     this.disableHour,
@@ -117,11 +108,12 @@ class DayNightTimePickerIos extends StatefulWidget {
   }
 
   @override
-  _DayNightTimePickerIosState createState() => _DayNightTimePickerIosState();
+  _DayNightTimePickerAndroidState createState() =>
+      _DayNightTimePickerAndroidState();
 }
 
 /// Picker state class
-class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
+class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
   /// Current selected hour
   int hour;
 
@@ -137,69 +129,18 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   /// Default Ok/Cancel [TextStyle]
   final okCancelStyle = TextStyle(fontWeight: FontWeight.bold);
 
-  /// Controller for `hour` list
-  FixedExtentScrollController _hourController;
-
-  /// Controller for `minute` list
-  FixedExtentScrollController _minuteController;
-
-  /// List of hours to show
-  List<int> hours = [];
-
-  /// List of minutes to show
-  List<int> minutes = [];
-
   @override
   void initState() {
     setState(() {
       changingHour =
           (!widget.disableHour && !widget.disableMinute) || !widget.disableHour;
     });
-    final hourDiv = ((widget.maxHour - widget.minHour) + 1).round();
-    final _hours = generateHours(
-      hourDiv,
-      widget.minHour,
-      widget.maxHour,
-    );
-
-    double minMinute = getMinMinute(widget.minMinute, widget.minuteInterval);
-    double maxMinute = getMaxMinute(widget.maxMinute, widget.minuteInterval);
-
-    int minDiff = ((maxMinute) - minMinute).round();
-    final minuteDiv = getMinuteDivisions(minDiff, widget.minuteInterval);
-    List<int> _minutes = generateMinutes(
-      minuteDiv,
-      widget.minuteInterval,
-      minMinute,
-      maxMinute,
-    );
-    final initialVal = separateHoursAndMinutes();
-
-    _hourController = FixedExtentScrollController(
-        initialItem: _hours.indexOf(initialVal['h']))
-      ..addListener(() {
-        setState(() {
-          changingHour = true;
-        });
-      });
-    _minuteController = FixedExtentScrollController(
-        initialItem: _minutes.indexOf(initialVal['m']))
-      ..addListener(() {
-        setState(() {
-          changingHour = false;
-          hours = _hours;
-          minutes = _minutes;
-        });
-      });
-    setState(() {
-      hours = _hours;
-      minutes = _minutes;
-    });
+    separateHoursAndMinutes();
     super.initState();
   }
 
   @override
-  void didUpdateWidget(DayNightTimePickerIos oldWidget) {
+  void didUpdateWidget(DayNightTimePickerAndroid oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.is24HrFormat != widget.is24HrFormat ||
         oldWidget.value != widget.value) {
@@ -208,7 +149,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   }
 
   /// Separate out the hour and minute from a string
-  Map<String, int> separateHoursAndMinutes() {
+  void separateHoursAndMinutes() {
     int _h = widget.value.hour;
     int _m = widget.value.minute;
     String _a = "am";
@@ -223,16 +164,11 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
         _h -= 12;
       }
     }
-
     setState(() {
       hour = _h;
       minute = _m;
       a = _a;
     });
-    return {
-      "h": _h,
-      "m": _m,
-    };
   }
 
   /// Change handler for picker
@@ -243,7 +179,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
       });
     } else {
       setState(() {
-        minute = value.round();
+        minute = value.ceil();
       });
     }
   }
@@ -273,21 +209,40 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
 
   /// Handler to close the picker
   onCancel() {
-    Navigator.of(context).pop();
+    if (!widget.isInlineWidget) {
+      Navigator.of(context).pop();
+    } else {
+      separateHoursAndMinutes();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final _commonTimeStyles = Theme.of(context).textTheme.headline2.copyWith(
-          fontSize: 30,
+          fontSize: 62,
+          fontWeight: FontWeight.bold,
         );
+
+    double min = getMinMinute(widget.minMinute, widget.minuteInterval);
+    double max = getMaxMinute(widget.maxMinute, widget.minuteInterval);
+
+    int minDiff = (max - min).round();
+    int divisions = getMinuteDivisions(minDiff, widget.minuteInterval);
+
     double hourMinValue = widget.is24HrFormat ? 0 : 1;
     double hourMaxValue = widget.is24HrFormat ? 23 : 12;
+
+    if (changingHour) {
+      min = widget.minHour;
+      max = widget.maxHour;
+      divisions = (max - min).round();
+    }
 
     final height = widget.is24HrFormat ? 200.0 : 240.0;
 
     final color = widget.accentColor ?? Theme.of(context).accentColor;
     final unselectedColor = widget.unselectedColor ?? Colors.grey;
+    final unselectedOpacity = 1.0;
 
     final double blurAmount = widget.blurredBackground ?? false ? 5 : 0;
 
@@ -337,82 +292,69 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          SizedBox(
-                            width: 64,
+                          Material(
+                            color: Colors.transparent,
                             child: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 3.0),
-                              child: ListWheelScrollView.useDelegate(
-                                controller: _hourController,
-                                itemExtent: 36,
-                                physics: widget.disableHour
-                                    ? NeverScrollableScrollPhysics()
-                                    : FixedExtentScrollPhysics(),
-                                overAndUnderCenterOpacity:
-                                    widget.disableHour ? 0 : 0.25,
-                                perspective: 0.01,
-                                onSelectedItemChanged: (value) {
-                                  onChangeTime(hours[value] + 0.0);
-                                },
-                                childDelegate: ListWheelChildBuilderDelegate(
-                                  childCount: (hours ?? []).length,
-                                  builder: (context, index) {
-                                    final hourVal = padNumber(hours[index]);
-                                    return Center(
-                                      child: Text(
-                                        "$hourVal",
-                                        style: _commonTimeStyles.copyWith(
-                                          color: changingHour
-                                              ? color
-                                              : unselectedColor,
-                                        ),
-                                      ),
-                                    );
-                                  },
+                              child: InkWell(
+                                onTap: widget.disableHour
+                                    ? null
+                                    : () {
+                                        changeCurrentSelector(true);
+                                      },
+                                child: Opacity(
+                                  opacity: changingHour ? 1 : unselectedOpacity,
+                                  child: Text(
+                                    "$hour",
+                                    style: _commonTimeStyles.copyWith(
+                                        color: changingHour
+                                            ? color
+                                            : unselectedColor),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          Text(widget.hourLabel),
-                          SizedBox(
-                            width: 64,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 3.0),
-                              child: ListWheelScrollView.useDelegate(
-                                controller: _minuteController,
-                                itemExtent: 36,
-                                physics: widget.disableMinute
-                                    ? NeverScrollableScrollPhysics()
-                                    : FixedExtentScrollPhysics(),
-                                overAndUnderCenterOpacity:
-                                    widget.disableMinute ? 0 : 0.25,
-                                perspective: 0.01,
-                                onSelectedItemChanged: (value) {
-                                  onChangeTime(minutes[value] + 0.0);
-                                },
-                                childDelegate: ListWheelChildBuilderDelegate(
-                                  childCount: minutes.length,
-                                  builder: (context, index) {
-                                    final minuteVal = minutes[index];
-                                    return Center(
-                                      child: Text(
-                                        "${padNumber(minuteVal)}",
-                                        style: _commonTimeStyles.copyWith(
-                                          color: !changingHour
-                                              ? color
-                                              : unselectedColor,
-                                        ),
-                                      ),
-                                    );
-                                  },
+                          Text(":", style: _commonTimeStyles),
+                          Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: widget.disableMinute
+                                  ? null
+                                  : () {
+                                      changeCurrentSelector(false);
+                                    },
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 3.0),
+                                child: Opacity(
+                                  opacity:
+                                      !changingHour ? 1 : unselectedOpacity,
+                                  child: Text(
+                                    "${padNumber(minute)}",
+                                    style: _commonTimeStyles.copyWith(
+                                        color: !changingHour
+                                            ? color
+                                            : unselectedColor),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          Text(widget.minuteLabel),
                         ],
                       ),
+                    ),
+                    Slider(
+                      value: changingHour
+                          ? hour.roundToDouble()
+                          : minute.roundToDouble(),
+                      onChanged: onChangeTime,
+                      min: min,
+                      max: max,
+                      divisions: divisions,
+                      activeColor: color,
+                      inactiveColor: color.withAlpha(55),
                     ),
                     Expanded(
                       child: Row(

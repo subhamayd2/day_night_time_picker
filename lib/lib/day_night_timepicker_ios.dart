@@ -63,6 +63,24 @@ class DayNightTimePickerIos extends StatefulWidget {
   /// Steps interval while changing [minute].
   final MinuteInterval minuteInterval;
 
+  /// Disable minute picker
+  final bool disableMinute;
+
+  /// Disable hour picker
+  final bool disableHour;
+
+  /// Selectable maximum hour
+  final double maxHour;
+
+  /// Selectable maximum minute
+  final double maxMinute;
+
+  /// Selectable minimum hour
+  final double minHour;
+
+  /// Selectable minimum minute
+  final double minMinute;
+
   /// Initialize the picker [Widget]
   DayNightTimePickerIos({
     Key key,
@@ -82,6 +100,12 @@ class DayNightTimePickerIos extends StatefulWidget {
     this.hourLabel,
     this.minuteLabel,
     this.minuteInterval,
+    this.disableMinute,
+    this.disableHour,
+    this.maxHour,
+    this.maxMinute,
+    this.minHour,
+    this.minMinute,
   }) : super(key: key);
 
   @override
@@ -113,6 +137,10 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
 
   @override
   void initState() {
+    setState(() {
+      changingHour =
+          (!widget.disableHour && !widget.disableMinute) || !widget.disableHour;
+    });
     final initialVal = separateHoursAndMinutes();
     _hourController = FixedExtentScrollController(
         initialItem: initialVal['h'] - (widget.is24HrFormat ? 0 : 1))
@@ -235,7 +263,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
       hourListCount = 24;
     }
 
-    final minuteDiv = getMinuteDivisions(widget.minuteInterval);
+    final minuteDiv = getMinuteDivisions(60, widget.minuteInterval);
 
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: blurAmount, sigmaY: blurAmount),
@@ -288,8 +316,11 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                               child: ListWheelScrollView.useDelegate(
                                 controller: _hourController,
                                 itemExtent: 36,
-                                physics: FixedExtentScrollPhysics(),
-                                overAndUnderCenterOpacity: 0.25,
+                                physics: widget.disableHour
+                                    ? NeverScrollableScrollPhysics()
+                                    : FixedExtentScrollPhysics(),
+                                overAndUnderCenterOpacity:
+                                    widget.disableHour ? 0 : 0.25,
                                 perspective: 0.01,
                                 onSelectedItemChanged: (value) {
                                   onChangeTime(value + fixIndex);
@@ -323,8 +354,11 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                               child: ListWheelScrollView.useDelegate(
                                 controller: _minuteController,
                                 itemExtent: 36,
-                                physics: FixedExtentScrollPhysics(),
-                                overAndUnderCenterOpacity: 0.5,
+                                physics: widget.disableMinute
+                                    ? NeverScrollableScrollPhysics()
+                                    : FixedExtentScrollPhysics(),
+                                overAndUnderCenterOpacity:
+                                    widget.disableMinute ? 0 : 0.25,
                                 perspective: 0.01,
                                 onSelectedItemChanged: (value) {
                                   onChangeTime(value + 0.0);

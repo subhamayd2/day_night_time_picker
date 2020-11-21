@@ -54,6 +54,18 @@ const _ELEVATION = ELEVATION;
 /// **minuteLabel** - The label to be displayed for `minute` picker. Only for _iosStylePicker_. Defaults to `'minutes'`.
 ///
 /// **minuteInterval** - Steps interval while changing `minute`. Accepts `MinuteInterval` enum. Defaults to `MinuteInterval.ONE`.
+///
+/// **disableMinute** - Disables/hides the minute picker. Defaults to `false`.
+///
+/// **disableHour** - Disables/hides the hour picker. Defaults to `false`.
+///
+/// **maxHour** - Selectable maximum hour. Defaults to `12` | `23`.
+///
+/// **maxMinute** - Selectable maximum minute. Defaults to `59`.
+///
+/// **minHour** - Selectable minimum hour. Defaults to `0` | `1`.
+///
+/// **minMinute** - Selectable minimum minute. Defaults to `0`.
 PageRouteBuilder showPicker({
   BuildContext context,
   @required TimeOfDay value,
@@ -75,7 +87,33 @@ PageRouteBuilder showPicker({
   String hourLabel = 'hours',
   String minuteLabel = 'minutes',
   MinuteInterval minuteInterval = MinuteInterval.ONE,
+  bool disableMinute = false,
+  bool disableHour = false,
+  double minMinute = 0,
+  double maxMinute = 59,
+  // Infinity is used so that we can assert whether or not the user actually set a value
+  double minHour = double.infinity,
+  double maxHour = double.infinity,
 }) {
+  if (minHour == double.infinity) {
+    minHour = is24HrFormat ? 0 : 1;
+  }
+  if (maxHour == double.infinity) {
+    maxHour = is24HrFormat ? 23 : 12;
+  }
+
+  assert(!(disableHour == true && disableMinute == true),
+      "Both \"disableMinute\" and \"disableHour\" cannot be true.");
+  assert(maxMinute <= 59, "\"maxMinute\" must be less than or equal to 59");
+  assert(minMinute >= 0, "\"minMinute\" must be greater than or equal to 0");
+  if (is24HrFormat) {
+    assert(maxHour <= 23 && minHour >= 0,
+        "\"minHour\" and \"maxHour\" should be between 0-23 for 24-hour format");
+  } else {
+    assert(maxHour <= 12 && minHour >= 1,
+        "\"minHour\" and \"maxHour\" should be between 1-12 for 12-hour format");
+  }
+
   return PageRouteBuilder(
     pageBuilder: (context, _, __) {
       if (iosStylePicker) {
@@ -96,6 +134,12 @@ PageRouteBuilder showPicker({
           hourLabel: hourLabel,
           minuteLabel: minuteLabel,
           minuteInterval: minuteInterval,
+          disableMinute: disableMinute,
+          disableHour: disableHour,
+          maxHour: maxHour,
+          maxMinute: maxMinute,
+          minHour: minHour,
+          minMinute: minMinute,
         );
       } else {
         return _DayNightTimePicker(
@@ -113,6 +157,12 @@ PageRouteBuilder showPicker({
           borderRadius: borderRadius,
           elevation: elevation,
           minuteInterval: minuteInterval,
+          disableMinute: disableMinute,
+          disableHour: disableHour,
+          maxHour: maxHour,
+          maxMinute: maxMinute,
+          minHour: minHour,
+          minMinute: minMinute,
         );
       }
     },
@@ -181,6 +231,24 @@ class _DayNightTimePicker extends StatefulWidget {
   /// Steps interval while changing [minute].
   final MinuteInterval minuteInterval;
 
+  /// Disable minute picker
+  final bool disableMinute;
+
+  /// Disable hour picker
+  final bool disableHour;
+
+  /// Selectable maximum hour
+  final double maxHour;
+
+  /// Selectable maximum minute
+  final double maxMinute;
+
+  /// Selectable minimum hour
+  final double minHour;
+
+  /// Selectable minimum minute
+  final double minMinute;
+
   /// Initialize the picker [Widget]
   _DayNightTimePicker({
     Key key,
@@ -198,6 +266,12 @@ class _DayNightTimePicker extends StatefulWidget {
     this.borderRadius,
     this.elevation,
     this.minuteInterval,
+    this.disableMinute,
+    this.disableHour,
+    this.maxHour,
+    this.maxMinute,
+    this.minHour,
+    this.minMinute,
   }) : super(key: key);
 
   @override
@@ -223,6 +297,10 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
 
   @override
   void initState() {
+    setState(() {
+      changingHour =
+          (!widget.disableHour && !widget.disableMinute) || !widget.disableHour;
+    });
     separateHoursAndMinutes();
     super.initState();
   }
@@ -307,20 +385,19 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
           fontWeight: FontWeight.bold,
         );
 
-    double min = 0;
-    double max = 59;
-    int divisions = getMinuteDivisions(widget.minuteInterval);
+    double min = getMinMinute(widget.minMinute, widget.minuteInterval);
+    double max = getMaxMinute(widget.maxMinute, widget.minuteInterval);
+
+    int minDiff = (max - min).round();
+    int divisions = getMinuteDivisions(minDiff, widget.minuteInterval);
+
     double hourMinValue = widget.is24HrFormat ? 0 : 1;
     double hourMaxValue = widget.is24HrFormat ? 23 : 12;
+
     if (changingHour) {
-      min = 1;
-      max = 12;
-      divisions = 11;
-      if (widget.is24HrFormat) {
-        min = 0;
-        max = 23;
-        divisions = 23;
-      }
+      min = widget.minHour;
+      max = widget.maxHour;
+      divisions = (max - min).round();
     }
 
     final height = widget.is24HrFormat ? 200.0 : 240.0;
@@ -383,9 +460,11 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 3.0),
                               child: InkWell(
-                                onTap: () {
-                                  changeCurrentSelector(true);
-                                },
+                                onTap: widget.disableHour
+                                    ? null
+                                    : () {
+                                        changeCurrentSelector(true);
+                                      },
                                 child: Opacity(
                                   opacity: changingHour ? 1 : unselectedOpacity,
                                   child: Text(
@@ -403,9 +482,11 @@ class _DayNightTimePickerState extends State<_DayNightTimePicker> {
                           Material(
                             color: Colors.transparent,
                             child: InkWell(
-                              onTap: () {
-                                changeCurrentSelector(false);
-                              },
+                              onTap: widget.disableMinute
+                                  ? null
+                                  : () {
+                                      changeCurrentSelector(false);
+                                    },
                               child: Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 3.0),

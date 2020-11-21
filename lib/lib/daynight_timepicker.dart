@@ -47,9 +47,9 @@ import 'package:flutter/material.dart';
 ///
 /// **minuteInterval** - Steps interval while changing `minute`. Accepts `MinuteInterval` enum. Defaults to `MinuteInterval.ONE`.
 ///
-/// **disableMinute** - Disables/hides the minute picker. Defaults to `false`.
+/// **disableMinute** - Disables the minute picker. Defaults to `false`.
 ///
-/// **disableHour** - Disables/hides the hour picker. Defaults to `false`.
+/// **disableHour** - Disables the hour picker. Defaults to `false`.
 ///
 /// **maxHour** - Selectable maximum hour. Defaults to `12` | `23`.
 ///

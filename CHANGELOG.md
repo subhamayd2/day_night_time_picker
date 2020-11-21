@@ -1,3 +1,15 @@
+## [0.4.0] - 21st November 2020.
+
+- Added time picker range.
+- Added minute interval.
+- Enable/disable hour or minute.
+- Added option to render as inline widget.
+- Other bug fixes.
+
+## [0.3.0+2] - 08th October 2020.
+
+- Update img src in readme. Yeah twice, coz I am stupid.
+
 ## [0.3.0+2] - 08th October 2020.
 
 - Update img src in readme. Yeah twice, coz I am stupid.

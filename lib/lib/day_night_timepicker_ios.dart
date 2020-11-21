@@ -173,7 +173,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
       minMinute,
       maxMinute,
     );
-    final initialVal = separateHoursAndMinutes();
+    final initialVal = separateHoursAndMinutes(init: true);
 
     _hourController = FixedExtentScrollController(
         initialItem: _hours.indexOf(initialVal['h']))
@@ -208,7 +208,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   }
 
   /// Separate out the hour and minute from a string
-  Map<String, int> separateHoursAndMinutes() {
+  Map<String, int> separateHoursAndMinutes({bool init = false}) {
     int _h = widget.value.hour;
     int _m = widget.value.minute;
     String _a = "am";
@@ -229,6 +229,10 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
       minute = _m;
       a = _a;
     });
+    if (!init) {
+      _hourController.jumpToItem(hours.indexOf(_h));
+      _minuteController.jumpToItem(minutes.indexOf(_m));
+    }
     return {
       "h": _h,
       "m": _m,
@@ -273,7 +277,11 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
 
   /// Handler to close the picker
   onCancel() {
-    Navigator.of(context).pop();
+    if (!widget.isInlineWidget) {
+      Navigator.of(context).pop();
+    } else {
+      separateHoursAndMinutes();
+    }
   }
 
   @override
@@ -335,6 +343,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                       ),
                     Expanded(
                       child: Row(
+                        textDirection: TextDirection.ltr,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           SizedBox(

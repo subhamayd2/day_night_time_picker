@@ -25,6 +25,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   TimeOfDay _time = TimeOfDay.now().replacing(minute: 30);
+  bool iosStyle = true;
 
   void onTimeChanged(TimeOfDay newTime) {
     setState(() {
@@ -60,10 +61,6 @@ class _HomeState extends State<Home> {
                     minuteInterval: MinuteInterval.FIVE,
                     disableHour: false,
                     disableMinute: false,
-                    iosStylePicker: true,
-                    is24HrFormat: false,
-                    minHour: 8,
-                    maxHour: 10,
                     minMinute: 7,
                     maxMinute: 56,
                     // Optional onChange to receive value as DateTime
@@ -86,10 +83,26 @@ class _HomeState extends State<Home> {
               style: Theme.of(context).textTheme.headline6,
             ),
             createInlinePicker(
+              elevation: 1,
               value: _time,
               onChange: onTimeChanged,
-              elevation: 1,
+              minuteInterval: MinuteInterval.FIVE,
+              iosStylePicker: iosStyle,
+              minMinute: 7,
+              maxMinute: 56,
             ),
+            Text(
+              "IOS Style",
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+            Switch(
+              value: iosStyle,
+              onChanged: (newVal) {
+                setState(() {
+                  iosStyle = newVal;
+                });
+              },
+            )
           ],
         ),
       ),

@@ -290,6 +290,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                       ),
                     Expanded(
                       child: Row(
+                        textDirection: TextDirection.ltr,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Material(

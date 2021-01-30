@@ -244,7 +244,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   }
 
   /// Change handler for picker
-  void onChangeTime(double value) {
+  onChangeTime(double value) {
     if (changingHour) {
       setState(() {
         hour = value.round();
@@ -257,14 +257,14 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   }
 
   /// Hnadle should change hour or minute
-  void changeCurrentSelector(bool isHour) {
+  changeCurrentSelector(bool isHour) {
     setState(() {
       changingHour = isHour;
     });
   }
 
   /// [onChange] handler. Return [TimeOfDay]
-  void onOk() {
+  onOk() {
     var time = TimeOfDay(
       hour: getHours(hour, a, widget.is24HrFormat),
       minute: minute,
@@ -375,7 +375,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                                     final hourVal = padNumber(hours[index]);
                                     return Center(
                                       child: Text(
-                                        "$hourVal",
+                                        hourVal,
                                         style: _commonTimeStyles.copyWith(
                                           color: changingHour
                                               ? color

@@ -271,7 +271,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                 displace: mapRange(hour * 1.0, hourMinValue, hourMaxValue),
                 sunAsset: widget.sunAsset,
                 moonAsset: widget.moonAsset,
-              ) : Container(height: 25),
+              ) : Container(height: 25, color: Theme.of(context).cardColor),
               Container(
                 height: height,
                 color: Theme.of(context).cardColor,

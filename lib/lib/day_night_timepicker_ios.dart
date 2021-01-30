@@ -325,7 +325,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                 sunAsset: widget.sunAsset,
                 moonAsset: widget.moonAsset,
               ) : Container(
-                height: 25,
+                height: 25, color: Theme.of(context).cardColor
               ),
               Container(
                 height: height,

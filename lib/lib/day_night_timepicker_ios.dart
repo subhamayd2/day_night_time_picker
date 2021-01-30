@@ -139,7 +139,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   bool changingHour = true;
 
   /// Default Ok/Cancel [TextStyle]
-  final okCancelStyle = TextStyle(fontWeight: FontWeight.bold);
+  final okCancelStyle = const TextStyle(fontWeight: FontWeight.bold);
 
   /// Controller for `hour` list
   FixedExtentScrollController _hourController;
@@ -169,7 +169,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
     double minMinute = getMinMinute(widget.minMinute, widget.minuteInterval);
     double maxMinute = getMaxMinute(widget.maxMinute, widget.minuteInterval);
 
-    int minDiff = ((maxMinute) - minMinute).round();
+    int minDiff = (maxMinute - minMinute).round();
     final minuteDiv = getMinuteDivisions(minDiff, widget.minuteInterval);
     List<int> _minutes = generateMinutes(
       minuteDiv,
@@ -244,7 +244,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   }
 
   /// Change handler for picker
-  onChangeTime(double value) {
+  void onChangeTime(double value) {
     if (changingHour) {
       setState(() {
         hour = value.round();
@@ -257,14 +257,14 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   }
 
   /// Hnadle should change hour or minute
-  changeCurrentSelector(bool isHour) {
+  void changeCurrentSelector(bool isHour) {
     setState(() {
       changingHour = isHour;
     });
   }
 
   /// [onChange] handler. Return [TimeOfDay]
-  onOk() {
+  void onOk() {
     var time = TimeOfDay(
       hour: getHours(hour, a, widget.is24HrFormat),
       minute: minute,
@@ -361,8 +361,8 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                                 controller: _hourController,
                                 itemExtent: 36,
                                 physics: widget.disableHour
-                                    ? NeverScrollableScrollPhysics()
-                                    : FixedExtentScrollPhysics(),
+                                    ? const NeverScrollableScrollPhysics()
+                                    : const FixedExtentScrollPhysics(),
                                 overAndUnderCenterOpacity:
                                     widget.disableHour ? 0 : 0.25,
                                 perspective: 0.01,
@@ -398,8 +398,8 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                                 controller: _minuteController,
                                 itemExtent: 36,
                                 physics: widget.disableMinute
-                                    ? NeverScrollableScrollPhysics()
-                                    : FixedExtentScrollPhysics(),
+                                    ? const NeverScrollableScrollPhysics()
+                                    : const FixedExtentScrollPhysics(),
                                 overAndUnderCenterOpacity:
                                     widget.disableMinute ? 0 : 0.25,
                                 perspective: 0.01,

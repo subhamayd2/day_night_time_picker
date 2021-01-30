@@ -163,7 +163,7 @@ PageRouteBuilder showPicker({
         );
       }
     },
-    transitionDuration: Duration(milliseconds: 200),
+    transitionDuration: const Duration(milliseconds: 200),
     transitionsBuilder: (context, anim, secondAnim, child) => SlideTransition(
       position: anim.drive(
         Tween(

@@ -131,7 +131,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
   bool changingHour = true;
 
   /// Default Ok/Cancel [TextStyle]
-  final okCancelStyle = TextStyle(fontWeight: FontWeight.bold);
+  final okCancelStyle = const TextStyle(fontWeight: FontWeight.bold);
 
   @override
   void initState() {
@@ -246,7 +246,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
 
     final color = widget.accentColor ?? Theme.of(context).accentColor;
     final unselectedColor = widget.unselectedColor ?? Colors.grey;
-    final unselectedOpacity = 1.0;
+    const unselectedOpacity = 1.0;
 
     final double blurAmount = widget.blurredBackground ?? false ? 5 : 0;
 
@@ -337,7 +337,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                                   opacity:
                                       !changingHour ? 1 : unselectedOpacity,
                                   child: Text(
-                                    "${padNumber(minute)}",
+                                    padNumber(minute),
                                     style: _commonTimeStyles.copyWith(
                                         color: !changingHour
                                             ? color

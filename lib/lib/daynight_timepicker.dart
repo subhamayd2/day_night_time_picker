@@ -41,6 +41,8 @@ import 'package:flutter/material.dart';
 ///
 /// **iosStylePicker** - Whether to display a IOS style picker (Not exactly the same). Defaults to `false`.
 ///
+/// **displayHeader** - Whether to display the sun moon animation. Defaults to `true`.
+///
 /// **hourLabel** - The label to be displayed for `hour` picker. Only for _iosStylePicker_. Defaults to `'hours'`.
 ///
 /// **minuteLabel** - The label to be displayed for `minute` picker. Only for _iosStylePicker_. Defaults to `'minutes'`.
@@ -76,6 +78,7 @@ PageRouteBuilder showPicker({
   double elevation,
   bool barrierDismissible = true,
   bool iosStylePicker = false,
+  bool displayHeader = true,
   String hourLabel = 'hours',
   String minuteLabel = 'minutes',
   MinuteInterval minuteInterval = MinuteInterval.ONE,
@@ -114,6 +117,7 @@ PageRouteBuilder showPicker({
           onChange: onChange,
           onChangeDateTime: onChangeDateTime,
           is24HrFormat: is24HrFormat,
+          displayHeader: displayHeader,
           accentColor: accentColor,
           unselectedColor: unselectedColor,
           cancelText: cancelText,
@@ -139,6 +143,7 @@ PageRouteBuilder showPicker({
           onChange: onChange,
           onChangeDateTime: onChangeDateTime,
           is24HrFormat: is24HrFormat,
+          displayHeader: displayHeader,
           accentColor: accentColor,
           unselectedColor: unselectedColor,
           cancelText: cancelText,

@@ -77,6 +77,9 @@ class DayNightTimePickerAndroid extends StatefulWidget {
   /// Whether the widget is displayed as a popup or inline
   final bool isInlineWidget;
 
+  /// Weather to show okText,cancelText and use onValueChange apply
+  final bool isOnValueChangeMode;
+
   /// Initialize the picker [Widget]
   DayNightTimePickerAndroid({
     @required this.value,
@@ -87,6 +90,7 @@ class DayNightTimePickerAndroid extends StatefulWidget {
     this.unselectedColor,
     this.cancelText = "cancel",
     this.okText = "ok",
+    this.isOnValueChangeMode = false,
     this.sunAsset,
     this.moonAsset,
     this.blurredBackground = false,
@@ -204,7 +208,9 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
           DateTime(now.year, now.month, now.day, time.hour, time.minute);
       widget.onChangeDateTime(dateTime);
     }
-    onCancel();
+    if(!widget.isOnValueChangeMode) {
+      onCancel();
+    }
   }
 
   /// Handler to close the picker
@@ -347,6 +353,11 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                       ),
                     ),
                     Slider(
+                      onChangeEnd: (value){
+                        if(widget.isOnValueChangeMode){
+                          onOk();
+                        }
+                      },
                       value: changingHour
                           ? hour.roundToDouble()
                           : minute.roundToDouble(),
@@ -357,7 +368,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                       activeColor: color,
                       inactiveColor: color.withAlpha(55),
                     ),
-                    Expanded(
+                    widget.isOnValueChangeMode? Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
@@ -379,7 +390,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                           ),
                         ],
                       ),
-                    ),
+                    ):SizedBox(height: 8,),
                   ],
                 ),
               ),

@@ -368,7 +368,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                       activeColor: color,
                       inactiveColor: color.withAlpha(55),
                     ),
-                    widget.isOnValueChangeMode? Expanded(
+                    !widget.isOnValueChangeMode? Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[

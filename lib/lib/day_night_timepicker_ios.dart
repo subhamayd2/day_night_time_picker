@@ -432,7 +432,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                         ],
                       ),
                     ),
-                    widget.isOnValueChangeMode? Expanded(
+                    !widget.isOnValueChangeMode? Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[

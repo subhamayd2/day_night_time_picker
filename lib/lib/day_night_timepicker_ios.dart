@@ -269,16 +269,16 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
     if (widget.onChangeDateTime != null) {
       final now = DateTime.now();
       final dateTime =
-          DateTime(now.year, now.month, now.day, time.hour, time.minute);
+      DateTime(now.year, now.month, now.day, time.hour, time.minute);
       widget.onChangeDateTime(dateTime);
     }
-    onCancel();
+    onCancel(result: widget.value);
   }
 
   /// Handler to close the picker
-  onCancel() {
+  onCancel({var result}) {
     if (!widget.isInlineWidget) {
-      Navigator.of(context).pop();
+      Navigator.of(context).pop(result);
     } else {
       separateHoursAndMinutes();
     }

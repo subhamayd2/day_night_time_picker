@@ -87,6 +87,9 @@ class DayNightTimePickerIos extends StatefulWidget {
   /// Whether the widget is displayed as a popup or inline
   final bool isInlineWidget;
 
+  /// Weather to show okText,cancelText and use onValueChange apply
+  final bool isOnValueChangeMode;
+
   /// Initialize the picker [Widget]
   DayNightTimePickerIos({
     @required this.value,
@@ -98,6 +101,7 @@ class DayNightTimePickerIos extends StatefulWidget {
     this.unselectedColor,
     this.cancelText = "cancel",
     this.okText = "ok",
+    this.isOnValueChangeMode = false,
     this.sunAsset,
     this.moonAsset,
     this.blurredBackground = false,
@@ -276,7 +280,9 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
           DateTime(now.year, now.month, now.day, time.hour, time.minute);
       widget.onChangeDateTime(dateTime);
     }
-    onCancel();
+    if(!widget.isOnValueChangeMode) {
+      onCancel();
+    }
   }
 
   /// Handler to close the picker
@@ -368,6 +374,9 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                                 perspective: 0.01,
                                 onSelectedItemChanged: (value) {
                                   onChangeTime(hours[value] + 0.0);
+                                  if(widget.isOnValueChangeMode){
+                                    onOk();
+                                  }
                                 },
                                 childDelegate: ListWheelChildBuilderDelegate(
                                   childCount: (hours ?? []).length,
@@ -429,7 +438,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                         ],
                       ),
                     ),
-                    Expanded(
+                    !widget.isOnValueChangeMode? Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
@@ -451,7 +460,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                           ),
                         ],
                       ),
-                    ),
+                    ):SizedBox(height: 8,),
                   ],
                 ),
               ),

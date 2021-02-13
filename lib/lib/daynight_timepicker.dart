@@ -250,6 +250,7 @@ Widget createInlinePicker({
   Color unselectedColor,
   String cancelText = "cancel",
   String okText = "ok",
+  bool isOnChangeValueMode = false,
   Image sunAsset,
   Image moonAsset,
   bool blurredBackground = false,
@@ -313,6 +314,7 @@ Widget createInlinePicker({
       minHour: minHour,
       minMinute: minMinute,
       isInlineWidget: true,
+      isOnValueChangeMode: isOnChangeValueMode,
     );
   } else {
     return DayNightTimePickerAndroid(
@@ -337,6 +339,8 @@ Widget createInlinePicker({
       minHour: minHour,
       minMinute: minMinute,
       isInlineWidget: true,
+      isOnValueChangeMode: isOnChangeValueMode,
+
     );
   }
 }

@@ -94,6 +94,7 @@ FlatButton(
 | **maxMinute**           | Selectable maximum minute.                                                                               |                 `59`                 |
 | **displayHeader**       | Whether to display the sun moon animation.                                                               |                `true`                |
 | **isOnValueChangeMode** | Weather to hide okText, cancelText and return value on every onValueChange. **_Only for Inline widget_** |               `false`                |
+| **themeData**           | ThemeData to use for the widget.                                                                         |         `Theme.of(context)`          |
 
 ---
 

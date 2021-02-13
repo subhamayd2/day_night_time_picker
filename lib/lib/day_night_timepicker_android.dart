@@ -26,6 +26,9 @@ class DayNightTimePickerAndroid extends StatefulWidget {
   /// Show the time in TimePicker in 24 hour format.
   final bool is24HrFormat;
 
+  /// Display the sun moon animation
+  final bool displayHeader;
+
   /// Accent color of the TimePicker.
   final Color accentColor;
 
@@ -83,6 +86,7 @@ class DayNightTimePickerAndroid extends StatefulWidget {
     @required this.onChange,
     this.onChangeDateTime,
     this.is24HrFormat = false,
+    this.displayHeader,
     this.accentColor,
     this.unselectedColor,
     this.cancelText = "cancel",
@@ -127,7 +131,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
   bool changingHour = true;
 
   /// Default Ok/Cancel [TextStyle]
-  final okCancelStyle = TextStyle(fontWeight: FontWeight.bold);
+  final okCancelStyle = const TextStyle(fontWeight: FontWeight.bold);
 
   @override
   void initState() {
@@ -242,7 +246,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
 
     final color = widget.accentColor ?? Theme.of(context).accentColor;
     final unselectedColor = widget.unselectedColor ?? Colors.grey;
-    final unselectedOpacity = 1.0;
+    const unselectedOpacity = 1.0;
 
     final double blurAmount = widget.blurredBackground ?? false ? 5 : 0;
 
@@ -262,12 +266,12 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              DayNightBanner(
+              widget.displayHeader ? DayNightBanner(
                 hour: getHours(hour, a, widget.is24HrFormat),
                 displace: mapRange(hour * 1.0, hourMinValue, hourMaxValue),
                 sunAsset: widget.sunAsset,
                 moonAsset: widget.moonAsset,
-              ),
+              ) : Container(height: 25, color: Theme.of(context).cardColor),
               Container(
                 height: height,
                 color: Theme.of(context).cardColor,
@@ -333,7 +337,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                                   opacity:
                                       !changingHour ? 1 : unselectedOpacity,
                                   child: Text(
-                                    "${padNumber(minute)}",
+                                    padNumber(minute),
                                     style: _commonTimeStyles.copyWith(
                                         color: !changingHour
                                             ? color

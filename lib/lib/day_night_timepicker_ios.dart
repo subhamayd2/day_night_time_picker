@@ -27,6 +27,9 @@ class DayNightTimePickerIos extends StatefulWidget {
   /// Show the time in TimePicker in 24 hour format.
   final bool is24HrFormat;
 
+  /// Display the sun moon animation
+  final bool displayHeader;
+
   /// Accent color of the TimePicker.
   final Color accentColor;
 
@@ -90,6 +93,7 @@ class DayNightTimePickerIos extends StatefulWidget {
     @required this.onChange,
     this.onChangeDateTime,
     this.is24HrFormat = false,
+    this.displayHeader,
     this.accentColor,
     this.unselectedColor,
     this.cancelText = "cancel",
@@ -135,7 +139,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   bool changingHour = true;
 
   /// Default Ok/Cancel [TextStyle]
-  final okCancelStyle = TextStyle(fontWeight: FontWeight.bold);
+  final okCancelStyle = const TextStyle(fontWeight: FontWeight.bold);
 
   /// Controller for `hour` list
   FixedExtentScrollController _hourController;
@@ -165,7 +169,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
     double minMinute = getMinMinute(widget.minMinute, widget.minuteInterval);
     double maxMinute = getMaxMinute(widget.maxMinute, widget.minuteInterval);
 
-    int minDiff = ((maxMinute) - minMinute).round();
+    int minDiff = (maxMinute - minMinute).round();
     final minuteDiv = getMinuteDivisions(minDiff, widget.minuteInterval);
     List<int> _minutes = generateMinutes(
       minuteDiv,
@@ -315,11 +319,13 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              DayNightBanner(
+              widget.displayHeader ? DayNightBanner(
                 hour: getHours(hour, a, widget.is24HrFormat),
                 displace: mapRange(hour * 1.0, hourMinValue, hourMaxValue),
                 sunAsset: widget.sunAsset,
                 moonAsset: widget.moonAsset,
+              ) : Container(
+                height: 25, color: Theme.of(context).cardColor
               ),
               Container(
                 height: height,
@@ -355,8 +361,8 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                                 controller: _hourController,
                                 itemExtent: 36,
                                 physics: widget.disableHour
-                                    ? NeverScrollableScrollPhysics()
-                                    : FixedExtentScrollPhysics(),
+                                    ? const NeverScrollableScrollPhysics()
+                                    : const FixedExtentScrollPhysics(),
                                 overAndUnderCenterOpacity:
                                     widget.disableHour ? 0 : 0.25,
                                 perspective: 0.01,
@@ -369,7 +375,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                                     final hourVal = padNumber(hours[index]);
                                     return Center(
                                       child: Text(
-                                        "$hourVal",
+                                        hourVal,
                                         style: _commonTimeStyles.copyWith(
                                           color: changingHour
                                               ? color
@@ -392,8 +398,8 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                                 controller: _minuteController,
                                 itemExtent: 36,
                                 physics: widget.disableMinute
-                                    ? NeverScrollableScrollPhysics()
-                                    : FixedExtentScrollPhysics(),
+                                    ? const NeverScrollableScrollPhysics()
+                                    : const FixedExtentScrollPhysics(),
                                 overAndUnderCenterOpacity:
                                     widget.disableMinute ? 0 : 0.25,
                                 perspective: 0.01,

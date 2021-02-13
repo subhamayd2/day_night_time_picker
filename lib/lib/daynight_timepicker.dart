@@ -240,6 +240,10 @@ PageRouteBuilder showPicker({
 ///
 /// **minMinute** - Selectable minimum minute. Defaults to `0`.
 ///
+/// **displayHeader** - Whether to display the sun moon animation. Defaults to `true`.
+///
+/// **isOnValueChangeMode** - Weather to hide okText, cancelText and return value on every onValueChange. Defaults to `false`.
+///
 Widget createInlinePicker({
   BuildContext context,
   @required TimeOfDay value,
@@ -266,6 +270,7 @@ Widget createInlinePicker({
   bool disableHour = false,
   double minMinute = 0,
   double maxMinute = 59,
+  bool displayHeader = true,
   // Infinity is used so that we can assert whether or not the user actually set a value
   double minHour = double.infinity,
   double maxHour = double.infinity,
@@ -314,6 +319,7 @@ Widget createInlinePicker({
       minHour: minHour,
       minMinute: minMinute,
       isInlineWidget: true,
+      displayHeader: displayHeader,
       isOnValueChangeMode: isOnChangeValueMode,
     );
   } else {
@@ -339,8 +345,8 @@ Widget createInlinePicker({
       minHour: minHour,
       minMinute: minMinute,
       isInlineWidget: true,
+      displayHeader: displayHeader,
       isOnValueChangeMode: isOnChangeValueMode,
-
     );
   }
 }

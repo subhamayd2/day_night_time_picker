@@ -14,6 +14,7 @@ const _BORDER_RADIUS = BORDER_RADIUS;
 const _ELEVATION = ELEVATION;
 
 /// Private class. [StatefulWidget] that renders the content of the picker.
+// ignore: must_be_immutable
 class DayNightTimePickerIos extends StatefulWidget {
   /// **`Required`** Display value. It takes in [TimeOfDay].
   final TimeOfDay value;
@@ -87,7 +88,7 @@ class DayNightTimePickerIos extends StatefulWidget {
   /// Whether the widget is displayed as a popup or inline
   final bool isInlineWidget;
 
-  /// Weather to show okText,cancelText and use onValueChange apply
+  /// Weather to hide okText, cancelText and return value on every onValueChange.
   final bool isOnValueChangeMode;
 
   /// Initialize the picker [Widget]
@@ -186,17 +187,41 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
     _hourController = FixedExtentScrollController(
         initialItem: _hours.indexOf(initialVal['h']))
       ..addListener(() {
-        setState(() {
-          changingHour = true;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          setState(() {
+            changingHour = true;
+          });
+        });
+      })
+      ..addListener(() {
+        _hourController.position.isScrollingNotifier.addListener(() {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (widget.isOnValueChangeMode &&
+                !_hourController.position.isScrollingNotifier.value) {
+              onOk();
+            }
+          });
         });
       });
     _minuteController = FixedExtentScrollController(
         initialItem: _minutes.indexOf(initialVal['m']))
       ..addListener(() {
-        setState(() {
-          changingHour = false;
-          hours = _hours;
-          minutes = _minutes;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          setState(() {
+            changingHour = false;
+            hours = _hours;
+            minutes = _minutes;
+          });
+        });
+      })
+      ..addListener(() {
+        _minuteController.position.isScrollingNotifier.addListener(() {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (widget.isOnValueChangeMode &&
+                !_minuteController.position.isScrollingNotifier.value) {
+              onOk();
+            }
+          });
         });
       });
     setState(() {
@@ -211,7 +236,9 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.is24HrFormat != widget.is24HrFormat ||
         oldWidget.value != widget.value) {
-      separateHoursAndMinutes();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        separateHoursAndMinutes();
+      });
     }
   }
 
@@ -247,17 +274,18 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
     };
   }
 
-  /// Change handler for picker
-  onChangeTime(double value) {
-    if (changingHour) {
-      setState(() {
-        hour = value.round();
-      });
-    } else {
-      setState(() {
-        minute = value.round();
-      });
-    }
+  /// Change handler for hour picker
+  onChangeHour(double value) {
+    setState(() {
+      hour = value.round();
+    });
+  }
+
+  /// Change handler for minute picker
+  onChangeMinute(double value) {
+    setState(() {
+      minute = value.round();
+    });
   }
 
   /// Hnadle should change hour or minute
@@ -280,7 +308,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
           DateTime(now.year, now.month, now.day, time.hour, time.minute);
       widget.onChangeDateTime(dateTime);
     }
-    if(!widget.isOnValueChangeMode) {
+    if (!widget.isOnValueChangeMode) {
       onCancel();
     }
   }
@@ -325,14 +353,15 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              widget.displayHeader ? DayNightBanner(
-                hour: getHours(hour, a, widget.is24HrFormat),
-                displace: mapRange(hour * 1.0, hourMinValue, hourMaxValue),
-                sunAsset: widget.sunAsset,
-                moonAsset: widget.moonAsset,
-              ) : Container(
-                height: 25, color: Theme.of(context).cardColor
-              ),
+              widget.displayHeader
+                  ? DayNightBanner(
+                      hour: getHours(hour, a, widget.is24HrFormat),
+                      displace:
+                          mapRange(hour * 1.0, hourMinValue, hourMaxValue),
+                      sunAsset: widget.sunAsset,
+                      moonAsset: widget.moonAsset,
+                    )
+                  : Container(height: 25, color: Theme.of(context).cardColor),
               Container(
                 height: height,
                 color: Theme.of(context).cardColor,
@@ -373,10 +402,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                                     widget.disableHour ? 0 : 0.25,
                                 perspective: 0.01,
                                 onSelectedItemChanged: (value) {
-                                  onChangeTime(hours[value] + 0.0);
-                                  if(widget.isOnValueChangeMode){
-                                    onOk();
-                                  }
+                                  onChangeHour(hours[value] + 0.0);
                                 },
                                 childDelegate: ListWheelChildBuilderDelegate(
                                   childCount: (hours ?? []).length,
@@ -413,7 +439,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                                     widget.disableMinute ? 0 : 0.25,
                                 perspective: 0.01,
                                 onSelectedItemChanged: (value) {
-                                  onChangeTime(minutes[value] + 0.0);
+                                  onChangeMinute(minutes[value] + 0.0);
                                 },
                                 childDelegate: ListWheelChildBuilderDelegate(
                                   childCount: minutes.length,
@@ -438,29 +464,33 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                         ],
                       ),
                     ),
-                    !widget.isOnValueChangeMode? Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          FlatButton(
-                            onPressed: onCancel,
-                            child: Text(
-                              widget.cancelText.toUpperCase(),
-                              style: okCancelStyle,
+                    !widget.isOnValueChangeMode
+                        ? Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                FlatButton(
+                                  onPressed: onCancel,
+                                  child: Text(
+                                    widget.cancelText.toUpperCase(),
+                                    style: okCancelStyle,
+                                  ),
+                                  textColor: color,
+                                ),
+                                FlatButton(
+                                  onPressed: onOk,
+                                  child: Text(
+                                    widget.okText.toUpperCase(),
+                                    style: okCancelStyle,
+                                  ),
+                                  textColor: color,
+                                ),
+                              ],
                             ),
-                            textColor: color,
+                          )
+                        : SizedBox(
+                            height: 8,
                           ),
-                          FlatButton(
-                            onPressed: onOk,
-                            child: Text(
-                              widget.okText.toUpperCase(),
-                              style: okCancelStyle,
-                            ),
-                            textColor: color,
-                          ),
-                        ],
-                      ),
-                    ):SizedBox(height: 8,),
                   ],
                 ),
               ),

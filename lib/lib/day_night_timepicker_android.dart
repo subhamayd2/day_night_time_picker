@@ -13,6 +13,7 @@ const _BORDER_RADIUS = BORDER_RADIUS;
 const _ELEVATION = ELEVATION;
 
 /// Private class. [StatefulWidget] that renders the content of the picker.
+// ignore: must_be_immutable
 class DayNightTimePickerAndroid extends StatefulWidget {
   /// **`Required`** Display value. It takes in [TimeOfDay].
   final TimeOfDay value;
@@ -80,7 +81,7 @@ class DayNightTimePickerAndroid extends StatefulWidget {
   /// Whether the widget is displayed as a popup or inline
   final bool isInlineWidget;
 
-  /// Weather to show okText,cancelText and use onValueChange apply
+  /// Weather to hide okText, cancelText and return value on every onValueChange.
   final bool isOnValueChangeMode;
 
   /// Initialize the picker [Widget]
@@ -212,7 +213,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
           DateTime(now.year, now.month, now.day, time.hour, time.minute);
       widget.onChangeDateTime(dateTime);
     }
-    if(!widget.isOnValueChangeMode) {
+    if (!widget.isOnValueChangeMode) {
       onCancel();
     }
   }
@@ -272,12 +273,15 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              widget.displayHeader ? DayNightBanner(
-                hour: getHours(hour, a, widget.is24HrFormat),
-                displace: mapRange(hour * 1.0, hourMinValue, hourMaxValue),
-                sunAsset: widget.sunAsset,
-                moonAsset: widget.moonAsset,
-              ) : Container(height: 25, color: Theme.of(context).cardColor),
+              widget.displayHeader
+                  ? DayNightBanner(
+                      hour: getHours(hour, a, widget.is24HrFormat),
+                      displace:
+                          mapRange(hour * 1.0, hourMinValue, hourMaxValue),
+                      sunAsset: widget.sunAsset,
+                      moonAsset: widget.moonAsset,
+                    )
+                  : Container(height: 25, color: Theme.of(context).cardColor),
               Container(
                 height: height,
                 color: Theme.of(context).cardColor,
@@ -357,8 +361,8 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                       ),
                     ),
                     Slider(
-                      onChangeEnd: (value){
-                        if(widget.isOnValueChangeMode){
+                      onChangeEnd: (value) {
+                        if (widget.isOnValueChangeMode) {
                           onOk();
                         }
                       },
@@ -372,29 +376,33 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                       activeColor: color,
                       inactiveColor: color.withAlpha(55),
                     ),
-                    !widget.isOnValueChangeMode? Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          FlatButton(
-                            onPressed: onCancel,
-                            child: Text(
-                              widget.cancelText.toUpperCase(),
-                              style: okCancelStyle,
+                    !widget.isOnValueChangeMode
+                        ? Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                FlatButton(
+                                  onPressed: onCancel,
+                                  child: Text(
+                                    widget.cancelText.toUpperCase(),
+                                    style: okCancelStyle,
+                                  ),
+                                  textColor: color,
+                                ),
+                                FlatButton(
+                                  onPressed: onOk,
+                                  child: Text(
+                                    widget.okText.toUpperCase(),
+                                    style: okCancelStyle,
+                                  ),
+                                  textColor: color,
+                                ),
+                              ],
                             ),
-                            textColor: color,
+                          )
+                        : SizedBox(
+                            height: 8,
                           ),
-                          FlatButton(
-                            onPressed: onOk,
-                            child: Text(
-                              widget.okText.toUpperCase(),
-                              style: okCancelStyle,
-                            ),
-                            textColor: color,
-                          ),
-                        ],
-                      ),
-                    ):SizedBox(height: 8,),
                   ],
                 ),
               ),

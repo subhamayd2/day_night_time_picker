@@ -13,6 +13,7 @@ const _BORDER_RADIUS = BORDER_RADIUS;
 const _ELEVATION = ELEVATION;
 
 /// Private class. [StatefulWidget] that renders the content of the picker.
+// ignore: must_be_immutable
 class DayNightTimePickerAndroid extends StatefulWidget {
   /// **`Required`** Display value. It takes in [TimeOfDay].
   final TimeOfDay value;
@@ -25,6 +26,9 @@ class DayNightTimePickerAndroid extends StatefulWidget {
 
   /// Show the time in TimePicker in 24 hour format.
   final bool is24HrFormat;
+
+  /// Display the sun moon animation
+  final bool displayHeader;
 
   /// Accent color of the TimePicker.
   final Color accentColor;
@@ -77,16 +81,21 @@ class DayNightTimePickerAndroid extends StatefulWidget {
   /// Whether the widget is displayed as a popup or inline
   final bool isInlineWidget;
 
+  /// Weather to hide okText, cancelText and return value on every onValueChange.
+  final bool isOnValueChangeMode;
+
   /// Initialize the picker [Widget]
   DayNightTimePickerAndroid({
     @required this.value,
     @required this.onChange,
     this.onChangeDateTime,
     this.is24HrFormat = false,
+    this.displayHeader,
     this.accentColor,
     this.unselectedColor,
     this.cancelText = "cancel",
     this.okText = "ok",
+    this.isOnValueChangeMode = false,
     this.sunAsset,
     this.moonAsset,
     this.blurredBackground = false,
@@ -127,7 +136,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
   bool changingHour = true;
 
   /// Default Ok/Cancel [TextStyle]
-  final okCancelStyle = TextStyle(fontWeight: FontWeight.bold);
+  final okCancelStyle = const TextStyle(fontWeight: FontWeight.bold);
 
   @override
   void initState() {
@@ -242,7 +251,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
 
     final color = widget.accentColor ?? Theme.of(context).accentColor;
     final unselectedColor = widget.unselectedColor ?? Colors.grey;
-    final unselectedOpacity = 1.0;
+    const unselectedOpacity = 1.0;
 
     final double blurAmount = widget.blurredBackground ?? false ? 5 : 0;
 
@@ -262,12 +271,15 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              DayNightBanner(
-                hour: getHours(hour, a, widget.is24HrFormat),
-                displace: mapRange(hour * 1.0, hourMinValue, hourMaxValue),
-                sunAsset: widget.sunAsset,
-                moonAsset: widget.moonAsset,
-              ),
+              widget.displayHeader
+                  ? DayNightBanner(
+                      hour: getHours(hour, a, widget.is24HrFormat),
+                      displace:
+                          mapRange(hour * 1.0, hourMinValue, hourMaxValue),
+                      sunAsset: widget.sunAsset,
+                      moonAsset: widget.moonAsset,
+                    )
+                  : Container(height: 25, color: Theme.of(context).cardColor),
               Container(
                 height: height,
                 color: Theme.of(context).cardColor,
@@ -333,7 +345,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                                   opacity:
                                       !changingHour ? 1 : unselectedOpacity,
                                   child: Text(
-                                    "${padNumber(minute)}",
+                                    padNumber(minute),
                                     style: _commonTimeStyles.copyWith(
                                         color: !changingHour
                                             ? color
@@ -347,6 +359,11 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                       ),
                     ),
                     Slider(
+                      onChangeEnd: (value) {
+                        if (widget.isOnValueChangeMode) {
+                          onOk();
+                        }
+                      },
                       value: changingHour
                           ? hour.roundToDouble()
                           : minute.roundToDouble(),
@@ -357,29 +374,33 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                       activeColor: color,
                       inactiveColor: color.withAlpha(55),
                     ),
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          FlatButton(
-                            onPressed: onCancel,
-                            child: Text(
-                              widget.cancelText.toUpperCase(),
-                              style: okCancelStyle,
+                    !widget.isOnValueChangeMode
+                        ? Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                FlatButton(
+                                  onPressed: onCancel,
+                                  child: Text(
+                                    widget.cancelText.toUpperCase(),
+                                    style: okCancelStyle,
+                                  ),
+                                  textColor: color,
+                                ),
+                                FlatButton(
+                                  onPressed: onOk,
+                                  child: Text(
+                                    widget.okText.toUpperCase(),
+                                    style: okCancelStyle,
+                                  ),
+                                  textColor: color,
+                                ),
+                              ],
                             ),
-                            textColor: color,
+                          )
+                        : SizedBox(
+                            height: 8,
                           ),
-                          FlatButton(
-                            onPressed: onOk,
-                            child: Text(
-                              widget.okText.toUpperCase(),
-                              style: okCancelStyle,
-                            ),
-                            textColor: color,
-                          ),
-                        ],
-                      ),
-                    ),
                   ],
                 ),
               ),

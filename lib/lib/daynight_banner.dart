@@ -42,14 +42,14 @@ class DayNightBanner extends StatelessWidget {
     final isDusk = hour >= 16 && hour <= 18;
     return AnimatedContainer(
       padding: const EdgeInsets.symmetric(horizontal: 32),
-      duration: Duration(seconds: 1),
+      duration: const Duration(seconds: 1),
       height: 150,
       color: getColor(isDay, isDusk),
       child: LayoutBuilder(
         builder: (context, constraints) {
           final maxWidth = constraints.maxWidth.round() - SUN_MOON_WIDTH;
           final top = sin(pi * displace) * 1.8;
-          final left = (maxWidth * displace);
+          final left = maxWidth * displace;
           return Stack(
             alignment: Alignment.center,
             children: <Widget>[
@@ -62,7 +62,7 @@ class DayNightBanner extends StatelessWidget {
                 ),
                 bottom: top * 20,
                 left: left,
-                duration: Duration(milliseconds: 200),
+                duration: const Duration(milliseconds: 200),
               ),
             ],
           );

@@ -41,6 +41,8 @@ import 'package:flutter/material.dart';
 ///
 /// **iosStylePicker** - Whether to display a IOS style picker (Not exactly the same). Defaults to `false`.
 ///
+/// **displayHeader** - Whether to display the sun moon animation. Defaults to `true`.
+///
 /// **hourLabel** - The label to be displayed for `hour` picker. Only for _iosStylePicker_. Defaults to `'hours'`.
 ///
 /// **minuteLabel** - The label to be displayed for `minute` picker. Only for _iosStylePicker_. Defaults to `'minutes'`.
@@ -58,6 +60,8 @@ import 'package:flutter/material.dart';
 /// **minHour** - Selectable minimum hour. Defaults to `0` | `1`.
 ///
 /// **minMinute** - Selectable minimum minute. Defaults to `0`.
+///
+/// **themeData** - ThemeData to use for the widget.
 PageRouteBuilder showPicker({
   BuildContext context,
   @required TimeOfDay value,
@@ -76,6 +80,7 @@ PageRouteBuilder showPicker({
   double elevation,
   bool barrierDismissible = true,
   bool iosStylePicker = false,
+  bool displayHeader = true,
   String hourLabel = 'hours',
   String minuteLabel = 'minutes',
   MinuteInterval minuteInterval = MinuteInterval.ONE,
@@ -83,6 +88,7 @@ PageRouteBuilder showPicker({
   bool disableHour = false,
   double minMinute = 0,
   double maxMinute = 59,
+  ThemeData themeData,
   // Infinity is used so that we can assert whether or not the user actually set a value
   double minHour = double.infinity,
   double maxHour = double.infinity,
@@ -109,56 +115,64 @@ PageRouteBuilder showPicker({
   return PageRouteBuilder(
     pageBuilder: (context, _, __) {
       if (iosStylePicker) {
-        return DayNightTimePickerIos(
-          value: value,
-          onChange: onChange,
-          onChangeDateTime: onChangeDateTime,
-          is24HrFormat: is24HrFormat,
-          accentColor: accentColor,
-          unselectedColor: unselectedColor,
-          cancelText: cancelText,
-          okText: okText,
-          sunAsset: sunAsset,
-          moonAsset: moonAsset,
-          blurredBackground: blurredBackground,
-          borderRadius: borderRadius,
-          elevation: elevation,
-          hourLabel: hourLabel,
-          minuteLabel: minuteLabel,
-          minuteInterval: minuteInterval,
-          disableMinute: disableMinute,
-          disableHour: disableHour,
-          maxHour: maxHour,
-          maxMinute: maxMinute,
-          minHour: minHour,
-          minMinute: minMinute,
+        return Theme(
+          data: themeData != null ? themeData : Theme.of(context),
+          child: DayNightTimePickerIos(
+            value: value,
+            onChange: onChange,
+            onChangeDateTime: onChangeDateTime,
+            is24HrFormat: is24HrFormat,
+            displayHeader: displayHeader,
+            accentColor: accentColor,
+            unselectedColor: unselectedColor,
+            cancelText: cancelText,
+            okText: okText,
+            sunAsset: sunAsset,
+            moonAsset: moonAsset,
+            blurredBackground: blurredBackground,
+            borderRadius: borderRadius,
+            elevation: elevation,
+            hourLabel: hourLabel,
+            minuteLabel: minuteLabel,
+            minuteInterval: minuteInterval,
+            disableMinute: disableMinute,
+            disableHour: disableHour,
+            maxHour: maxHour,
+            maxMinute: maxMinute,
+            minHour: minHour,
+            minMinute: minMinute,
+          ),
         );
       } else {
-        return DayNightTimePickerAndroid(
-          value: value,
-          onChange: onChange,
-          onChangeDateTime: onChangeDateTime,
-          is24HrFormat: is24HrFormat,
-          accentColor: accentColor,
-          unselectedColor: unselectedColor,
-          cancelText: cancelText,
-          okText: okText,
-          sunAsset: sunAsset,
-          moonAsset: moonAsset,
-          blurredBackground: blurredBackground,
-          borderRadius: borderRadius,
-          elevation: elevation,
-          minuteInterval: minuteInterval,
-          disableMinute: disableMinute,
-          disableHour: disableHour,
-          maxHour: maxHour,
-          maxMinute: maxMinute,
-          minHour: minHour,
-          minMinute: minMinute,
+        return Theme(
+          data: themeData != null ? themeData : Theme.of(context),
+          child: DayNightTimePickerAndroid(
+            value: value,
+            onChange: onChange,
+            onChangeDateTime: onChangeDateTime,
+            is24HrFormat: is24HrFormat,
+            displayHeader: displayHeader,
+            accentColor: accentColor,
+            unselectedColor: unselectedColor,
+            cancelText: cancelText,
+            okText: okText,
+            sunAsset: sunAsset,
+            moonAsset: moonAsset,
+            blurredBackground: blurredBackground,
+            borderRadius: borderRadius,
+            elevation: elevation,
+            minuteInterval: minuteInterval,
+            disableMinute: disableMinute,
+            disableHour: disableHour,
+            maxHour: maxHour,
+            maxMinute: maxMinute,
+            minHour: minHour,
+            minMinute: minMinute,
+          ),
         );
       }
     },
-    transitionDuration: Duration(milliseconds: 200),
+    transitionDuration: const Duration(milliseconds: 200),
     transitionsBuilder: (context, anim, secondAnim, child) => SlideTransition(
       position: anim.drive(
         Tween(
@@ -235,6 +249,11 @@ PageRouteBuilder showPicker({
 ///
 /// **minMinute** - Selectable minimum minute. Defaults to `0`.
 ///
+/// **displayHeader** - Whether to display the sun moon animation. Defaults to `true`.
+///
+/// **isOnValueChangeMode** - Weather to hide okText, cancelText and return value on every onValueChange. Defaults to `false`.
+///
+/// **themeData** - ThemeData to use for the widget.
 Widget createInlinePicker({
   BuildContext context,
   @required TimeOfDay value,
@@ -245,6 +264,7 @@ Widget createInlinePicker({
   Color unselectedColor,
   String cancelText = "cancel",
   String okText = "ok",
+  bool isOnChangeValueMode = false,
   Image sunAsset,
   Image moonAsset,
   bool blurredBackground = false,
@@ -260,6 +280,8 @@ Widget createInlinePicker({
   bool disableHour = false,
   double minMinute = 0,
   double maxMinute = 59,
+  bool displayHeader = true,
+  ThemeData themeData,
   // Infinity is used so that we can assert whether or not the user actually set a value
   double minHour = double.infinity,
   double maxHour = double.infinity,
@@ -284,54 +306,72 @@ Widget createInlinePicker({
   }
 
   if (iosStylePicker) {
-    return DayNightTimePickerIos(
-      value: value,
-      onChange: onChange,
-      onChangeDateTime: onChangeDateTime,
-      is24HrFormat: is24HrFormat,
-      accentColor: accentColor,
-      unselectedColor: unselectedColor,
-      cancelText: cancelText,
-      okText: okText,
-      sunAsset: sunAsset,
-      moonAsset: moonAsset,
-      blurredBackground: blurredBackground,
-      borderRadius: borderRadius,
-      elevation: elevation,
-      hourLabel: hourLabel,
-      minuteLabel: minuteLabel,
-      minuteInterval: minuteInterval,
-      disableMinute: disableMinute,
-      disableHour: disableHour,
-      maxHour: maxHour,
-      maxMinute: maxMinute,
-      minHour: minHour,
-      minMinute: minMinute,
-      isInlineWidget: true,
+    return Builder(
+      builder: (context) {
+        return Theme(
+          data: themeData != null ? themeData : Theme.of(context),
+          child: DayNightTimePickerIos(
+            value: value,
+            onChange: onChange,
+            onChangeDateTime: onChangeDateTime,
+            is24HrFormat: is24HrFormat,
+            accentColor: accentColor,
+            unselectedColor: unselectedColor,
+            cancelText: cancelText,
+            okText: okText,
+            sunAsset: sunAsset,
+            moonAsset: moonAsset,
+            blurredBackground: blurredBackground,
+            borderRadius: borderRadius,
+            elevation: elevation,
+            hourLabel: hourLabel,
+            minuteLabel: minuteLabel,
+            minuteInterval: minuteInterval,
+            disableMinute: disableMinute,
+            disableHour: disableHour,
+            maxHour: maxHour,
+            maxMinute: maxMinute,
+            minHour: minHour,
+            minMinute: minMinute,
+            isInlineWidget: true,
+            displayHeader: displayHeader,
+            isOnValueChangeMode: isOnChangeValueMode,
+          ),
+        );
+      },
     );
   } else {
-    return DayNightTimePickerAndroid(
-      value: value,
-      onChange: onChange,
-      onChangeDateTime: onChangeDateTime,
-      is24HrFormat: is24HrFormat,
-      accentColor: accentColor,
-      unselectedColor: unselectedColor,
-      cancelText: cancelText,
-      okText: okText,
-      sunAsset: sunAsset,
-      moonAsset: moonAsset,
-      blurredBackground: blurredBackground,
-      borderRadius: borderRadius,
-      elevation: elevation,
-      minuteInterval: minuteInterval,
-      disableMinute: disableMinute,
-      disableHour: disableHour,
-      maxHour: maxHour,
-      maxMinute: maxMinute,
-      minHour: minHour,
-      minMinute: minMinute,
-      isInlineWidget: true,
+    return Builder(
+      builder: (context) {
+        return Theme(
+          data: themeData != null ? themeData : Theme.of(context),
+          child: DayNightTimePickerAndroid(
+            value: value,
+            onChange: onChange,
+            onChangeDateTime: onChangeDateTime,
+            is24HrFormat: is24HrFormat,
+            accentColor: accentColor,
+            unselectedColor: unselectedColor,
+            cancelText: cancelText,
+            okText: okText,
+            sunAsset: sunAsset,
+            moonAsset: moonAsset,
+            blurredBackground: blurredBackground,
+            borderRadius: borderRadius,
+            elevation: elevation,
+            minuteInterval: minuteInterval,
+            disableMinute: disableMinute,
+            disableHour: disableHour,
+            maxHour: maxHour,
+            maxMinute: maxMinute,
+            minHour: minHour,
+            minMinute: minMinute,
+            isInlineWidget: true,
+            displayHeader: displayHeader,
+            isOnValueChangeMode: isOnChangeValueMode,
+          ),
+        );
+      },
     );
   }
 }

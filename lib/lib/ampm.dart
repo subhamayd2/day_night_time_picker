@@ -15,7 +15,7 @@ class AmPm extends StatelessWidget {
   final Color unselectedColor;
 
   /// Default [TextStyle]
-  final _style = TextStyle(fontSize: 20);
+  final _style = const TextStyle(fontSize: 20);
 
   /// Initialize the buttons
   AmPm({this.selected, this.onChange, this.accentColor, this.unselectedColor});
@@ -23,7 +23,7 @@ class AmPm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isAm = selected == 'am';
-    final unselectedOpacity = 0.5;
+    const unselectedOpacity = 0.5;
 
     return Container(
       child: Row(

@@ -1,3 +1,11 @@
+## [0.5.0] - 13th February 2021.
+
+- Added option to return value for inline widget on every onValueChange
+- Added option to hide sun/moon animation header.
+- Added `themeData` property.
+- Minor performance fixes.
+- Other bug fixes.
+
 ## [0.4.0] - 21st November 2020.
 
 - Added time picker range.

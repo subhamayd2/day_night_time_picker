@@ -322,6 +322,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                                   opacity: changingHour ? 1 : unselectedOpacity,
                                   child: Text(
                                     "$hour",
+                                    textScaleFactor: 1.0,
                                     style: _commonTimeStyles.copyWith(
                                         color: changingHour
                                             ? color
@@ -331,7 +332,8 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                               ),
                             ),
                           ),
-                          Text(":", style: _commonTimeStyles),
+                          Text(":",
+                              textScaleFactor: 1.0, style: _commonTimeStyles),
                           Material(
                             color: Colors.transparent,
                             child: InkWell(
@@ -348,6 +350,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                                       !changingHour ? 1 : unselectedOpacity,
                                   child: Text(
                                     padNumber(minute),
+                                    textScaleFactor: 1.0,
                                     style: _commonTimeStyles.copyWith(
                                         color: !changingHour
                                             ? color

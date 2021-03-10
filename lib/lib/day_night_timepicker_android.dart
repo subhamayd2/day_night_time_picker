@@ -381,21 +381,25 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
-                                FlatButton(
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    textStyle: TextStyle(color: color),
+                                  ),
                                   onPressed: onCancel,
                                   child: Text(
                                     widget.cancelText.toUpperCase(),
                                     style: okCancelStyle,
                                   ),
-                                  textColor: color,
                                 ),
-                                FlatButton(
+                                TextButton(
                                   onPressed: onOk,
                                   child: Text(
                                     widget.okText.toUpperCase(),
                                     style: okCancelStyle,
                                   ),
-                                  textColor: color,
+                                  style: TextButton.styleFrom(
+                                    textStyle: TextStyle(color: color),
+                                  ),
                                 ),
                               ],
                             ),

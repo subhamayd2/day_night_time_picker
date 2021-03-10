@@ -9,7 +9,7 @@ String padNumber(int num) {
 }
 
 /// Get the hour either in 12Hr or 24Hr format
-int getHours(int h, String a, bool is24Hr) {
+int? getHours(int? h, String? a, bool is24Hr) {
   if (is24Hr) {
     return h;
   }
@@ -22,7 +22,7 @@ int getHours(int h, String a, bool is24Hr) {
   if (h == 12) {
     return 12;
   }
-  return h + 12;
+  return h! + 12;
 }
 
 /// Map a given value between a range
@@ -36,7 +36,7 @@ double mapRange(
   return ((value - iMin) * (oMax - oMin)) / (iMax - iMin) + oMin;
 }
 
-int getIntFromMinuteIntervalEnum(MinuteInterval interval) {
+int getIntFromMinuteIntervalEnum(MinuteInterval? interval) {
   switch (interval) {
     case MinuteInterval.FIVE:
       return 5;
@@ -50,7 +50,7 @@ int getIntFromMinuteIntervalEnum(MinuteInterval interval) {
 }
 
 /// Map MinuteInterval enum to division values
-int getMinuteDivisions(int diff, MinuteInterval interval) {
+int getMinuteDivisions(int diff, MinuteInterval? interval) {
   switch (interval) {
     case MinuteInterval.FIVE:
       // 12
@@ -67,7 +67,7 @@ int getMinuteDivisions(int diff, MinuteInterval interval) {
 }
 
 /// Get the minimum minute from interval
-double getMinMinute(double minMinute, MinuteInterval interval) {
+double getMinMinute(double? minMinute, MinuteInterval? interval) {
   if (minMinute == 0) {
     return 0;
   }
@@ -77,7 +77,7 @@ double getMinMinute(double minMinute, MinuteInterval interval) {
   double i = 1;
   while (min < 0) {
     double val = i * step;
-    if (val >= minMinute) {
+    if (val >= minMinute!) {
       min = val;
     }
     i++;
@@ -86,7 +86,7 @@ double getMinMinute(double minMinute, MinuteInterval interval) {
 }
 
 /// Get the maximum minute from interval
-double getMaxMinute(double maxMinute, MinuteInterval interval) {
+double getMaxMinute(double? maxMinute, MinuteInterval? interval) {
   if (maxMinute == 59) {
     return 59;
   }
@@ -94,7 +94,7 @@ double getMaxMinute(double maxMinute, MinuteInterval interval) {
 
   double max = 60;
   double i = 1;
-  while (max > maxMinute) {
+  while (max > maxMinute!) {
     double val = 60 - (i * step);
     if (val <= maxMinute) {
       max = val;
@@ -105,8 +105,8 @@ double getMaxMinute(double maxMinute, MinuteInterval interval) {
 }
 
 /// Generate a List of minutes
-List<int> generateMinutes(int divisions, MinuteInterval interval, min, max) {
-  final minutes = List<int>.generate(divisions + 1, (index) {
+List<int?> generateMinutes(int divisions, MinuteInterval? interval, min, max) {
+  final minutes = List<int?>.generate(divisions + 1, (index) {
     final val = min.round() + (getIntFromMinuteIntervalEnum(interval) * index);
     if (val >= max) {
       return max.round();
@@ -117,8 +117,8 @@ List<int> generateMinutes(int divisions, MinuteInterval interval, min, max) {
 }
 
 /// Generate a List of hours
-List<int> generateHours(int divisions, min, max) {
-  final hours = List<int>.generate(divisions, (index) {
+List<int?> generateHours(int divisions, min, max) {
+  final hours = List<int?>.generate(divisions, (index) {
     final val = min.round() + index;
     if (val >= max) {
       return max.round();

@@ -6,16 +6,16 @@ import './sun_moon.dart';
 /// [Widget] for rendering the box container of the sun and moon.
 class DayNightBanner extends StatelessWidget {
   /// Current selected hour
-  final int hour;
+  final int? hour;
 
   /// How much the Image is displaced from [left] based on the current hour
   final double displace;
 
   /// Image asset of the sun
-  final Image sunAsset;
+  final Image? sunAsset;
 
   /// Image asset of the moon
-  final Image moonAsset;
+  final Image? moonAsset;
 
   /// Initialize the container
   DayNightBanner({
@@ -26,7 +26,7 @@ class DayNightBanner extends StatelessWidget {
   });
 
   /// Get the background color of the container, representing the time of day
-  Color getColor(bool isDay, bool isDusk) {
+  Color? getColor(bool isDay, bool isDusk) {
     if (!isDay) {
       return Colors.blueGrey[900];
     }
@@ -38,8 +38,8 @@ class DayNightBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDay = hour >= 6 && hour <= 18;
-    final isDusk = hour >= 16 && hour <= 18;
+    final isDay = hour! >= 6 && hour! <= 18;
+    final isDusk = hour! >= 16 && hour! <= 18;
     return AnimatedContainer(
       padding: const EdgeInsets.symmetric(horizontal: 32),
       duration: const Duration(seconds: 1),

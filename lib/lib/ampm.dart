@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 /// [Widget] for rendering the AM/PM button
 class AmPm extends StatelessWidget {
   /// Currently selected by user
-  final String selected;
+  final String? selected;
 
   /// [onChange] handler for AM/PM
-  final void Function(String) onChange;
+  final void Function(String)? onChange;
 
   /// Accent color to be used for the button
-  final Color accentColor;
+  final Color? accentColor;
 
   /// Accent color to be used for the unselected button
-  final Color unselectedColor;
+  final Color? unselectedColor;
 
   /// Default [TextStyle]
   final _style = const TextStyle(fontSize: 20);
@@ -34,7 +34,7 @@ class AmPm extends StatelessWidget {
             child: InkWell(
               onTap: !isAm
                   ? () {
-                      onChange("am");
+                      onChange!("am");
                     }
                   : null,
               child: Padding(
@@ -58,7 +58,7 @@ class AmPm extends StatelessWidget {
             child: InkWell(
               onTap: isAm
                   ? () {
-                      onChange("pm");
+                      onChange!("pm");
                     }
                   : null,
               child: Padding(

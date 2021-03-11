@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 /// [Widget] for rendering the Sun and Moon Asset
 class SunMoon extends StatelessWidget {
   /// Whether currently the Sun is displayed
-  final bool isSun;
+  final bool? isSun;
 
   /// The Image asset for the sun
-  final Image sunAsset;
+  final Image? sunAsset;
 
   /// The Image asset for the moon
-  final Image moonAsset;
+  final Image? moonAsset;
 
   /// Initialize the Class
   SunMoon({
@@ -27,7 +27,7 @@ class SunMoon extends StatelessWidget {
         switchInCurve: Curves.ease,
         switchOutCurve: Curves.ease,
         duration: const Duration(milliseconds: 250),
-        child: isSun
+        child: isSun!
             ? Container(
                 key: const ValueKey(1),
                 child: sunAsset ??

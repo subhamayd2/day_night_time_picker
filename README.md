@@ -1,9 +1,7 @@
 # DayNightTimePicker
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A day night time picker for Flutter with **Zero Dependencies**.
@@ -127,6 +125,9 @@ Thanks goes to these wonderful people:
     <td align="center"><a href="https://github.com/gohdong"><img src="https://avatars.githubusercontent.com/u/22044475?v=4?s=100" width="100px;" alt=""/><br /><sub><b>gohdong</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=gohdong" title="Code">💻</a></td>
     <td align="center"><a href="https://achim.io/"><img src="https://avatars.githubusercontent.com/u/43643339?v=4?s=100" width="100px;" alt=""/><br /><sub><b>nohli</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=nohli" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/sander102907"><img src="https://avatars.githubusercontent.com/u/22891388?v=4?s=100" width="100px;" alt=""/><br /><sub><b>sander102907</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=sander102907" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="http://asoteam.ir"><img src="https://avatars.githubusercontent.com/u/22625638?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sobhan Moradi</b></sub></a><br /><a href="#design-sobimor" title="Design">🎨</a></td>
   </tr>
 </table>
 

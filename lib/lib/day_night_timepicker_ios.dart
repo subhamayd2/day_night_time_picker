@@ -58,6 +58,9 @@ class DayNightTimePickerIos extends StatefulWidget {
   /// Elevation of the [Modal] in [double].
   final double? elevation;
 
+  /// Inset padding of the [Modal] in [EdgeInsets].
+  final EdgeInsets? dialogInsetPadding;
+
   /// Label for the `hour` text.
   final String? hourLabel;
 
@@ -108,6 +111,7 @@ class DayNightTimePickerIos extends StatefulWidget {
     this.blurredBackground = false,
     this.borderRadius,
     this.elevation,
+    this.dialogInsetPadding,
     this.hourLabel,
     this.minuteLabel,
     this.minuteInterval,
@@ -341,6 +345,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: blurAmount, sigmaY: blurAmount),
       child: Dialog(
+        insetPadding: widget.dialogInsetPadding,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius),
         ),

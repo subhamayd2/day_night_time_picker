@@ -87,6 +87,7 @@ FlatButton(
 | **barrierColor**        | Color of the background of the [Modal].                                                                  |           `Colors.black45`           |
 | **borderRadius**        | Border radius of the [Container] in [double].                                                            |                `10.0`                |
 | **elevation**           | Elevation of the [Modal] in [double].                                                                    |                `12.0`                |
+| **dialogInsetPadding**  | Inset padding of the [Modal] in EdgeInsets.                                                              | `EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0)` |
 | **barrierDismissible**  | Whether clicking outside should dismiss the [Modal].                                                     |                `true`                |
 | **iosStylePicker**      | Whether to display a IOS style picker (Not exactly the same).                                            |               `false`                |
 | **hourLabel**           | The label to be displayed for `hour` picker. Only for _iosStylePicker_.                                  |              `'hours'`               |

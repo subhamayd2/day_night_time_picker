@@ -57,6 +57,9 @@ class DayNightTimePickerAndroid extends StatefulWidget {
   /// Elevation of the [Modal] in [double].
   final double? elevation;
 
+  /// Inset padding of the [Modal] in [EdgeInsets].
+  final EdgeInsets? dialogInsetPadding;
+
   /// Steps interval while changing [minute].
   final MinuteInterval? minuteInterval;
 
@@ -101,6 +104,7 @@ class DayNightTimePickerAndroid extends StatefulWidget {
     this.blurredBackground = false,
     this.borderRadius,
     this.elevation,
+    this.dialogInsetPadding,
     this.minuteInterval,
     this.disableMinute,
     this.disableHour,
@@ -261,6 +265,7 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: blurAmount, sigmaY: blurAmount),
       child: Dialog(
+        insetPadding: widget.dialogInsetPadding,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius),
         ),

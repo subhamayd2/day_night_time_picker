@@ -213,15 +213,13 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
           DateTime(now.year, now.month, now.day, time.hour, time.minute);
       widget.onChangeDateTime!(dateTime);
     }
-    if (!widget.isOnValueChangeMode) {
-      onCancel();
-    }
+    onCancel(result: widget.value);
   }
 
   /// Handler to close the picker
-  onCancel() {
+  onCancel({var result}) {
     if (!widget.isInlineWidget) {
-      Navigator.of(context).pop();
+      Navigator.of(context).pop(result);
     } else {
       separateHoursAndMinutes();
     }

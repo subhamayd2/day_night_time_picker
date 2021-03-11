@@ -1,0 +1,78 @@
+{
+  "projectName": "day_night_time_picker",
+  "projectOwner": "subhamayd2",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "subhamayd2",
+      "name": "Subhamay Dutta",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23093995?v=4",
+      "profile": "https://github.com/subhamayd2",
+      "contributions": [
+        "code", "doc"
+      ]
+    },
+    {
+      "login": "impure",
+      "name": "Andrew Zuo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4359114?v=4",
+      "profile": "https://github.com/impure",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "MOOUDE",
+      "name": "Mohammad Odeh",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6555426?v=4",
+      "profile": "https://www.linkedin.com/in/oude-mohammad/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "hashem78",
+      "name": "Hashem Alayan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4525797?v=4",
+      "profile": "https://github.com/hashem78",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "gohdong",
+      "name": "gohdong",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22044475?v=4",
+      "profile": "https://github.com/gohdong",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "nohli",
+      "name": "nohli",
+      "avatar_url": "https://avatars.githubusercontent.com/u/43643339?v=4",
+      "profile": "https://achim.io/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "sander102907",
+      "name": "sander102907",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22891388?v=4",
+      "profile": "https://github.com/sander102907",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}

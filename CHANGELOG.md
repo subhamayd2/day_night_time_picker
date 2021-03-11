@@ -1,13 +1,17 @@
+## [1.0.1] - 11th March 2021.
+
+- Added prop to control Dialog padding.
+
 ## [1.0.0] - 11th March 2021.
 
 - Null safety!
-- Fixed text scale factor
+- Fixed text scale factor.
 - Fixed return data on navigator pop()
-- Changed FlatButton to TextButton
+- Changed FlatButton to TextButton.
 
 ## [0.5.0] - 13th February 2021.
 
-- Added option to return value for inline widget on every onValueChange
+- Added option to return value for inline widget on every onValueChange.
 - Added option to hide sun/moon animation header.
 - Added `themeData` property.
 - Minor performance fixes.

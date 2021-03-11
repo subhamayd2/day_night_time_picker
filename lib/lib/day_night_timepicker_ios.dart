@@ -23,19 +23,19 @@ class DayNightTimePickerIos extends StatefulWidget {
   final void Function(TimeOfDay) onChange;
 
   /// _`Optional`_ Return the new time the user picked as [DateTime].
-  final void Function(DateTime) onChangeDateTime;
+  final void Function(DateTime)? onChangeDateTime;
 
   /// Show the time in TimePicker in 24 hour format.
   final bool is24HrFormat;
 
   /// Display the sun moon animation
-  final bool displayHeader;
+  final bool? displayHeader;
 
   /// Accent color of the TimePicker.
-  final Color accentColor;
+  final Color? accentColor;
 
   /// Accent color of unselected text.
-  final Color unselectedColor;
+  final Color? unselectedColor;
 
   /// Text displayed for the Cancel button.
   String cancelText;
@@ -44,46 +44,46 @@ class DayNightTimePickerIos extends StatefulWidget {
   String okText;
 
   /// Image asset used for the Sun.
-  final Image sunAsset;
+  final Image? sunAsset;
 
   /// Image asset used for the Moon.
-  final Image moonAsset;
+  final Image? moonAsset;
 
   /// Whether to blur the background of the [Modal].
   final bool blurredBackground;
 
   /// Border radius of the [Container] in [double].
-  final double borderRadius;
+  final double? borderRadius;
 
   /// Elevation of the [Modal] in [double].
-  final double elevation;
+  final double? elevation;
 
   /// Label for the `hour` text.
-  final String hourLabel;
+  final String? hourLabel;
 
   /// Label for the `minute` text.
-  final String minuteLabel;
+  final String? minuteLabel;
 
   /// Steps interval while changing [minute].
-  final MinuteInterval minuteInterval;
+  final MinuteInterval? minuteInterval;
 
   /// Disable minute picker
-  final bool disableMinute;
+  final bool? disableMinute;
 
   /// Disable hour picker
-  final bool disableHour;
+  final bool? disableHour;
 
   /// Selectable maximum hour
-  final double maxHour;
+  final double? maxHour;
 
   /// Selectable maximum minute
-  final double maxMinute;
+  final double? maxMinute;
 
   /// Selectable minimum hour
-  final double minHour;
+  final double? minHour;
 
   /// Selectable minimum minute
-  final double minMinute;
+  final double? minMinute;
 
   /// Whether the widget is displayed as a popup or inline
   final bool isInlineWidget;
@@ -93,8 +93,8 @@ class DayNightTimePickerIos extends StatefulWidget {
 
   /// Initialize the picker [Widget]
   DayNightTimePickerIos({
-    @required this.value,
-    @required this.onChange,
+    required this.value,
+    required this.onChange,
     this.onChangeDateTime,
     this.is24HrFormat = false,
     this.displayHeader,
@@ -132,13 +132,13 @@ class DayNightTimePickerIos extends StatefulWidget {
 /// Picker state class
 class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   /// Current selected hour
-  int hour;
+  int? hour;
 
   /// Current selected minute
-  int minute;
+  late int minute;
 
   /// Current selected AM/PM
-  String a;
+  String? a;
 
   /// Currently changing the hour section
   bool changingHour = true;
@@ -147,24 +147,24 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   final okCancelStyle = const TextStyle(fontWeight: FontWeight.bold);
 
   /// Controller for `hour` list
-  FixedExtentScrollController _hourController;
+  FixedExtentScrollController? _hourController;
 
   /// Controller for `minute` list
-  FixedExtentScrollController _minuteController;
+  FixedExtentScrollController? _minuteController;
 
   /// List of hours to show
-  List<int> hours = [];
+  List<int?> hours = [];
 
   /// List of minutes to show
-  List<int> minutes = [];
+  List<int?> minutes = [];
 
   @override
   void initState() {
     setState(() {
-      changingHour =
-          (!widget.disableHour && !widget.disableMinute) || !widget.disableHour;
+      changingHour = (!widget.disableHour! && !widget.disableMinute!) ||
+          !widget.disableHour!;
     });
-    final hourDiv = ((widget.maxHour - widget.minHour) + 1).round();
+    final hourDiv = ((widget.maxHour! - widget.minHour!) + 1).round();
     final _hours = generateHours(
       hourDiv,
       widget.minHour,
@@ -176,7 +176,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
 
     int minDiff = (maxMinute - minMinute).round();
     final minuteDiv = getMinuteDivisions(minDiff, widget.minuteInterval);
-    List<int> _minutes = generateMinutes(
+    List<int?> _minutes = generateMinutes(
       minuteDiv,
       widget.minuteInterval,
       minMinute,
@@ -187,17 +187,17 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
     _hourController = FixedExtentScrollController(
         initialItem: _hours.indexOf(initialVal['h']))
       ..addListener(() {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
+        WidgetsBinding.instance!.addPostFrameCallback((_) {
           setState(() {
             changingHour = true;
           });
         });
       })
       ..addListener(() {
-        _hourController.position.isScrollingNotifier.addListener(() {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
+        _hourController!.position.isScrollingNotifier.addListener(() {
+          WidgetsBinding.instance!.addPostFrameCallback((_) {
             if (widget.isOnValueChangeMode &&
-                !_hourController.position.isScrollingNotifier.value) {
+                !_hourController!.position.isScrollingNotifier.value) {
               onOk();
             }
           });
@@ -206,7 +206,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
     _minuteController = FixedExtentScrollController(
         initialItem: _minutes.indexOf(initialVal['m']))
       ..addListener(() {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
+        WidgetsBinding.instance!.addPostFrameCallback((_) {
           setState(() {
             changingHour = false;
             hours = _hours;
@@ -215,10 +215,10 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
         });
       })
       ..addListener(() {
-        _minuteController.position.isScrollingNotifier.addListener(() {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
+        _minuteController!.position.isScrollingNotifier.addListener(() {
+          WidgetsBinding.instance!.addPostFrameCallback((_) {
             if (widget.isOnValueChangeMode &&
-                !_minuteController.position.isScrollingNotifier.value) {
+                !_minuteController!.position.isScrollingNotifier.value) {
               onOk();
             }
           });
@@ -236,7 +236,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.is24HrFormat != widget.is24HrFormat ||
         oldWidget.value != widget.value) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
         separateHoursAndMinutes();
       });
     }
@@ -265,8 +265,8 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
       a = _a;
     });
     if (!init) {
-      _hourController.jumpToItem(hours.indexOf(_h));
-      _minuteController.jumpToItem(minutes.indexOf(_m));
+      _hourController!.jumpToItem(hours.indexOf(_h));
+      _minuteController!.jumpToItem(minutes.indexOf(_m));
     }
     return {
       "h": _h,
@@ -298,15 +298,15 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   /// [onChange] handler. Return [TimeOfDay]
   onOk() {
     var time = TimeOfDay(
-      hour: getHours(hour, a, widget.is24HrFormat),
+      hour: getHours(hour, a, widget.is24HrFormat)!,
       minute: minute,
     );
     widget.onChange(time);
     if (widget.onChangeDateTime != null) {
       final now = DateTime.now();
       final dateTime =
-      DateTime(now.year, now.month, now.day, time.hour, time.minute);
-      widget.onChangeDateTime(dateTime);
+          DateTime(now.year, now.month, now.day, time.hour, time.minute);
+      widget.onChangeDateTime!(dateTime);
     }
     onCancel(result: widget.value);
   }
@@ -322,7 +322,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
 
   @override
   Widget build(BuildContext context) {
-    final _commonTimeStyles = Theme.of(context).textTheme.headline2.copyWith(
+    final _commonTimeStyles = Theme.of(context).textTheme.headline2!.copyWith(
           fontSize: 30,
         );
     double hourMinValue = widget.is24HrFormat ? 0 : 1;
@@ -333,7 +333,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
     final color = widget.accentColor ?? Theme.of(context).accentColor;
     final unselectedColor = widget.unselectedColor ?? Colors.grey;
 
-    final double blurAmount = widget.blurredBackground ?? false ? 5 : 0;
+    final double blurAmount = widget.blurredBackground ? 5 : 0;
 
     final borderRadius = widget.borderRadius ?? _BORDER_RADIUS;
     final elevation = widget.elevation ?? _ELEVATION;
@@ -351,11 +351,11 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              widget.displayHeader
+              widget.displayHeader!
                   ? DayNightBanner(
                       hour: getHours(hour, a, widget.is24HrFormat),
                       displace:
-                          mapRange(hour * 1.0, hourMinValue, hourMaxValue),
+                          mapRange(hour! * 1.0, hourMinValue, hourMaxValue),
                       sunAsset: widget.sunAsset,
                       moonAsset: widget.moonAsset,
                     )
@@ -393,19 +393,19 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                               child: ListWheelScrollView.useDelegate(
                                 controller: _hourController,
                                 itemExtent: 36,
-                                physics: widget.disableHour
+                                physics: widget.disableHour!
                                     ? const NeverScrollableScrollPhysics()
                                     : const FixedExtentScrollPhysics(),
                                 overAndUnderCenterOpacity:
-                                    widget.disableHour ? 0 : 0.25,
+                                    widget.disableHour! ? 0 : 0.25,
                                 perspective: 0.01,
                                 onSelectedItemChanged: (value) {
-                                  onChangeHour(hours[value] + 0.0);
+                                  onChangeHour(hours[value]! + 0.0);
                                 },
                                 childDelegate: ListWheelChildBuilderDelegate(
-                                  childCount: (hours ?? []).length,
+                                  childCount: hours.length,
                                   builder: (context, index) {
-                                    final hourVal = padNumber(hours[index]);
+                                    final hourVal = padNumber(hours[index]!);
                                     return Center(
                                       child: Text(
                                         hourVal,
@@ -421,7 +421,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                               ),
                             ),
                           ),
-                          Text(widget.hourLabel),
+                          Text(widget.hourLabel!),
                           SizedBox(
                             width: 64,
                             child: Padding(
@@ -430,19 +430,19 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                               child: ListWheelScrollView.useDelegate(
                                 controller: _minuteController,
                                 itemExtent: 36,
-                                physics: widget.disableMinute
+                                physics: widget.disableMinute!
                                     ? const NeverScrollableScrollPhysics()
                                     : const FixedExtentScrollPhysics(),
                                 overAndUnderCenterOpacity:
-                                    widget.disableMinute ? 0 : 0.25,
+                                    widget.disableMinute! ? 0 : 0.25,
                                 perspective: 0.01,
                                 onSelectedItemChanged: (value) {
-                                  onChangeMinute(minutes[value] + 0.0);
+                                  onChangeMinute(minutes[value]! + 0.0);
                                 },
                                 childDelegate: ListWheelChildBuilderDelegate(
                                   childCount: minutes.length,
                                   builder: (context, index) {
-                                    final minuteVal = minutes[index];
+                                    final minuteVal = minutes[index]!;
                                     return Center(
                                       child: Text(
                                         "${padNumber(minuteVal)}",
@@ -458,7 +458,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                               ),
                             ),
                           ),
-                          Text(widget.minuteLabel),
+                          Text(widget.minuteLabel!),
                         ],
                       ),
                     ),
@@ -467,21 +467,25 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
-                                FlatButton(
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    textStyle: TextStyle(color: color),
+                                  ),
                                   onPressed: onCancel,
                                   child: Text(
                                     widget.cancelText.toUpperCase(),
                                     style: okCancelStyle,
                                   ),
-                                  textColor: color,
                                 ),
-                                FlatButton(
+                                TextButton(
                                   onPressed: onOk,
                                   child: Text(
                                     widget.okText.toUpperCase(),
                                     style: okCancelStyle,
                                   ),
-                                  textColor: color,
+                                  style: TextButton.styleFrom(
+                                    textStyle: TextStyle(color: color),
+                                  ),
                                 ),
                               ],
                             ),

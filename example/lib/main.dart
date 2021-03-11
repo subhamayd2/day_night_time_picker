@@ -50,8 +50,10 @@ class _HomeState extends State<Home> {
               style: Theme.of(context).textTheme.headline1,
             ),
             SizedBox(height: 10),
-            FlatButton(
-              color: Theme.of(context).accentColor,
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Theme.of(context).accentColor,
+              ),
               onPressed: () {
                 Navigator.of(context).push(
                   showPicker(

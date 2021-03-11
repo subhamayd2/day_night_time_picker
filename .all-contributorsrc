@@ -16,7 +16,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/23093995?v=4",
       "profile": "https://github.com/subhamayd2",
       "contributions": [
-        "code", "doc"
+        "code",
+        "doc"
       ]
     },
     {
@@ -72,7 +73,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "sobimor",
+      "name": "Sobhan Moradi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22625638?v=4",
+      "profile": "http://asoteam.ir",
+      "contributions": [
+        "design"
+      ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }

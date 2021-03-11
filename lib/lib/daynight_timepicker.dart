@@ -37,6 +37,8 @@ import 'package:flutter/material.dart';
 ///
 /// **elevation** - Elevation of the [Modal] in double. Defaults to `12.0`.
 ///
+/// **dialogInsetPadding** - Inset padding of the [Modal] in EdgeInsets. Defaults to `EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0)`.
+///
 /// **barrierDismissible** - Whether clicking outside should dismiss the [Modal]. Defaults to `true`.
 ///
 /// **iosStylePicker** - Whether to display a IOS style picker (Not exactly the same). Defaults to `false`.
@@ -78,6 +80,7 @@ PageRouteBuilder showPicker({
   Color barrierColor = Colors.black45,
   double? borderRadius,
   double? elevation,
+  EdgeInsets? dialogInsetPadding = const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
   bool barrierDismissible = true,
   bool iosStylePicker = false,
   bool displayHeader = true,
@@ -132,6 +135,7 @@ PageRouteBuilder showPicker({
             blurredBackground: blurredBackground,
             borderRadius: borderRadius,
             elevation: elevation,
+            dialogInsetPadding: dialogInsetPadding,
             hourLabel: hourLabel,
             minuteLabel: minuteLabel,
             minuteInterval: minuteInterval,
@@ -161,6 +165,7 @@ PageRouteBuilder showPicker({
             blurredBackground: blurredBackground,
             borderRadius: borderRadius,
             elevation: elevation,
+            dialogInsetPadding: dialogInsetPadding,
             minuteInterval: minuteInterval,
             disableMinute: disableMinute,
             disableHour: disableHour,
@@ -227,6 +232,8 @@ PageRouteBuilder showPicker({
 ///
 /// **elevation** - Elevation of the [Modal] in double. Defaults to `12.0`.
 ///
+/// **dialogInsetPadding** - Inset padding of the [Modal] in EdgeInsets. Defaults to `EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0)`.
+///
 /// **barrierDismissible** - Whether clicking outside should dismiss the [Modal]. Defaults to `true`.
 ///
 /// **iosStylePicker** - Whether to display a IOS style picker (Not exactly the same). Defaults to `false`.
@@ -271,6 +278,7 @@ Widget createInlinePicker({
   Color barrierColor = Colors.black45,
   double? borderRadius,
   double? elevation,
+  EdgeInsets? dialogInsetPadding = const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
   bool barrierDismissible = true,
   bool iosStylePicker = false,
   String hourLabel = 'hours',
@@ -324,6 +332,7 @@ Widget createInlinePicker({
             blurredBackground: blurredBackground,
             borderRadius: borderRadius,
             elevation: elevation,
+            dialogInsetPadding: dialogInsetPadding,
             hourLabel: hourLabel,
             minuteLabel: minuteLabel,
             minuteInterval: minuteInterval,
@@ -359,6 +368,7 @@ Widget createInlinePicker({
             blurredBackground: blurredBackground,
             borderRadius: borderRadius,
             elevation: elevation,
+            dialogInsetPadding: dialogInsetPadding,
             minuteInterval: minuteInterval,
             disableMinute: disableMinute,
             disableHour: disableHour,

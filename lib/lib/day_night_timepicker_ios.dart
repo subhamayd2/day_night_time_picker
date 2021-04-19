@@ -94,6 +94,9 @@ class DayNightTimePickerIos extends StatefulWidget {
   /// Weather to hide okText, cancelText and return value on every onValueChange.
   final bool isOnValueChangeMode;
 
+  /// Whether or not the minute picker is auto focus/selected.
+  final bool focusMinutePicker;
+
   /// Initialize the picker [Widget]
   DayNightTimePickerIos({
     required this.value,
@@ -122,6 +125,7 @@ class DayNightTimePickerIos extends StatefulWidget {
     this.minHour,
     this.minMinute,
     this.isInlineWidget = false,
+    this.focusMinutePicker = false,
   }) {
     if (isInlineWidget) {
       this.cancelText = "reset";
@@ -145,7 +149,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   String? a;
 
   /// Currently changing the hour section
-  bool changingHour = true;
+  bool hourIsSelected = true;
 
   /// Default Ok/Cancel [TextStyle]
   final okCancelStyle = const TextStyle(fontWeight: FontWeight.bold);
@@ -164,9 +168,14 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
 
   @override
   void initState() {
+    bool _hourIsSelected = true;
+
+    if (widget.focusMinutePicker || widget.disableHour!) {
+      _hourIsSelected = false;
+    }
+
     setState(() {
-      changingHour = (!widget.disableHour! && !widget.disableMinute!) ||
-          !widget.disableHour!;
+      hourIsSelected = _hourIsSelected;
     });
     final hourDiv = ((widget.maxHour! - widget.minHour!) + 1).round();
     final _hours = generateHours(
@@ -193,7 +202,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
       ..addListener(() {
         WidgetsBinding.instance!.addPostFrameCallback((_) {
           setState(() {
-            changingHour = true;
+            hourIsSelected = true;
           });
         });
       })
@@ -212,7 +221,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
       ..addListener(() {
         WidgetsBinding.instance!.addPostFrameCallback((_) {
           setState(() {
-            changingHour = false;
+            hourIsSelected = false;
             hours = _hours;
             minutes = _minutes;
           });
@@ -295,7 +304,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   /// Hnadle should change hour or minute
   changeCurrentSelector(bool isHour) {
     setState(() {
-      changingHour = isHour;
+      hourIsSelected = isHour;
     });
   }
 
@@ -415,7 +424,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                                       child: Text(
                                         hourVal,
                                         style: _commonTimeStyles.copyWith(
-                                          color: changingHour
+                                          color: hourIsSelected
                                               ? color
                                               : unselectedColor,
                                         ),
@@ -452,7 +461,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                                       child: Text(
                                         "${padNumber(minuteVal)}",
                                         style: _commonTimeStyles.copyWith(
-                                          color: !changingHour
+                                          color: !hourIsSelected
                                               ? color
                                               : unselectedColor,
                                         ),

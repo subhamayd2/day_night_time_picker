@@ -1,3 +1,7 @@
+## [1.0.1+1] - 19th April 2021.
+
+- Added prop to auto focus minute picker.
+
 ## [1.0.1] - 11th March 2021.
 
 - Added prop to control Dialog padding.

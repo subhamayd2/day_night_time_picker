@@ -63,7 +63,10 @@ import 'package:flutter/material.dart';
 ///
 /// **minMinute** - Selectable minimum minute. Defaults to `0`.
 ///
+/// **focusMinutePicker** - Whether or not the minute picker is auto focus/selected. Defaults to `false`.
+///
 /// **themeData** - ThemeData to use for the widget.
+///
 PageRouteBuilder showPicker({
   BuildContext? context,
   required TimeOfDay value,
@@ -80,7 +83,8 @@ PageRouteBuilder showPicker({
   Color barrierColor = Colors.black45,
   double? borderRadius,
   double? elevation,
-  EdgeInsets? dialogInsetPadding = const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+  EdgeInsets? dialogInsetPadding =
+      const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
   bool barrierDismissible = true,
   bool iosStylePicker = false,
   bool displayHeader = true,
@@ -92,6 +96,7 @@ PageRouteBuilder showPicker({
   double minMinute = 0,
   double maxMinute = 59,
   ThemeData? themeData,
+  bool focusMinutePicker = false,
   // Infinity is used so that we can assert whether or not the user actually set a value
   double minHour = double.infinity,
   double maxHour = double.infinity,
@@ -105,6 +110,8 @@ PageRouteBuilder showPicker({
 
   assert(!(disableHour == true && disableMinute == true),
       "Both \"disableMinute\" and \"disableHour\" cannot be true.");
+  assert(!(disableMinute == true && focusMinutePicker == true),
+      "Both \"disableMinute\" and \"focusMinutePicker\" cannot be true.");
   assert(maxMinute <= 59, "\"maxMinute\" must be less than or equal to 59");
   assert(minMinute >= 0, "\"minMinute\" must be greater than or equal to 0");
   if (is24HrFormat) {
@@ -145,6 +152,7 @@ PageRouteBuilder showPicker({
             maxMinute: maxMinute,
             minHour: minHour,
             minMinute: minMinute,
+            focusMinutePicker: focusMinutePicker,
           ),
         );
       } else {
@@ -173,6 +181,7 @@ PageRouteBuilder showPicker({
             maxMinute: maxMinute,
             minHour: minHour,
             minMinute: minMinute,
+            focusMinutePicker: focusMinutePicker,
           ),
         );
       }
@@ -260,7 +269,10 @@ PageRouteBuilder showPicker({
 ///
 /// **isOnValueChangeMode** - Weather to hide okText, cancelText and return value on every onValueChange. Defaults to `false`.
 ///
+/// **focusMinutePicker** - Whether or not the minute picker is auto focus/selected. Defaults to `false`.
+///
 /// **themeData** - ThemeData to use for the widget.
+///
 Widget createInlinePicker({
   BuildContext? context,
   required TimeOfDay value,
@@ -278,7 +290,8 @@ Widget createInlinePicker({
   Color barrierColor = Colors.black45,
   double? borderRadius,
   double? elevation,
-  EdgeInsets? dialogInsetPadding = const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+  EdgeInsets? dialogInsetPadding =
+      const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
   bool barrierDismissible = true,
   bool iosStylePicker = false,
   String hourLabel = 'hours',
@@ -290,6 +303,7 @@ Widget createInlinePicker({
   double maxMinute = 59,
   bool displayHeader = true,
   ThemeData? themeData,
+  bool focusMinutePicker = false,
   // Infinity is used so that we can assert whether or not the user actually set a value
   double minHour = double.infinity,
   double maxHour = double.infinity,
@@ -303,6 +317,8 @@ Widget createInlinePicker({
 
   assert(!(disableHour == true && disableMinute == true),
       "Both \"disableMinute\" and \"disableHour\" cannot be true.");
+  assert(!(disableMinute == true && focusMinutePicker == true),
+      "Both \"disableMinute\" and \"focusMinutePicker\" cannot be true.");
   assert(maxMinute <= 59, "\"maxMinute\" must be less than or equal to 59");
   assert(minMinute >= 0, "\"minMinute\" must be greater than or equal to 0");
   if (is24HrFormat) {
@@ -345,6 +361,7 @@ Widget createInlinePicker({
             isInlineWidget: true,
             displayHeader: displayHeader,
             isOnValueChangeMode: isOnChangeValueMode,
+            focusMinutePicker: focusMinutePicker,
           ),
         );
       },
@@ -379,6 +396,7 @@ Widget createInlinePicker({
             isInlineWidget: true,
             displayHeader: displayHeader,
             isOnValueChangeMode: isOnChangeValueMode,
+            focusMinutePicker: focusMinutePicker,
           ),
         );
       },

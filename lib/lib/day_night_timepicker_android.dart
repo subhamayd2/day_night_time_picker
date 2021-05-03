@@ -1,8 +1,7 @@
-import 'dart:ui';
-
 import 'package:day_night_time_picker/lib/ampm.dart';
 import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:day_night_time_picker/lib/daynight_banner.dart';
+import 'package:day_night_time_picker/lib/filter_wrapper.dart';
 import 'package:day_night_time_picker/lib/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -271,8 +270,8 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
     final borderRadius = widget.borderRadius ?? _BORDER_RADIUS;
     final elevation = widget.elevation ?? _ELEVATION;
 
-    return BackdropFilter(
-      filter: ImageFilter.blur(sigmaX: blurAmount, sigmaY: blurAmount),
+    return FilterWrapper(
+      blurAmount: blurAmount,
       child: Dialog(
         insetPadding: widget.dialogInsetPadding,
         shape: RoundedRectangleBorder(

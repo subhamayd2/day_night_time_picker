@@ -1,3 +1,7 @@
+## [1.0.2] - 3rd May 2021.
+
+- Workaround fix for `ImageFilter.blur`.
+
 ## [1.0.1+1] - 19th April 2021.
 
 - Added prop to auto focus minute picker.

@@ -8,4 +8,4 @@ const ELEVATION = 12.0;
 const SUN_MOON_WIDTH = 100.0;
 
 /// Minute interval enum
-enum MinuteInterval { ONE, FIVE, TEN, FIFTEEN }
+enum MinuteInterval { ONE, FIVE, TEN, FIFTEEN,THIRTY }

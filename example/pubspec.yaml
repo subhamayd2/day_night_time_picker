@@ -26,6 +26,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   day_night_time_picker:
     path: ../
+  get: ^4.1.4
 
 dev_dependencies:
   flutter_test:

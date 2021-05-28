@@ -1,13 +1,19 @@
 import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() => runApp(MyApp());
+
+class GetState extends GetxController {
+  var name = 0.obs;
+  changeName() => name++;
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Time picker',
       theme: ThemeData(
@@ -27,6 +33,8 @@ class _HomeState extends State<Home> {
   TimeOfDay _time = TimeOfDay.now().replacing(minute: 30);
   bool iosStyle = true;
 
+  final c = GetState();
+
   void onTimeChanged(TimeOfDay newTime) {
     setState(() {
       _time = newTime;
@@ -36,10 +44,12 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: c.changeName),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Obx(() => Text("${c.name}")),
             Text(
               "Popup Picker Style",
               style: Theme.of(context).textTheme.headline6,

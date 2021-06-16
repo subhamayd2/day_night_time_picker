@@ -44,7 +44,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: c.changeName),
+      floatingActionButton: FloatingActionButton(
+        onPressed: c.changeName,
+        child: Icon(Icons.add),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -89,6 +89,9 @@ class DayNightTimePickerAndroid extends StatefulWidget {
   /// Whether or not the minute picker is auto focus/selected.
   final bool focusMinutePicker;
 
+  /// Ok/Cancel button's text style [TextStyle]
+  TextStyle okCancelStyle;
+
   /// Initialize the picker [Widget]
   DayNightTimePickerAndroid({
     required this.value,
@@ -116,6 +119,7 @@ class DayNightTimePickerAndroid extends StatefulWidget {
     this.minMinute,
     this.isInlineWidget = false,
     this.focusMinutePicker = false,
+    this.okCancelStyle = const TextStyle(fontWeight: FontWeight.bold),
   }) {
     if (isInlineWidget) {
       this.cancelText = "reset";
@@ -143,11 +147,13 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
   bool hourIsSelected = true;
 
   /// Default Ok/Cancel [TextStyle]
-  final okCancelStyle = const TextStyle(fontWeight: FontWeight.bold);
+  late TextStyle okCancelStyle;
 
   @override
   void initState() {
     bool _hourIsSelected = true;
+
+    okCancelStyle = widget.okCancelStyle;
 
     if (widget.focusMinutePicker || widget.disableHour!) {
       _hourIsSelected = false;

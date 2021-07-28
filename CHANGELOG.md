@@ -1,6 +1,6 @@
 ## [1.0.3] - 28th May 2021.
 
--Added Thirty in the MinuteInterval enum
+- Added Thirty in the `MinuteInterval` enum.
 
 ## [1.0.2] - 3rd May 2021.
 

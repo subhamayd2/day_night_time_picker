@@ -2,7 +2,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat)](#contributors)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
@@ -130,7 +130,8 @@ Thanks goes to these wonderful people:
     <td align="center"><a href="https://github.com/sander102907"><img src="https://avatars.githubusercontent.com/u/22891388?v=4?s=100" width="100px;" alt=""/><br /><sub><b>sander102907</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=sander102907" title="Code">💻</a></td>
   </tr>
   <tr>
-    <td align="center"><a href="https://asoteam.ir"><img src="https://avatars.githubusercontent.com/u/22625638?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sobhan Moradi</b></sub></a><br /><a href="#design-sobimor" title="Design">🎨</a></td>
+    <td align="center"><a href="http://asoteam.ir"><img src="https://avatars.githubusercontent.com/u/22625638?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sobhan Moradi</b></sub></a><br /><a href="#design-sobimor" title="Design">🎨</a></td>
+    <td align="center"><a href="https://github.com/iaskari"><img src="https://avatars.githubusercontent.com/u/3792357?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Omar Dahhane</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=iaskari" title="Code">💻</a></td>
   </tr>
 </table>
 

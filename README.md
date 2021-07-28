@@ -103,6 +103,7 @@ FlatButton(
 | **isOnValueChangeMode** | Weather to hide okText, cancelText and return value on every onValueChange. **_Only for Inline widget_** |                         `false`                          |
 | **focusMinutePicker**   | Whether or not the minute picker is auto focus/selected.                                                 |                         `false`                          |
 | **themeData**           | ThemeData to use for the widget.                                                                         |                   `Theme.of(context)`                    |
+| **okCancelStyle**       | Ok/Cancel button's text style.                                                                           |      `const TextStyle(fontWeight: FontWeight.bold)`      |
 
 ---
 

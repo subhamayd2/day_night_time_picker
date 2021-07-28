@@ -1,3 +1,7 @@
+## [1.0.3+1] - 28th July 2021.
+
+- Added `TextStyle` prop for ok/cancel button.
+
 ## [1.0.3] - 28th May 2021.
 
 - Added Thirty in the `MinuteInterval` enum.

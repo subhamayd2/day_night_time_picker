@@ -92,6 +92,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "fatihy101",
+      "name": "Fatih Yaman",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34458068?v=4",
+      "profile": "https://github.com/fatihy101",
+      "contributions": [
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,

@@ -85,7 +85,7 @@ class _HomeState extends State<Home> {
                 Text(
                   "Inline Picker Style",
                   style: Theme.of(context).textTheme.headline6,
-              ),
+                ),
                 // Render inline widget
                 createInlinePicker(
                   elevation: 1,

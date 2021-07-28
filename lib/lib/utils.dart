@@ -44,6 +44,8 @@ int getIntFromMinuteIntervalEnum(MinuteInterval? interval) {
       return 10;
     case MinuteInterval.FIFTEEN:
       return 15;
+    case MinuteInterval.THIRTY:
+      return 30;
     default:
       return 1;
   }
@@ -61,6 +63,9 @@ int getMinuteDivisions(int diff, MinuteInterval? interval) {
     case MinuteInterval.FIFTEEN:
       // 4
       return (diff / 15).round();
+    case MinuteInterval.THIRTY:
+      // 2
+      return (diff / 30).round();
     default:
       return diff;
   }

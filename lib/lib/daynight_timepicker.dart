@@ -67,7 +67,9 @@ import 'package:flutter/material.dart';
 ///
 /// **themeData** - ThemeData to use for the widget.
 ///
-/// **okCancelStyle** - Ok/Cancel button's text style. Defaults to `const TextStyle(fontWeight: FontWeight.bold)`.
+/// **okStyle** - Ok button's text style. Defaults to `const TextStyle(fontWeight: FontWeight.bold)`.
+///
+/// **cancelStyle** - Cancel button's text style. Defaults to `const TextStyle(fontWeight: FontWeight.bold)`.
 PageRouteBuilder showPicker({
   BuildContext? context,
   required TimeOfDay value,
@@ -101,7 +103,8 @@ PageRouteBuilder showPicker({
   // Infinity is used so that we can assert whether or not the user actually set a value
   double minHour = double.infinity,
   double maxHour = double.infinity,
-  TextStyle okCancelStyle = const TextStyle(fontWeight: FontWeight.bold),
+  TextStyle okStyle = const TextStyle(fontWeight: FontWeight.bold),
+  TextStyle cancelStyle = const TextStyle(fontWeight: FontWeight.bold),
 }) {
   if (minHour == double.infinity) {
     minHour = is24HrFormat ? 0 : 1;
@@ -155,7 +158,8 @@ PageRouteBuilder showPicker({
             minHour: minHour,
             minMinute: minMinute,
             focusMinutePicker: focusMinutePicker,
-            okCancelStyle: okCancelStyle,
+            okStyle: okStyle,
+            cancelStyle: cancelStyle,
           ),
         );
       } else {
@@ -185,7 +189,8 @@ PageRouteBuilder showPicker({
             minHour: minHour,
             minMinute: minMinute,
             focusMinutePicker: focusMinutePicker,
-            okCancelStyle: okCancelStyle,
+            okStyle: okStyle,
+            cancelStyle: cancelStyle,
           ),
         );
       }

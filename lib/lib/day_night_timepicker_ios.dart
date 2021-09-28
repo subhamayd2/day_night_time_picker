@@ -96,8 +96,11 @@ class DayNightTimePickerIos extends StatefulWidget {
   /// Whether or not the minute picker is auto focus/selected.
   final bool focusMinutePicker;
 
-  /// Ok/Cancel button's text style [TextStyle]
-  TextStyle okCancelStyle;
+  /// Ok button's text style [TextStyle]
+  TextStyle okStyle;
+
+  /// Cancel button's text style [TextStyle]
+  TextStyle cancelStyle;
 
   /// Initialize the picker [Widget]
   DayNightTimePickerIos({
@@ -128,7 +131,8 @@ class DayNightTimePickerIos extends StatefulWidget {
     this.minMinute,
     this.isInlineWidget = false,
     this.focusMinutePicker = false,
-    this.okCancelStyle = const TextStyle(fontWeight: FontWeight.bold),
+    this.okStyle = const TextStyle(fontWeight: FontWeight.bold),
+    this.cancelStyle = const TextStyle(fontWeight: FontWeight.bold),
   }) {
     if (isInlineWidget) {
       this.cancelText = "reset";
@@ -155,7 +159,10 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   bool hourIsSelected = true;
 
   /// Default Ok/Cancel [TextStyle]
-  late TextStyle okCancelStyle;
+  late TextStyle okStyle;
+
+  /// Default Ok/Cancel [TextStyle]
+  late TextStyle cancelStyle;
 
   /// Controller for `hour` list
   FixedExtentScrollController? _hourController;
@@ -173,7 +180,8 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   void initState() {
     bool _hourIsSelected = true;
 
-    okCancelStyle = widget.okCancelStyle;
+    okStyle = widget.okStyle;
+    cancelStyle = widget.cancelStyle;
 
     if (widget.focusMinutePicker || widget.disableHour!) {
       _hourIsSelected = false;
@@ -493,14 +501,14 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                                   onPressed: onCancel,
                                   child: Text(
                                     widget.cancelText.toUpperCase(),
-                                    style: okCancelStyle,
+                                    style: cancelStyle,
                                   ),
                                 ),
                                 TextButton(
                                   onPressed: onOk,
                                   child: Text(
                                     widget.okText.toUpperCase(),
-                                    style: okCancelStyle,
+                                    style: okStyle,
                                   ),
                                   style: TextButton.styleFrom(
                                     textStyle: TextStyle(color: color),

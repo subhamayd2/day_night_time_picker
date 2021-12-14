@@ -206,9 +206,11 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
         initialItem: _hours.indexOf(initialVal['h']))
       ..addListener(() {
         WidgetsBinding.instance!.addPostFrameCallback((_) {
-          setState(() {
-            hourIsSelected = true;
-          });
+          if (mounted) {
+            setState(() {
+              hourIsSelected = true;
+            });
+          }
         });
       })
       ..addListener(() {
@@ -225,11 +227,13 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
         initialItem: _minutes.indexOf(initialVal['m']))
       ..addListener(() {
         WidgetsBinding.instance!.addPostFrameCallback((_) {
-          setState(() {
-            hourIsSelected = false;
-            hours = _hours;
-            minutes = _minutes;
-          });
+          if (mounted) {
+            setState(() {
+              hourIsSelected = false;
+              hours = _hours;
+              minutes = _minutes;
+            });
+          }
         });
       })
       ..addListener(() {

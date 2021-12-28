@@ -1,11 +1,18 @@
 import 'package:day_night_time_picker/lib/state/state_container.dart';
 import 'package:flutter/material.dart';
 
+/// Render the [Hour] or [Minute] value for `Android` picker
 class DisplayValue extends StatelessWidget {
+  /// The [value] to display
   final String value;
+
+  /// The [onTap] handler
   final Null Function()? onTap;
+
+  /// Whether the [value] is selected or not
   final bool isSelected;
 
+  /// Constructor for the [Widget]
   const DisplayValue({
     Key? key,
     required this.value,

@@ -1,8 +1,12 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:day_night_time_picker/lib/state/time.dart';
 import 'package:flutter/material.dart';
 
+/// Stateful [Widget] for [InheritedWidget]
 class TimeModelBinding extends StatefulWidget {
+  /// The initial time provided by the user
   final Time initialTime;
 
   /// **`Required`** Return the new time the user picked as [TimeOfDay].
@@ -89,7 +93,10 @@ class TimeModelBinding extends StatefulWidget {
   /// Cancel button's text style [TextStyle]
   TextStyle cancelStyle;
 
+  /// The child [Widget] to render
   final Widget child;
+
+  /// Constructor for the [Widget]
   TimeModelBinding({
     Key? key,
     required this.initialTime,
@@ -127,6 +134,7 @@ class TimeModelBinding extends StatefulWidget {
   @override
   TimeModelBindingState createState() => TimeModelBindingState();
 
+  /// Get the [InheritedWidget]'s state in the tree
   static TimeModelBindingState of(BuildContext context) {
     final _ModelBindingScope scope =
         context.dependOnInheritedWidgetOfExactType<_ModelBindingScope>()!;
@@ -134,22 +142,32 @@ class TimeModelBinding extends StatefulWidget {
   }
 }
 
+/// The [InheritedWidget] wrapped with [State]
 class _ModelBindingScope extends InheritedWidget {
+  /// The State
   final TimeModelBindingState modelBindingState;
 
+  /// Constructor for the [InheritedWidget]
   const _ModelBindingScope({
     Key? key,
     required this.modelBindingState,
     required Widget child,
   }) : super(key: key, child: child);
 
+  /// Update notifier for the [InheritedWidget]
   @override
   bool updateShouldNotify(_ModelBindingScope oldWidget) => true;
 }
 
+/// [InheritedWidget] State class
 class TimeModelBindingState extends State<TimeModelBinding> {
+  /// initial time
   late Time time = widget.initialTime;
+
+  /// Whether the hour is currently being selected/changed
   bool hourIsSelected = true;
+
+  /// The last [DayPeriod] value
   DayPeriod lastPeriod = DayPeriod.am;
 
   @override
@@ -166,10 +184,12 @@ class TimeModelBindingState extends State<TimeModelBinding> {
     super.initState();
   }
 
+  /// Whether the [DayPeriod] changed or not
   bool didPeriodChange() {
     return lastPeriod != time.period;
   }
 
+  /// Change handler for [DayPeriod]
   void onAmPmChange(DayPeriod e) {
     setState(() {
       lastPeriod = time.period;
@@ -186,18 +206,21 @@ class TimeModelBindingState extends State<TimeModelBinding> {
     }
   }
 
+  /// Change handler for the `hour`
   void onHourChange(double value) {
     setState(() {
       time = time.replacing(hour: value.round());
     });
   }
 
+  /// Change handler for the `minute`
   void onMinuteChange(double value) {
     setState(() {
       time = time.replacing(minute: value.ceil());
     });
   }
 
+  /// Change handler for `hourIsSelected`
   void onHourIsSelectedChange(bool newValue) {
     setState(() {
       hourIsSelected = newValue;
@@ -223,6 +246,10 @@ class TimeModelBindingState extends State<TimeModelBinding> {
     }
   }
 
+  /// Check if time is within range.
+  /// Used to disable `AM/PM`.
+  /// Example: if user provided [minHour] as `9` and [maxHour] as `21`,
+  /// then the user should only be able to toggle `AM/PM` for `9am` and `9pm`
   bool checkIfWithinRange(DayPeriod other) {
     final tempTime = Time(time.hour, time.minute).setPeriod(other);
     final expectedHour = tempTime.hour;

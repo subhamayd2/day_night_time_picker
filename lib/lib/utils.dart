@@ -108,14 +108,3 @@ List<int?> generateHours(int divisions, min, max) {
   });
   return hours;
 }
-
-bool getShouldAllowAmPm(TimeOfDay time, double minHour, double maxHour) {
-  return time.hour >= minHour && time.hour <= maxHour;
-}
-
-int changeHourBasedOnAmPm(int hour, String a) {
-  if (a == 'pm' && hour != 12) {
-    return hour + 12;
-  }
-  return hour;
-}

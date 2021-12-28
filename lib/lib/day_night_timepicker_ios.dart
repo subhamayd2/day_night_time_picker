@@ -18,6 +18,7 @@ class DayNightTimePickerIos extends StatefulWidget {
 
 /// Picker state class
 class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
+  /// Instance of the time state
   TimeModelBindingState? timeState;
 
   /// Controller for `hour` list
@@ -32,6 +33,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   /// List of minutes to show
   List<int?> minutes = [];
 
+  /// initial setup
   void init() {
     final hourDiv =
         ((timeState!.widget.maxHour! - timeState!.widget.minHour!) + 1).round();

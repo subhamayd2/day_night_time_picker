@@ -2,8 +2,12 @@ import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:day_night_time_picker/lib/state/state_container.dart';
 import 'package:flutter/material.dart';
 
+/// Just a simple [Dialog] with common styling
 class WrapperDialog extends StatelessWidget {
+  /// The child [Widget] to render
   final Widget child;
+
+  /// Constructor for the [Widget]
   WrapperDialog({
     Key? key,
     required this.child,

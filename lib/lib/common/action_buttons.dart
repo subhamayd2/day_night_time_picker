@@ -1,6 +1,7 @@
 import 'package:day_night_time_picker/lib/state/state_container.dart';
 import 'package:flutter/material.dart';
 
+/// Render the [Ok] and [Cancel] buttons
 class ActionButtons extends StatelessWidget {
   const ActionButtons({Key? key}) : super(key: key);
 

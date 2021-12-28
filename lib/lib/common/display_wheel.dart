@@ -1,14 +1,28 @@
 import 'package:day_night_time_picker/lib/state/state_container.dart';
 import 'package:flutter/material.dart';
 
+/// Render the [Hour] or [Minute] wheel for `IOS` picker
+
 class DisplayWheel extends StatelessWidget {
+  /// [Controller] for the wheel
   final FixedExtentScrollController controller;
+
+  /// The items rendered for the wheel
   final List<int?> items;
+
+  /// The Change handler
   final Null Function(int value) onChange;
+
+  /// Callback to render custom label
   final int Function(int item)? getModifiedLabel;
+
+  /// Whether the wheel is selected or not
   final bool isSelected;
+
+  /// Whether the wheel is disabled or not
   final bool disabled;
 
+  /// Constructor for the [Widget]
   const DisplayWheel({
     Key? key,
     required this.controller,

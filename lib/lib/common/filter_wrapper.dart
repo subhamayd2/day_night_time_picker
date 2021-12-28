@@ -11,6 +11,7 @@ class FilterWrapper extends StatelessWidget {
   /// child of the filter in the [Widget] tree
   final Widget? child;
 
+  /// Constructor for the [Widget]
   const FilterWrapper({
     Key? key,
     this.child,

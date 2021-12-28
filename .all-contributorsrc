@@ -101,6 +101,15 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "awesomejerry",
+      "name": "JerryShen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6601073?v=4",
+      "profile": "http://www.awesomejerry.space",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

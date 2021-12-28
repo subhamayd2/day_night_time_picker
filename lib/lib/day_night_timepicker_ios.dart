@@ -56,7 +56,6 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
       minMinute,
       maxMinute,
     );
-
     final h = timeState!.widget.is24HrFormat
         ? timeState!.time.hour
         : timeState!.time.hourOfPeriod;
@@ -67,7 +66,9 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
         FixedExtentScrollController(initialItem: _hours.indexOf(h))
           ..addListener(() {
             WidgetsBinding.instance!.addPostFrameCallback((_) {
-              timeState!.onHourIsSelectedChange(true);
+              if(mounted) {
+                timeState!.onHourIsSelectedChange(true);
+              }
             });
           })
           ..addListener(() {
@@ -84,11 +85,13 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
         FixedExtentScrollController(initialItem: _minutes.indexOf(m))
           ..addListener(() {
             WidgetsBinding.instance!.addPostFrameCallback((_) {
-              timeState!.onHourIsSelectedChange(false);
-              setState(() {
-                hours = _hours;
-                minutes = _minutes;
-              });
+              if(mounted) {
+                timeState!.onHourIsSelectedChange(false);
+                setState(() {
+                  hours = _hours;
+                  minutes = _minutes;
+                });
+              }
             });
           })
           ..addListener(() {

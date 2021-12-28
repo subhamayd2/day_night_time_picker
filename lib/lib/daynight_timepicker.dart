@@ -1,7 +1,8 @@
-import 'dart:ui';
 import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:day_night_time_picker/lib/day_night_timepicker_android.dart';
 import 'package:day_night_time_picker/lib/day_night_timepicker_ios.dart';
+import 'package:day_night_time_picker/lib/state/state_container.dart';
+import 'package:day_night_time_picker/lib/state/time.dart';
 import 'package:flutter/material.dart';
 
 ///
@@ -99,15 +100,15 @@ PageRouteBuilder showPicker({
   ThemeData? themeData,
   bool focusMinutePicker = false,
   // Infinity is used so that we can assert whether or not the user actually set a value
-  double minHour = double.infinity,
-  double maxHour = double.infinity,
+  double minHour = double.infinity, // 0
+  double maxHour = double.infinity, // 23
   TextStyle okCancelStyle = const TextStyle(fontWeight: FontWeight.bold),
 }) {
   if (minHour == double.infinity) {
-    minHour = is24HrFormat ? 0 : 1;
+    minHour = 0;
   }
   if (maxHour == double.infinity) {
-    maxHour = is24HrFormat ? 23 : 12;
+    maxHour = 23;
   }
 
   assert(!(disableHour == true && disableMinute == true),
@@ -116,77 +117,22 @@ PageRouteBuilder showPicker({
       "Both \"disableMinute\" and \"focusMinutePicker\" cannot be true.");
   assert(maxMinute <= 59, "\"maxMinute\" must be less than or equal to 59");
   assert(minMinute >= 0, "\"minMinute\" must be greater than or equal to 0");
-  if (is24HrFormat) {
-    assert(maxHour <= 23 && minHour >= 0,
-        "\"minHour\" and \"maxHour\" should be between 0-23 for 24-hour format");
-  } else {
-    assert(maxHour <= 12 && minHour >= 1,
-        "\"minHour\" and \"maxHour\" should be between 1-12 for 12-hour format");
-  }
+  assert(maxHour <= 23 && minHour >= 0,
+      "\"minHour\" and \"maxHour\" should be between 0-23");
+
+  final timeValue = Time.fromTimeOfDay(value);
 
   return PageRouteBuilder(
     pageBuilder: (context, _, __) {
       if (iosStylePicker) {
         return Theme(
           data: themeData != null ? themeData : Theme.of(context),
-          child: DayNightTimePickerIos(
-            value: value,
-            onChange: onChange,
-            onChangeDateTime: onChangeDateTime,
-            is24HrFormat: is24HrFormat,
-            displayHeader: displayHeader,
-            accentColor: accentColor,
-            unselectedColor: unselectedColor,
-            cancelText: cancelText,
-            okText: okText,
-            sunAsset: sunAsset,
-            moonAsset: moonAsset,
-            blurredBackground: blurredBackground,
-            borderRadius: borderRadius,
-            elevation: elevation,
-            dialogInsetPadding: dialogInsetPadding,
-            hourLabel: hourLabel,
-            minuteLabel: minuteLabel,
-            minuteInterval: minuteInterval,
-            disableMinute: disableMinute,
-            disableHour: disableHour,
-            maxHour: maxHour,
-            maxMinute: maxMinute,
-            minHour: minHour,
-            minMinute: minMinute,
-            focusMinutePicker: focusMinutePicker,
-            okCancelStyle: okCancelStyle,
-          ),
+          child: DayNightTimePickerIos(),
         );
       } else {
         return Theme(
           data: themeData != null ? themeData : Theme.of(context),
-          child: DayNightTimePickerAndroid(
-            value: value,
-            onChange: onChange,
-            onChangeDateTime: onChangeDateTime,
-            is24HrFormat: is24HrFormat,
-            displayHeader: displayHeader,
-            accentColor: accentColor,
-            unselectedColor: unselectedColor,
-            cancelText: cancelText,
-            okText: okText,
-            sunAsset: sunAsset,
-            moonAsset: moonAsset,
-            blurredBackground: blurredBackground,
-            borderRadius: borderRadius,
-            elevation: elevation,
-            dialogInsetPadding: dialogInsetPadding,
-            minuteInterval: minuteInterval,
-            disableMinute: disableMinute,
-            disableHour: disableHour,
-            maxHour: maxHour,
-            maxMinute: maxMinute,
-            minHour: minHour,
-            minMinute: minMinute,
-            focusMinutePicker: focusMinutePicker,
-            okCancelStyle: okCancelStyle,
-          ),
+          child: DayNightTimePickerAndroid(),
         );
       }
     },
@@ -202,7 +148,36 @@ PageRouteBuilder showPicker({
       ),
       child: FadeTransition(
         opacity: anim,
-        child: child,
+        child: TimeModelBinding(
+          initialTime: timeValue,
+          child: child,
+          isInlineWidget: false,
+          onChange: onChange,
+          onChangeDateTime: onChangeDateTime,
+          is24HrFormat: is24HrFormat,
+          displayHeader: displayHeader,
+          accentColor: accentColor,
+          unselectedColor: unselectedColor,
+          cancelText: cancelText,
+          okText: okText,
+          sunAsset: sunAsset,
+          moonAsset: moonAsset,
+          blurredBackground: blurredBackground,
+          borderRadius: borderRadius,
+          elevation: elevation,
+          dialogInsetPadding: dialogInsetPadding,
+          minuteInterval: minuteInterval,
+          disableMinute: disableMinute,
+          disableHour: disableHour,
+          maxHour: maxHour,
+          maxMinute: maxMinute,
+          minHour: minHour,
+          minMinute: minMinute,
+          focusMinutePicker: focusMinutePicker,
+          okCancelStyle: okCancelStyle,
+          hourLabel: hourLabel,
+          minuteLabel: minuteLabel,
+        ),
       ),
     ),
     barrierDismissible: barrierDismissible,
@@ -315,10 +290,10 @@ Widget createInlinePicker({
   TextStyle okCancelStyle: const TextStyle(fontWeight: FontWeight.bold),
 }) {
   if (minHour == double.infinity) {
-    minHour = is24HrFormat ? 0 : 1;
+    minHour = 0;
   }
   if (maxHour == double.infinity) {
-    maxHour = is24HrFormat ? 23 : 12;
+    maxHour = 23;
   }
 
   assert(!(disableHour == true && disableMinute == true),
@@ -327,87 +302,62 @@ Widget createInlinePicker({
       "Both \"disableMinute\" and \"focusMinutePicker\" cannot be true.");
   assert(maxMinute <= 59, "\"maxMinute\" must be less than or equal to 59");
   assert(minMinute >= 0, "\"minMinute\" must be greater than or equal to 0");
-  if (is24HrFormat) {
-    assert(maxHour <= 23 && minHour >= 0,
-        "\"minHour\" and \"maxHour\" should be between 0-23 for 24-hour format");
-  } else {
-    assert(maxHour <= 12 && minHour >= 1,
-        "\"minHour\" and \"maxHour\" should be between 1-12 for 12-hour format");
-  }
+  assert(maxHour <= 23 && minHour >= 0,
+      "\"minHour\" and \"maxHour\" should be between 0-23");
 
-  if (iosStylePicker) {
-    return Builder(
+  final timeValue = Time.fromTimeOfDay(value);
+
+  return TimeModelBinding(
+    onChange: onChange,
+    onChangeDateTime: onChangeDateTime,
+    is24HrFormat: is24HrFormat,
+    accentColor: accentColor,
+    unselectedColor: unselectedColor,
+    cancelText: cancelText,
+    okText: okText,
+    sunAsset: sunAsset,
+    moonAsset: moonAsset,
+    blurredBackground: blurredBackground,
+    borderRadius: borderRadius,
+    elevation: elevation,
+    dialogInsetPadding: dialogInsetPadding,
+    minuteInterval: minuteInterval,
+    disableMinute: disableMinute,
+    disableHour: disableHour,
+    maxHour: maxHour,
+    maxMinute: maxMinute,
+    minHour: minHour,
+    minMinute: minMinute,
+    isInlineWidget: true,
+    displayHeader: displayHeader,
+    isOnValueChangeMode: isOnChangeValueMode,
+    focusMinutePicker: focusMinutePicker,
+    okCancelStyle: okCancelStyle,
+    hourLabel: hourLabel,
+    minuteLabel: minuteLabel,
+    initialTime: timeValue,
+    child: Builder(
       builder: (context) {
-        return Theme(
-          data: themeData != null ? themeData : Theme.of(context),
-          child: DayNightTimePickerIos(
-            value: value,
-            onChange: onChange,
-            onChangeDateTime: onChangeDateTime,
-            is24HrFormat: is24HrFormat,
-            accentColor: accentColor,
-            unselectedColor: unselectedColor,
-            cancelText: cancelText,
-            okText: okText,
-            sunAsset: sunAsset,
-            moonAsset: moonAsset,
-            blurredBackground: blurredBackground,
-            borderRadius: borderRadius,
-            elevation: elevation,
-            dialogInsetPadding: dialogInsetPadding,
-            hourLabel: hourLabel,
-            minuteLabel: minuteLabel,
-            minuteInterval: minuteInterval,
-            disableMinute: disableMinute,
-            disableHour: disableHour,
-            maxHour: maxHour,
-            maxMinute: maxMinute,
-            minHour: minHour,
-            minMinute: minMinute,
-            isInlineWidget: true,
-            displayHeader: displayHeader,
-            isOnValueChangeMode: isOnChangeValueMode,
-            focusMinutePicker: focusMinutePicker,
-            okCancelStyle: okCancelStyle,
-          ),
-        );
+        if (iosStylePicker) {
+          return Builder(
+            builder: (context) {
+              return Theme(
+                data: themeData != null ? themeData : Theme.of(context),
+                child: DayNightTimePickerIos(),
+              );
+            },
+          );
+        } else {
+          return Builder(
+            builder: (context) {
+              return Theme(
+                data: themeData != null ? themeData : Theme.of(context),
+                child: DayNightTimePickerAndroid(),
+              );
+            },
+          );
+        }
       },
-    );
-  } else {
-    return Builder(
-      builder: (context) {
-        return Theme(
-          data: themeData != null ? themeData : Theme.of(context),
-          child: DayNightTimePickerAndroid(
-            value: value,
-            onChange: onChange,
-            onChangeDateTime: onChangeDateTime,
-            is24HrFormat: is24HrFormat,
-            accentColor: accentColor,
-            unselectedColor: unselectedColor,
-            cancelText: cancelText,
-            okText: okText,
-            sunAsset: sunAsset,
-            moonAsset: moonAsset,
-            blurredBackground: blurredBackground,
-            borderRadius: borderRadius,
-            elevation: elevation,
-            dialogInsetPadding: dialogInsetPadding,
-            minuteInterval: minuteInterval,
-            disableMinute: disableMinute,
-            disableHour: disableHour,
-            maxHour: maxHour,
-            maxMinute: maxMinute,
-            minHour: minHour,
-            minMinute: minMinute,
-            isInlineWidget: true,
-            displayHeader: displayHeader,
-            isOnValueChangeMode: isOnChangeValueMode,
-            focusMinutePicker: focusMinutePicker,
-            okCancelStyle: okCancelStyle,
-          ),
-        );
-      },
-    );
-  }
+    ),
+  );
 }

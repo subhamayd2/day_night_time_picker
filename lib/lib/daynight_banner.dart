@@ -1,30 +1,12 @@
 import 'dart:math';
 import 'package:day_night_time_picker/lib/constants.dart';
+import 'package:day_night_time_picker/lib/state/state_container.dart';
+import 'package:day_night_time_picker/lib/utils.dart';
 import 'package:flutter/material.dart';
 import './sun_moon.dart';
 
 /// [Widget] for rendering the box container of the sun and moon.
 class DayNightBanner extends StatelessWidget {
-  /// Current selected hour
-  final int? hour;
-
-  /// How much the Image is displaced from [left] based on the current hour
-  final double displace;
-
-  /// Image asset of the sun
-  final Image? sunAsset;
-
-  /// Image asset of the moon
-  final Image? moonAsset;
-
-  /// Initialize the container
-  DayNightBanner({
-    this.hour,
-    this.displace = 0,
-    this.sunAsset,
-    this.moonAsset,
-  });
-
   /// Get the background color of the container, representing the time of day
   Color? getColor(bool isDay, bool isDusk) {
     if (!isDay) {
@@ -38,8 +20,17 @@ class DayNightBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDay = hour! >= 6 && hour! <= 18;
-    final isDusk = hour! >= 16 && hour! <= 18;
+    final timeState = TimeModelBinding.of(context);
+    final hour = timeState.time.hour;
+    final isDay = hour >= 6 && hour <= 18;
+    final isDusk = hour >= 16 && hour <= 18;
+
+    if (!timeState.widget.displayHeader!) {
+      return Container(height: 25, color: Theme.of(context).cardColor);
+    }
+
+    final displace = mapRange(timeState.time.hour * 1.0, 0, 23);
+
     return AnimatedContainer(
       padding: const EdgeInsets.symmetric(horizontal: 32),
       duration: const Duration(seconds: 1),
@@ -57,8 +48,6 @@ class DayNightBanner extends StatelessWidget {
                 curve: Curves.ease,
                 child: SunMoon(
                   isSun: isDay,
-                  sunAsset: sunAsset,
-                  moonAsset: moonAsset,
                 ),
                 bottom: top * 20,
                 left: left,

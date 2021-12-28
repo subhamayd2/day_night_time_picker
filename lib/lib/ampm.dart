@@ -1,29 +1,27 @@
+import 'package:day_night_time_picker/lib/state/state_container.dart';
 import 'package:flutter/material.dart';
 
 /// [Widget] for rendering the AM/PM button
 class AmPm extends StatelessWidget {
-  /// Currently selected by user
-  final String? selected;
-
-  /// [onChange] handler for AM/PM
-  final void Function(String)? onChange;
-
-  /// Accent color to be used for the button
-  final Color? accentColor;
-
-  /// Accent color to be used for the unselected button
-  final Color? unselectedColor;
-
   /// Default [TextStyle]
   final _style = const TextStyle(fontSize: 20);
 
-  /// Initialize the buttons
-  AmPm({this.selected, this.onChange, this.accentColor, this.unselectedColor});
-
   @override
   Widget build(BuildContext context) {
-    final isAm = selected == 'am';
+    var timeState = TimeModelBinding.of(context);
+    final isAm = timeState.time.period == DayPeriod.am;
     const unselectedOpacity = 0.5;
+
+    final shouldDisablePM = !timeState.checkIfWithinRange(DayPeriod.pm);
+    final shouldDisableAM = !timeState.checkIfWithinRange(DayPeriod.am);
+
+    if (timeState.widget.is24HrFormat) {
+      return Container();
+    }
+
+    final accentColor =
+        timeState.widget.accentColor ?? Theme.of(context).colorScheme.secondary;
+    final unselectedColor = timeState.widget.unselectedColor ?? Colors.grey;
 
     return Container(
       child: Row(
@@ -32,14 +30,16 @@ class AmPm extends StatelessWidget {
           Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: !isAm
+              onTap: !isAm && !shouldDisableAM
                   ? () {
-                      onChange!("am");
+                      timeState.onAmPmChange(DayPeriod.am);
                     }
                   : null,
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0,
+                  vertical: 4,
+                ),
                 child: Opacity(
                   opacity: !isAm ? unselectedOpacity : 1,
                   child: Text(
@@ -56,9 +56,9 @@ class AmPm extends StatelessWidget {
           Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: isAm
+              onTap: isAm && !shouldDisablePM
                   ? () {
-                      onChange!("pm");
+                      timeState.onAmPmChange(DayPeriod.pm);
                     }
                   : null,
               child: Padding(

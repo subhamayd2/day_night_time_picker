@@ -1,29 +1,5 @@
 import 'package:day_night_time_picker/lib/constants.dart';
-
-/// Padding single digit number to be double digit
-String padNumber(int num) {
-  if (num < 10) {
-    return "0$num";
-  }
-  return "$num";
-}
-
-/// Get the hour either in 12Hr or 24Hr format
-int? getHours(int? h, String? a, bool is24Hr) {
-  if (is24Hr) {
-    return h;
-  }
-  if (a == 'am') {
-    if (h == 12) {
-      return 0;
-    }
-    return h;
-  }
-  if (h == 12) {
-    return 12;
-  }
-  return h! + 12;
-}
+import 'package:flutter/material.dart';
 
 /// Map a given value between a range
 double mapRange(
@@ -131,4 +107,15 @@ List<int?> generateHours(int divisions, min, max) {
     return val;
   });
   return hours;
+}
+
+bool getShouldAllowAmPm(TimeOfDay time, double minHour, double maxHour) {
+  return time.hour >= minHour && time.hour <= maxHour;
+}
+
+int changeHourBasedOnAmPm(int hour, String a) {
+  if (a == 'pm' && hour != 12) {
+    return hour + 12;
+  }
+  return hour;
 }

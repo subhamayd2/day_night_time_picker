@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:day_night_time_picker/lib/state/state_container.dart';
 import 'package:flutter/material.dart';
 
 /// Needed to use Backdrop filter conditionally, since `ImageFilter.blur`
@@ -7,20 +8,19 @@ import 'package:flutter/material.dart';
 ///
 /// See https://github.com/flutter/flutter/issues/77258#issuecomment-822006335
 class FilterWrapper extends StatelessWidget {
-  /// The amount of blur to be applied to the backdrop
-  final double blurAmount;
-
   /// child of the filter in the [Widget] tree
   final Widget? child;
 
   const FilterWrapper({
     Key? key,
-    this.blurAmount = 0.0,
     this.child,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final timeState = TimeModelBinding.of(context);
+    final double blurAmount = timeState.widget.blurredBackground ? 5 : 0;
+
     if (blurAmount == 0.0) {
       return Container(
         child: child,

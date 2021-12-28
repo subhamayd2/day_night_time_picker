@@ -1,4 +1,5 @@
 import 'package:day_night_time_picker/lib/constants.dart';
+import 'package:day_night_time_picker/lib/state/state_container.dart';
 import 'package:flutter/material.dart';
 
 /// [Widget] for rendering the Sun and Moon Asset
@@ -6,21 +7,14 @@ class SunMoon extends StatelessWidget {
   /// Whether currently the Sun is displayed
   final bool? isSun;
 
-  /// The Image asset for the sun
-  final Image? sunAsset;
-
-  /// The Image asset for the moon
-  final Image? moonAsset;
-
   /// Initialize the Class
   SunMoon({
     this.isSun,
-    this.sunAsset,
-    this.moonAsset,
   });
 
   @override
   Widget build(BuildContext context) {
+    final timeState = TimeModelBinding.of(context);
     return Container(
       width: SUN_MOON_WIDTH,
       child: AnimatedSwitcher(
@@ -30,7 +24,7 @@ class SunMoon extends StatelessWidget {
         child: isSun!
             ? Container(
                 key: const ValueKey(1),
-                child: sunAsset ??
+                child: timeState.widget.sunAsset ??
                     const Image(
                       image: AssetImage(
                         "packages/day_night_time_picker/assets/sun.png",
@@ -38,7 +32,7 @@ class SunMoon extends StatelessWidget {
                     ))
             : Container(
                 key: const ValueKey(2),
-                child: moonAsset ??
+                child: timeState.widget.moonAsset ??
                     const Image(
                       image: AssetImage(
                           "packages/day_night_time_picker/assets/moon.png"),

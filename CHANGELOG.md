@@ -1,3 +1,10 @@
+## [1.0.4] - 28th December 2021.
+
+- Separate `TextStyle` for `ok` and `cancel` text.
+- Remove adding `.toUpperCase()` to `ok` and `cancel` text.
+- Bug fixes
+- Refactoring
+
 ## [1.0.3+1] - 28th July 2021.
 
 - Added `TextStyle` prop for ok/cancel button.

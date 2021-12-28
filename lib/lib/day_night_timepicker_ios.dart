@@ -18,7 +18,6 @@ class DayNightTimePickerIos extends StatefulWidget {
 
 /// Picker state class
 class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
-
   TimeModelBindingState? timeState;
 
   /// Controller for `hour` list
@@ -66,7 +65,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
         FixedExtentScrollController(initialItem: _hours.indexOf(h))
           ..addListener(() {
             WidgetsBinding.instance!.addPostFrameCallback((_) {
-              if(mounted) {
+              if (mounted) {
                 timeState!.onHourIsSelectedChange(true);
               }
             });
@@ -85,7 +84,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
         FixedExtentScrollController(initialItem: _minutes.indexOf(m))
           ..addListener(() {
             WidgetsBinding.instance!.addPostFrameCallback((_) {
-              if(mounted) {
+              if (mounted) {
                 timeState!.onHourIsSelectedChange(false);
                 setState(() {
                   hours = _hours;

@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 /// Private class. [StatefulWidget] that renders the content of the picker.
 // ignore: must_be_immutable
 class DayNightTimePickerAndroid extends StatefulWidget {
-
   @override
   DayNightTimePickerAndroidState createState() =>
       DayNightTimePickerAndroidState();

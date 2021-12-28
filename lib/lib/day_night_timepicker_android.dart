@@ -408,14 +408,14 @@ class _DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                                   ),
                                   onPressed: onCancel,
                                   child: Text(
-                                    widget.cancelText.toUpperCase(),
+                                    widget.cancelText,
                                     style: okCancelStyle,
                                   ),
                                 ),
                                 TextButton(
                                   onPressed: onOk,
                                   child: Text(
-                                    widget.okText.toUpperCase(),
+                                    widget.okText,
                                     style: okCancelStyle,
                                   ),
                                   style: TextButton.styleFrom(

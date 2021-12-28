@@ -24,7 +24,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  TimeOfDay _time = TimeOfDay.now().replacing(minute: 30);
+  TimeOfDay _time = TimeOfDay.now().replacing(hour: 11, minute: 30);
   bool iosStyle = true;
 
   void onTimeChanged(TimeOfDay newTime) {
@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
                 SizedBox(height: 10),
                 TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: Theme.of(context).accentColor,
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
                   ),
                   onPressed: () {
                     Navigator.of(context).push(
@@ -63,10 +63,6 @@ class _HomeState extends State<Home> {
                         value: _time,
                         onChange: onTimeChanged,
                         minuteInterval: MinuteInterval.FIVE,
-                        disableHour: false,
-                        disableMinute: false,
-                        minMinute: 7,
-                        maxMinute: 56,
                         // Optional onChange to receive value as DateTime
                         onChangeDateTime: (DateTime dateTime) {
                           print(dateTime);
@@ -93,8 +89,9 @@ class _HomeState extends State<Home> {
                   onChange: onTimeChanged,
                   minuteInterval: MinuteInterval.FIVE,
                   iosStylePicker: iosStyle,
-                  minMinute: 7,
-                  maxMinute: 56,
+                  minHour: 9,
+                  maxHour: 21,
+                  is24HrFormat: false,
                 ),
                 Text(
                   "IOS Style",

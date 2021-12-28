@@ -79,7 +79,7 @@
       "login": "sobimor",
       "name": "Sobhan Moradi",
       "avatar_url": "https://avatars.githubusercontent.com/u/22625638?v=4",
-      "profile": "http://asoteam.ir",
+      "profile": "https://asoteam.ir",
       "contributions": [
         "design"
       ]
@@ -100,6 +100,24 @@
       "profile": "https://github.com/fatihy101",
       "contributions": [
         "design"
+      ]
+    },
+    {
+      "login": "awesomejerry",
+      "name": "JerryShen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6601073?v=4",
+      "profile": "https://www.awesomejerry.space",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "morio77",
+      "name": "本多健也",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68191253?v=4",
+      "profile": "https://github.com/morio77",
+      "contributions": [
+        "code"
       ]
     }
   ],

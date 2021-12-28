@@ -18,6 +18,7 @@ class DayNightTimePickerIos extends StatefulWidget {
 
 /// Picker state class
 class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
+
   TimeModelBindingState? timeState;
 
   /// Controller for `hour` list

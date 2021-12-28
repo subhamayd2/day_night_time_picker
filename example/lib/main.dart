@@ -59,15 +59,10 @@ class _HomeState extends State<Home> {
                   onPressed: () {
                     Navigator.of(context).push(
                       showPicker(
-                        iosStylePicker: true,
                         context: context,
                         value: _time,
                         onChange: onTimeChanged,
-                        // is24HrFormat: true,
                         minuteInterval: MinuteInterval.FIVE,
-                        minHour: 9,
-                        maxHour: 21,
-                        is24HrFormat: false,
                         // Optional onChange to receive value as DateTime
                         onChangeDateTime: (DateTime dateTime) {
                           print(dateTime);

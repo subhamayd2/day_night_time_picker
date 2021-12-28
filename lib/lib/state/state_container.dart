@@ -83,8 +83,11 @@ class TimeModelBinding extends StatefulWidget {
   /// Whether or not the minute picker is auto focus/selected.
   final bool focusMinutePicker;
 
-  /// Ok/Cancel button's text style [TextStyle]
-  TextStyle okCancelStyle;
+  /// Ok button's text style [TextStyle]
+  TextStyle okStyle;
+
+  /// Cancel button's text style [TextStyle]
+  TextStyle cancelStyle;
 
   final Widget child;
   TimeModelBinding({
@@ -117,7 +120,8 @@ class TimeModelBinding extends StatefulWidget {
     this.minuteLabel,
     this.isInlineWidget = false,
     this.focusMinutePicker = false,
-    this.okCancelStyle = const TextStyle(fontWeight: FontWeight.bold),
+    this.okStyle: const TextStyle(fontWeight: FontWeight.bold),
+    this.cancelStyle: const TextStyle(fontWeight: FontWeight.bold),
   }) : super(key: key);
 
   @override

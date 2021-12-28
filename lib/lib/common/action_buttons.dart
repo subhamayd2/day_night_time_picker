@@ -27,14 +27,14 @@ class ActionButtons extends StatelessWidget {
             onPressed: timeState.onCancel,
             child: Text(
               timeState.widget.cancelText,
-              style: timeState.widget.okCancelStyle,
+              style: timeState.widget.cancelStyle,
             ),
           ),
           TextButton(
             onPressed: timeState.onOk,
             child: Text(
               timeState.widget.okText,
-              style: timeState.widget.okCancelStyle,
+              style: timeState.widget.okStyle,
             ),
             style: TextButton.styleFrom(
               textStyle: TextStyle(color: color),

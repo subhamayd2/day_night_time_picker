@@ -106,7 +106,6 @@ PageRouteBuilder showPicker({
   double maxHour = double.infinity,
   TextStyle okStyle = const TextStyle(fontWeight: FontWeight.bold),
   TextStyle cancelStyle = const TextStyle(fontWeight: FontWeight.bold),
-
 }) {
   if (minHour == double.infinity) {
     minHour = 0;

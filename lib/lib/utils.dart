@@ -1,5 +1,4 @@
 import 'package:day_night_time_picker/lib/constants.dart';
-import 'package:flutter/material.dart';
 
 /// Map a given value between a range
 double mapRange(

@@ -1,3 +1,8 @@
+## [1.0.4+1] - 29th December 2021.
+
+- Fixed import
+- Refactored
+
 ## [1.0.4] - 28th December 2021.
 
 - Separate `TextStyle` for `ok` and `cancel` text.

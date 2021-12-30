@@ -1,3 +1,6 @@
+## [1.0.4+2] - 30th December 2021.
+
+- Fixed overflow issue on smaller devices
 ## [1.0.4+1] - 29th December 2021.
 
 - Fixed import

@@ -45,6 +45,9 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
         ? timeState.time.hour
         : timeState.time.hourOfPeriod;
 
+    final ltrMode =
+        timeState.widget.ltrMode ? TextDirection.ltr : TextDirection.rtl;
+
     return FilterWrapper(
       child: WrapperDialog(
         child: Column(
@@ -60,7 +63,7 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                   AmPm(),
                   Expanded(
                     child: Row(
-                      textDirection: TextDirection.ltr,
+                      textDirection: ltrMode,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         DisplayValue(

@@ -136,111 +136,60 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   Widget build(BuildContext context) {
     Orientation currentOrientation = MediaQuery.of(context).orientation;
 
-    return currentOrientation == Orientation.portrait
-        ? FilterWrapper(
-            child: WrapperDialog(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  DayNightBanner(),
-                  WrapperContainer(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        AmPm(),
-                        Expanded(
-                          child: Row(
-                            textDirection: TextDirection.ltr,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              DisplayWheel(
-                                controller: _hourController!,
-                                items: hours,
-                                isSelected: timeState!.hourIsSelected,
-                                onChange: (int value) {
-                                  timeState!.onHourChange(hours[value]! + 0.0);
-                                },
-                                disabled: timeState!.widget.disableHour!,
-                                getModifiedLabel: getModifiedLabel,
-                              ),
-                              Text(timeState!.widget.hourLabel!),
-                              DisplayWheel(
-                                controller: _minuteController!,
-                                items: minutes,
-                                isSelected: !timeState!.hourIsSelected,
-                                onChange: (int value) {
-                                  timeState!
-                                      .onMinuteChange(minutes[value]! + 0.0);
-                                },
-                                disabled: timeState!.widget.disableMinute!,
-                              ),
-                              Text(timeState!.widget.minuteLabel!),
-                            ],
-                          ),
-                        ),
-                        ActionButtons(),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
-        : SingleChildScrollView(
-            child: FilterWrapper(
-              child: WrapperDialog(
+    return SingleChildScrollView(
+      physics: currentOrientation == Orientation.portrait
+          ? NeverScrollableScrollPhysics()
+          : AlwaysScrollableScrollPhysics(),
+      child: FilterWrapper(
+        child: WrapperDialog(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              DayNightBanner(),
+              WrapperContainer(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    DayNightBanner(),
-                    WrapperContainer(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                    AmPm(),
+                    Expanded(
+                      child: Row(
+                        textDirection: TextDirection.ltr,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          AmPm(),
-                          Expanded(
-                            child: Row(
-                              textDirection: TextDirection.ltr,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                DisplayWheel(
-                                  controller: _hourController!,
-                                  items: hours,
-                                  isSelected: timeState!.hourIsSelected,
-                                  onChange: (int value) {
-                                    timeState!
-                                        .onHourChange(hours[value]! + 0.0);
-                                  },
-                                  disabled: timeState!.widget.disableHour!,
-                                  getModifiedLabel: getModifiedLabel,
-                                ),
-                                Text(timeState!.widget.hourLabel!),
-                                DisplayWheel(
-                                  controller: _minuteController!,
-                                  items: minutes,
-                                  isSelected: !timeState!.hourIsSelected,
-                                  onChange: (int value) {
-                                    timeState!
-                                        .onMinuteChange(minutes[value]! + 0.0);
-                                  },
-                                  disabled: timeState!.widget.disableMinute!,
-                                ),
-                                Text(timeState!.widget.minuteLabel!),
-                              ],
-                            ),
+                          DisplayWheel(
+                            controller: _hourController!,
+                            items: hours,
+                            isSelected: timeState!.hourIsSelected,
+                            onChange: (int value) {
+                              timeState!.onHourChange(hours[value]! + 0.0);
+                            },
+                            disabled: timeState!.widget.disableHour!,
+                            getModifiedLabel: getModifiedLabel,
                           ),
-                          ActionButtons(),
+                          Text(timeState!.widget.hourLabel!),
+                          DisplayWheel(
+                            controller: _minuteController!,
+                            items: minutes,
+                            isSelected: !timeState!.hourIsSelected,
+                            onChange: (int value) {
+                              timeState!.onMinuteChange(minutes[value]! + 0.0);
+                            },
+                            disabled: timeState!.widget.disableMinute!,
+                          ),
+                          Text(timeState!.widget.minuteLabel!),
                         ],
                       ),
                     ),
+                    ActionButtons(),
                   ],
                 ),
               ),
-            ),
-          );
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

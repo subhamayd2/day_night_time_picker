@@ -47,146 +47,78 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
 
     Orientation currentOrientation = MediaQuery.of(context).orientation;
 
-    return currentOrientation == Orientation.portrait
-        ? FilterWrapper(
-            child: WrapperDialog(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  DayNightBanner(),
-                  WrapperContainer(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        AmPm(),
-                        Expanded(
-                          child: Row(
-                            textDirection: TextDirection.ltr,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              DisplayValue(
-                                onTap: timeState.widget.disableHour!
-                                    ? null
-                                    : () {
-                                        timeState.onHourIsSelectedChange(true);
-                                      },
-                                value: hourValue.toString().padLeft(2, '0'),
-                                isSelected: timeState.hourIsSelected,
-                              ),
-                              DisplayValue(
-                                value: ":",
-                              ),
-                              DisplayValue(
-                                onTap: timeState.widget.disableMinute!
-                                    ? null
-                                    : () {
-                                        timeState.onHourIsSelectedChange(false);
-                                      },
-                                value: timeState.time.minute
-                                    .toString()
-                                    .padLeft(2, '0'),
-                                isSelected: !timeState.hourIsSelected,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Slider(
-                          onChangeEnd: (value) {
-                            if (timeState.widget.isOnValueChangeMode) {
-                              timeState.onOk();
-                            }
-                          },
-                          value: timeState.hourIsSelected
-                              ? timeState.time.hour.roundToDouble()
-                              : timeState.time.minute.roundToDouble(),
-                          onChanged: timeState.onTimeChange,
-                          min: min,
-                          max: max,
-                          divisions: divisions,
-                          activeColor: color,
-                          inactiveColor: color.withAlpha(55),
-                        ),
-                        ActionButtons(),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
-        : SingleChildScrollView(
-            child: FilterWrapper(
-              child: WrapperDialog(
+    return SingleChildScrollView(
+      physics: currentOrientation == Orientation.portrait
+          ? NeverScrollableScrollPhysics()
+          : AlwaysScrollableScrollPhysics(),
+      child: FilterWrapper(
+        child: WrapperDialog(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              DayNightBanner(),
+              WrapperContainer(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    DayNightBanner(),
-                    WrapperContainer(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                    AmPm(),
+                    Expanded(
+                      child: Row(
+                        textDirection: TextDirection.ltr,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          AmPm(),
-                          Expanded(
-                            child: Row(
-                              textDirection: TextDirection.ltr,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                DisplayValue(
-                                  onTap: timeState.widget.disableHour!
-                                      ? null
-                                      : () {
-                                          timeState
-                                              .onHourIsSelectedChange(true);
-                                        },
-                                  value: hourValue.toString().padLeft(2, '0'),
-                                  isSelected: timeState.hourIsSelected,
-                                ),
-                                DisplayValue(
-                                  value: ":",
-                                ),
-                                DisplayValue(
-                                  onTap: timeState.widget.disableMinute!
-                                      ? null
-                                      : () {
-                                          timeState
-                                              .onHourIsSelectedChange(false);
-                                        },
-                                  value: timeState.time.minute
-                                      .toString()
-                                      .padLeft(2, '0'),
-                                  isSelected: !timeState.hourIsSelected,
-                                ),
-                              ],
-                            ),
+                          DisplayValue(
+                            onTap: timeState.widget.disableHour!
+                                ? null
+                                : () {
+                                    timeState.onHourIsSelectedChange(true);
+                                  },
+                            value: hourValue.toString().padLeft(2, '0'),
+                            isSelected: timeState.hourIsSelected,
                           ),
-                          Slider(
-                            onChangeEnd: (value) {
-                              if (timeState.widget.isOnValueChangeMode) {
-                                timeState.onOk();
-                              }
-                            },
-                            value: timeState.hourIsSelected
-                                ? timeState.time.hour.roundToDouble()
-                                : timeState.time.minute.roundToDouble(),
-                            onChanged: timeState.onTimeChange,
-                            min: min,
-                            max: max,
-                            divisions: divisions,
-                            activeColor: color,
-                            inactiveColor: color.withAlpha(55),
+                          DisplayValue(
+                            value: ":",
                           ),
-                          ActionButtons(),
+                          DisplayValue(
+                            onTap: timeState.widget.disableMinute!
+                                ? null
+                                : () {
+                                    timeState.onHourIsSelectedChange(false);
+                                  },
+                            value: timeState.time.minute
+                                .toString()
+                                .padLeft(2, '0'),
+                            isSelected: !timeState.hourIsSelected,
+                          ),
                         ],
                       ),
                     ),
+                    Slider(
+                      onChangeEnd: (value) {
+                        if (timeState.widget.isOnValueChangeMode) {
+                          timeState.onOk();
+                        }
+                      },
+                      value: timeState.hourIsSelected
+                          ? timeState.time.hour.roundToDouble()
+                          : timeState.time.minute.roundToDouble(),
+                      onChanged: timeState.onTimeChange,
+                      min: min,
+                      max: max,
+                      divisions: divisions,
+                      activeColor: color,
+                      inactiveColor: color.withAlpha(55),
+                    ),
+                    ActionButtons(),
                   ],
                 ),
               ),
-            ),
-          );
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

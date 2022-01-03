@@ -45,7 +45,7 @@ class DisplayWheel extends StatelessWidget {
     final unselectedColor = timeState.widget.unselectedColor ?? Colors.grey;
 
     return SizedBox(
-      width: 64,
+      width: 60,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 3.0),
         child: ListWheelScrollView.useDelegate(

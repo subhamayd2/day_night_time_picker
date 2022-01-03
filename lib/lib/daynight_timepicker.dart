@@ -84,6 +84,7 @@ PageRouteBuilder showPicker({
   Image? sunAsset,
   Image? moonAsset,
   bool blurredBackground = false,
+  bool ltrMode = true,
   Color barrierColor = Colors.black45,
   double? borderRadius,
   double? elevation,
@@ -181,6 +182,7 @@ PageRouteBuilder showPicker({
           cancelStyle: cancelStyle,
           hourLabel: hourLabel,
           minuteLabel: minuteLabel,
+          ltrMode: ltrMode,
         ),
       ),
     ),
@@ -270,6 +272,7 @@ Widget createInlinePicker({
   String cancelText = "Cancel",
   String okText = "Ok",
   bool isOnChangeValueMode = false,
+  bool ltrMode = true,
   Image? sunAsset,
   Image? moonAsset,
   bool blurredBackground = false,
@@ -343,6 +346,7 @@ Widget createInlinePicker({
     cancelStyle: cancelStyle,
     hourLabel: hourLabel,
     minuteLabel: minuteLabel,
+    ltrMode: ltrMode,
     initialTime: timeValue,
     child: Builder(
       builder: (context) {

@@ -87,6 +87,9 @@ class TimeModelBinding extends StatefulWidget {
   /// Whether or not the minute picker is auto focus/selected.
   final bool focusMinutePicker;
 
+  /// Whether to display the time from left to right or right to left.(Standard: left to right)
+  final bool ltrMode;
+
   /// Ok button's text style [TextStyle]
   TextStyle okStyle;
 
@@ -106,6 +109,7 @@ class TimeModelBinding extends StatefulWidget {
     this.is24HrFormat = false,
     this.displayHeader,
     this.accentColor,
+    this.ltrMode = true,
     this.unselectedColor,
     this.cancelText = "cancel",
     this.okText = "ok",

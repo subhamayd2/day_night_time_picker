@@ -33,6 +33,9 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   /// List of minutes to show
   List<int?> minutes = [];
 
+  /// Whether to display the time from left to right or right to left.(Standard: left to right)
+  TextDirection? ltrMode;
+
   /// initial setup
   void init() {
     final hourDiv =
@@ -111,6 +114,8 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
         minutes = _minutes;
       });
     }
+
+    ltrMode = timeState!.widget.ltrMode ? TextDirection.ltr : TextDirection.rtl;
   }
 
   @override
@@ -160,7 +165,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                       AmPm(),
                       Expanded(
                         child: Row(
-                          textDirection: TextDirection.ltr,
+                          textDirection: ltrMode,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             DisplayWheel(

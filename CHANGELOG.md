@@ -1,3 +1,7 @@
+## [1.0.4+2] - 30th December 2021.
+
+- Fixed overflow issue on smaller devices
+- added Bool `ltrMode = true` for ltrMode `false = rtl` on Displaying the TextDirection
 ## [1.0.4+1] - 29th December 2021.
 
 - Fixed import

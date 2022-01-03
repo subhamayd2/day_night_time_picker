@@ -43,11 +43,11 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
 
     final hourValue = timeState.widget.is24HrFormat
         ? timeState.time.hour
-        : timeState.time.hourOfPeriod;                   
-                          
+        : timeState.time.hourOfPeriod;
+
     final ltrMode =
         timeState.widget.ltrMode ? TextDirection.ltr : TextDirection.rtl;
-    
+
     Orientation currentOrientation = MediaQuery.of(context).orientation;
 
     return Center(
@@ -70,7 +70,7 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                       AmPm(),
                       Expanded(
                         child: Row(
-                          textDirection: TextDirection.ltr,
+                          textDirection: ltrMode,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             DisplayValue(

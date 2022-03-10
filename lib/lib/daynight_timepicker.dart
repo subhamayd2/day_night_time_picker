@@ -107,6 +107,7 @@ PageRouteBuilder showPicker({
   double maxHour = double.infinity,
   TextStyle okStyle = const TextStyle(fontWeight: FontWeight.bold),
   TextStyle cancelStyle = const TextStyle(fontWeight: FontWeight.bold),
+  ButtonStyle? buttonStyle,
 }) {
   if (minHour == double.infinity) {
     minHour = 0;
@@ -180,6 +181,7 @@ PageRouteBuilder showPicker({
           focusMinutePicker: focusMinutePicker,
           okStyle: okStyle,
           cancelStyle: cancelStyle,
+          buttonStyle: buttonStyle,
           hourLabel: hourLabel,
           minuteLabel: minuteLabel,
           ltrMode: ltrMode,
@@ -298,6 +300,7 @@ Widget createInlinePicker({
   double maxHour = double.infinity,
   TextStyle okStyle: const TextStyle(fontWeight: FontWeight.bold),
   TextStyle cancelStyle: const TextStyle(fontWeight: FontWeight.bold),
+  ButtonStyle? buttonStyle,
 }) {
   if (minHour == double.infinity) {
     minHour = 0;
@@ -346,6 +349,7 @@ Widget createInlinePicker({
     cancelStyle: cancelStyle,
     hourLabel: hourLabel,
     minuteLabel: minuteLabel,
+    buttonStyle: buttonStyle,
     ltrMode: ltrMode,
     initialTime: timeValue,
     child: Builder(

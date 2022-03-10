@@ -96,6 +96,8 @@ class TimeModelBinding extends StatefulWidget {
   /// Cancel button's text style [TextStyle]
   TextStyle cancelStyle;
 
+  ButtonStyle? buttonStyle;
+
   /// The child [Widget] to render
   final Widget child;
 
@@ -133,6 +135,7 @@ class TimeModelBinding extends StatefulWidget {
     this.focusMinutePicker = false,
     this.okStyle: const TextStyle(fontWeight: FontWeight.bold),
     this.cancelStyle: const TextStyle(fontWeight: FontWeight.bold),
+    this.buttonStyle,
   }) : super(key: key);
 
   @override

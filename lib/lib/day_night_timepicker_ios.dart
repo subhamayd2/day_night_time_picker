@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api, no_leading_underscores_for_local_identifiers
+
 import 'package:day_night_time_picker/lib/common/action_buttons.dart';
 import 'package:day_night_time_picker/lib/common/display_wheel.dart';
 import 'package:day_night_time_picker/lib/common/wrapper_container.dart';
@@ -12,6 +14,8 @@ import 'utils.dart';
 /// Private class. [StatefulWidget] that renders the content of the picker.
 // ignore: must_be_immutable
 class DayNightTimePickerIos extends StatefulWidget {
+  const DayNightTimePickerIos({Key? key}) : super(key: key);
+
   @override
   _DayNightTimePickerIosState createState() => _DayNightTimePickerIosState();
 }
@@ -69,7 +73,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
     _hourController =
         FixedExtentScrollController(initialItem: _hours.indexOf(h))
           ..addListener(() {
-            WidgetsBinding.instance!.addPostFrameCallback((_) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
               if (mounted) {
                 timeState!.onHourIsSelectedChange(true);
               }
@@ -77,7 +81,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
           })
           ..addListener(() {
             _hourController!.position.isScrollingNotifier.addListener(() {
-              WidgetsBinding.instance!.addPostFrameCallback((_) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
                 if (timeState!.widget.isOnValueChangeMode &&
                     !_hourController!.position.isScrollingNotifier.value) {
                   timeState!.onOk();
@@ -88,7 +92,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
     _minuteController =
         FixedExtentScrollController(initialItem: _minutes.indexOf(m))
           ..addListener(() {
-            WidgetsBinding.instance!.addPostFrameCallback((_) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
               if (mounted) {
                 timeState!.onHourIsSelectedChange(false);
                 setState(() {
@@ -100,7 +104,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
           })
           ..addListener(() {
             _minuteController!.position.isScrollingNotifier.addListener(() {
-              WidgetsBinding.instance!.addPostFrameCallback((_) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
                 if (timeState!.widget.isOnValueChangeMode &&
                     !_minuteController!.position.isScrollingNotifier.value) {
                   timeState!.onOk();
@@ -148,21 +152,21 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
     return Center(
       child: SingleChildScrollView(
         physics: currentOrientation == Orientation.portrait
-            ? NeverScrollableScrollPhysics()
-            : AlwaysScrollableScrollPhysics(),
+            ? const NeverScrollableScrollPhysics()
+            : const AlwaysScrollableScrollPhysics(),
         child: FilterWrapper(
           child: WrapperDialog(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                DayNightBanner(),
+                const DayNightBanner(),
                 WrapperContainer(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      AmPm(),
+                      const AmPm(),
                       Expanded(
                         child: Row(
                           textDirection: ltrMode,
@@ -193,7 +197,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                           ],
                         ),
                       ),
-                      ActionButtons(),
+                      const ActionButtons(),
                     ],
                   ),
                 ),

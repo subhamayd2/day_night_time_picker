@@ -8,7 +8,7 @@ class WrapperDialog extends StatelessWidget {
   final Widget child;
 
   /// Constructor for the [Widget]
-  WrapperDialog({
+  const WrapperDialog({
     Key? key,
     required this.child,
   }) : super(key: key);

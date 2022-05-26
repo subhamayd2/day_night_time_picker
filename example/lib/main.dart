@@ -2,9 +2,11 @@ import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,13 +15,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: const Home(),
     );
   }
 }
 
 class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
   @override
+  // ignore: library_private_types_in_public_api
   _HomeState createState() => _HomeState();
 }
 
@@ -51,7 +56,7 @@ class _HomeState extends State<Home> {
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headline1,
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 TextButton(
                   style: TextButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -65,19 +70,20 @@ class _HomeState extends State<Home> {
                         minuteInterval: MinuteInterval.FIVE,
                         // Optional onChange to receive value as DateTime
                         onChangeDateTime: (DateTime dateTime) {
-                          print(dateTime);
+                          // print(dateTime);
+                          debugPrint("[debug datetime]:  $dateTime");
                         },
                       ),
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     "Open time picker",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
-                SizedBox(height: 10),
-                Divider(),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
+                const Divider(),
+                const SizedBox(height: 10),
                 Text(
                   "Inline Picker Style",
                   style: Theme.of(context).textTheme.headline6,

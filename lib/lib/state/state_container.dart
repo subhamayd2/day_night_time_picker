@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, no_leading_underscores_for_local_identifiers
 
 import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:day_night_time_picker/lib/state/time.dart';
@@ -131,8 +131,8 @@ class TimeModelBinding extends StatefulWidget {
     this.minuteLabel,
     this.isInlineWidget = false,
     this.focusMinutePicker = false,
-    this.okStyle: const TextStyle(fontWeight: FontWeight.bold),
-    this.cancelStyle: const TextStyle(fontWeight: FontWeight.bold),
+    this.okStyle = const TextStyle(fontWeight: FontWeight.bold),
+    this.cancelStyle = const TextStyle(fontWeight: FontWeight.bold),
   }) : super(key: key);
 
   @override

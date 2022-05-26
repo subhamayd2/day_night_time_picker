@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 /// Model wrapper class [Time] for [TimeOfDay]
 class Time extends TimeOfDay {
   /// Constructor for the class
-  Time(int hour, int minute) : super(hour: hour, minute: minute);
+  const Time(int hour, int minute) : super(hour: hour, minute: minute);
 
   /// Get [Time] instance from [TimeOfDay]
   factory Time.fromTimeOfDay(TimeOfDay time) {
@@ -14,15 +14,16 @@ class Time extends TimeOfDay {
 
   /// Get [TimeOfDay] instance from [Time]
   TimeOfDay toTimeOfDay() {
-    return TimeOfDay(hour: this.hour, minute: this.minute);
+    return TimeOfDay(hour: hour, minute: minute);
   }
 
   /// Toggle [DayPeriod]
   Time setPeriod(DayPeriod period) {
-    return this.replacing(hour: _changeHourBasedOnAmPm(this.hour, period));
+    return replacing(hour: _changeHourBasedOnAmPm(hour, period));
   }
 
   /// Overide [TimeOfDay.replacing]
+  @override
   Time replacing({int? hour, int? minute}) {
     return Time.fromTimeOfDay(super.replacing(hour: hour, minute: minute));
   }

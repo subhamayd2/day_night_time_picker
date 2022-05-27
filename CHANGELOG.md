@@ -1,5 +1,6 @@
 ## [1.1.0] - 27th May 2022.
 
+- Added Support for Flutter 3.0
 - Added ButtonStyle for `createInlinePicker` and `showPicker`
 
 ## [1.0.5] - 3rd January 2022.

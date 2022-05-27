@@ -1,4 +1,8 @@
-## [1.0.5] - 3rd January 2021.
+## [1.1.0] - 27th May 2022.
+
+- Added ButtonStyle for `createInlinePicker` and `showPicker`
+
+## [1.0.5] - 3rd January 2022.
 
 - Fixed overflow issue on smaller devices
 - added Bool `ltrMode = true` for ltrMode `false = rtl` on Displaying the TextDirection

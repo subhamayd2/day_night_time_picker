@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:day_night_time_picker/lib/state/time.dart';
 import 'package:flutter/material.dart';
@@ -96,6 +97,7 @@ class TimeModelBinding extends StatefulWidget {
   /// Cancel button's text style [TextStyle]
   TextStyle cancelStyle;
 
+  /// [ButtonStyle] is used for the [createInlinePicker] and [showPicker] methods
   ButtonStyle? buttonStyle;
 
   /// The child [Widget] to render

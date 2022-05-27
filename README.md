@@ -103,6 +103,7 @@ FlatButton(
 | **themeData**           | ThemeData to use for the widget.                                                                         |                   `Theme.of(context)`                    |
 | **okStyle**             | Ok button's text style.                                                                                  |      `const TextStyle(fontWeight: FontWeight.bold)`      |
 | **cancelStyle**         | Cancel button's text style.                                                                              |      `const TextStyle(fontWeight: FontWeight.bold)`      |
+| **buttonStyle**         | Button's style.                                                                              |      `Theme.of(context).colorScheme.secondary`      |
 
 ---
 

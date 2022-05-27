@@ -22,9 +22,10 @@ class ActionButtons extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           TextButton(
-            style: TextButton.styleFrom(
-              textStyle: TextStyle(color: color),
-            ),
+            style: timeState.widget.buttonStyle ??
+                TextButton.styleFrom(
+                  textStyle: TextStyle(color: color),
+                ),
             onPressed: timeState.onCancel,
             child: Text(
               timeState.widget.cancelText,
@@ -37,9 +38,10 @@ class ActionButtons extends StatelessWidget {
               timeState.widget.okText,
               style: timeState.widget.okStyle,
             ),
-            style: TextButton.styleFrom(
-              textStyle: TextStyle(color: color),
-            ),
+            style: timeState.widget.buttonStyle ??
+                TextButton.styleFrom(
+                  textStyle: TextStyle(color: color),
+                ),
           ),
         ],
       ),

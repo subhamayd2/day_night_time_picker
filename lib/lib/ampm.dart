@@ -6,6 +6,8 @@ class AmPm extends StatelessWidget {
   /// Default [TextStyle]
   final _style = const TextStyle(fontSize: 20);
 
+  const AmPm({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var timeState = TimeModelBinding.of(context);
@@ -23,62 +25,59 @@ class AmPm extends StatelessWidget {
         timeState.widget.accentColor ?? Theme.of(context).colorScheme.secondary;
     final unselectedColor = timeState.widget.unselectedColor ?? Colors.grey;
 
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: !isAm && !shouldDisableAM
-                  ? () {
-                      timeState.onAmPmChange(DayPeriod.am);
-                    }
-                  : null,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8.0,
-                  vertical: 4,
-                ),
-                child: Opacity(
-                  opacity: !isAm ? unselectedOpacity : 1,
-                  child: Text(
-                    "am",
-                    style: _style.copyWith(
-                      color: isAm ? accentColor : unselectedColor,
-                      fontWeight: isAm ? FontWeight.bold : null,
-                    ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: !isAm && !shouldDisableAM
+                ? () {
+                    timeState.onAmPmChange(DayPeriod.am);
+                  }
+                : null,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 4,
+              ),
+              child: Opacity(
+                opacity: !isAm ? unselectedOpacity : 1,
+                child: Text(
+                  "am",
+                  style: _style.copyWith(
+                    color: isAm ? accentColor : unselectedColor,
+                    fontWeight: isAm ? FontWeight.bold : null,
                   ),
                 ),
               ),
             ),
           ),
-          Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: isAm && !shouldDisablePM
-                  ? () {
-                      timeState.onAmPmChange(DayPeriod.pm);
-                    }
-                  : null,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
-                child: Opacity(
-                  opacity: isAm ? unselectedOpacity : 1,
-                  child: Text(
-                    "pm",
-                    style: _style.copyWith(
-                      color: !isAm ? accentColor : unselectedColor,
-                      fontWeight: !isAm ? FontWeight.bold : null,
-                    ),
+        ),
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: isAm && !shouldDisablePM
+                ? () {
+                    timeState.onAmPmChange(DayPeriod.pm);
+                  }
+                : null,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
+              child: Opacity(
+                opacity: isAm ? unselectedOpacity : 1,
+                child: Text(
+                  "pm",
+                  style: _style.copyWith(
+                    color: !isAm ? accentColor : unselectedColor,
+                    fontWeight: !isAm ? FontWeight.bold : null,
                   ),
                 ),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

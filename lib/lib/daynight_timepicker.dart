@@ -131,13 +131,13 @@ PageRouteBuilder showPicker({
     pageBuilder: (context, _, __) {
       if (iosStylePicker) {
         return Theme(
-          data: themeData != null ? themeData : Theme.of(context),
-          child: DayNightTimePickerIos(),
+          data: themeData ?? Theme.of(context),
+          child: const DayNightTimePickerIos(),
         );
       } else {
         return Theme(
-          data: themeData != null ? themeData : Theme.of(context),
-          child: DayNightTimePickerAndroid(),
+          data: themeData ?? Theme.of(context),
+          child: const DayNightTimePickerAndroid(),
         );
       }
     },
@@ -155,7 +155,6 @@ PageRouteBuilder showPicker({
         opacity: anim,
         child: TimeModelBinding(
           initialTime: timeValue,
-          child: child,
           isInlineWidget: false,
           onChange: onChange,
           onChangeDateTime: onChangeDateTime,
@@ -185,6 +184,7 @@ PageRouteBuilder showPicker({
           hourLabel: hourLabel,
           minuteLabel: minuteLabel,
           ltrMode: ltrMode,
+          child: child,
         ),
       ),
     ),
@@ -298,8 +298,8 @@ Widget createInlinePicker({
   // Infinity is used so that we can assert whether or not the user actually set a value
   double minHour = double.infinity,
   double maxHour = double.infinity,
-  TextStyle okStyle: const TextStyle(fontWeight: FontWeight.bold),
-  TextStyle cancelStyle: const TextStyle(fontWeight: FontWeight.bold),
+  TextStyle okStyle = const TextStyle(fontWeight: FontWeight.bold),
+  TextStyle cancelStyle = const TextStyle(fontWeight: FontWeight.bold),
   ButtonStyle? buttonStyle,
 }) {
   if (minHour == double.infinity) {
@@ -358,8 +358,8 @@ Widget createInlinePicker({
           return Builder(
             builder: (context) {
               return Theme(
-                data: themeData != null ? themeData : Theme.of(context),
-                child: DayNightTimePickerIos(),
+                data: themeData ?? Theme.of(context),
+                child: const DayNightTimePickerIos(),
               );
             },
           );
@@ -367,8 +367,8 @@ Widget createInlinePicker({
           return Builder(
             builder: (context) {
               return Theme(
-                data: themeData != null ? themeData : Theme.of(context),
-                child: DayNightTimePickerAndroid(),
+                data: themeData ?? Theme.of(context),
+                child: const DayNightTimePickerAndroid(),
               );
             },
           );

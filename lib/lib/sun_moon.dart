@@ -8,14 +8,15 @@ class SunMoon extends StatelessWidget {
   final bool? isSun;
 
   /// Initialize the Class
-  SunMoon({
+  const SunMoon({
+    Key? key,
     this.isSun,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final timeState = TimeModelBinding.of(context);
-    return Container(
+    return SizedBox(
       width: SUN_MOON_WIDTH,
       child: AnimatedSwitcher(
         switchInCurve: Curves.ease,

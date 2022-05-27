@@ -12,7 +12,7 @@ class ActionButtons extends StatelessWidget {
         timeState.widget.accentColor ?? Theme.of(context).colorScheme.secondary;
 
     if (timeState.widget.isOnValueChangeMode) {
-      return SizedBox(
+      return const SizedBox(
         height: 8,
       );
     }
@@ -34,14 +34,14 @@ class ActionButtons extends StatelessWidget {
           ),
           TextButton(
             onPressed: timeState.onOk,
-            child: Text(
-              timeState.widget.okText,
-              style: timeState.widget.okStyle,
-            ),
             style: timeState.widget.buttonStyle ??
                 TextButton.styleFrom(
                   textStyle: TextStyle(color: color),
                 ),
+            child: Text(
+              timeState.widget.okText,
+              style: timeState.widget.okStyle,
+            ),
           ),
         ],
       ),

@@ -7,6 +7,8 @@ import './sun_moon.dart';
 
 /// [Widget] for rendering the box container of the sun and moon.
 class DayNightBanner extends StatelessWidget {
+  const DayNightBanner({Key? key}) : super(key: key);
+
   /// Get the background color of the container, representing the time of day
   Color? getColor(bool isDay, bool isDusk) {
     if (!isDay) {
@@ -46,12 +48,12 @@ class DayNightBanner extends StatelessWidget {
             children: <Widget>[
               AnimatedPositioned(
                 curve: Curves.ease,
-                child: SunMoon(
-                  isSun: isDay,
-                ),
                 bottom: top * 20,
                 left: left,
                 duration: const Duration(milliseconds: 200),
+                child: SunMoon(
+                  isSun: isDay,
+                ),
               ),
             ],
           );

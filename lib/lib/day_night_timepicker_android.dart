@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 /// Private class. [StatefulWidget] that renders the content of the picker.
 // ignore: must_be_immutable
 class DayNightTimePickerAndroid extends StatefulWidget {
+  const DayNightTimePickerAndroid({Key? key}) : super(key: key);
+
   @override
   DayNightTimePickerAndroidState createState() =>
       DayNightTimePickerAndroidState();
@@ -53,21 +55,21 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
     return Center(
       child: SingleChildScrollView(
         physics: currentOrientation == Orientation.portrait
-            ? NeverScrollableScrollPhysics()
-            : AlwaysScrollableScrollPhysics(),
+            ? const NeverScrollableScrollPhysics()
+            : const AlwaysScrollableScrollPhysics(),
         child: FilterWrapper(
           child: WrapperDialog(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                DayNightBanner(),
+                const DayNightBanner(),
                 WrapperContainer(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      AmPm(),
+                      const AmPm(),
                       Expanded(
                         child: Row(
                           textDirection: ltrMode,
@@ -82,7 +84,7 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                               value: hourValue.toString().padLeft(2, '0'),
                               isSelected: timeState.hourIsSelected,
                             ),
-                            DisplayValue(
+                            const DisplayValue(
                               value: ":",
                             ),
                             DisplayValue(
@@ -115,7 +117,7 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                         activeColor: color,
                         inactiveColor: color.withAlpha(55),
                       ),
-                      ActionButtons(),
+                      const ActionButtons(),
                     ],
                   ),
                 ),

@@ -1,4 +1,6 @@
 /// Default Border radius value in [double]
+// ignore_for_file: constant_identifier_names
+
 const BORDER_RADIUS = 10.0;
 
 /// Default Elevation value in [double]

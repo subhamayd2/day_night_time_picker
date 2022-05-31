@@ -2,6 +2,7 @@
 
 - Added Support for Flutter 3.0
 - Added ButtonStyle for `createInlinePicker` and `showPicker`
+- Fixed an issue with the ios style picker 
 
 ## [1.0.5] - 3rd January 2022.
 

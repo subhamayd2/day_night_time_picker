@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:day_night_time_picker/lib/day_night_timepicker_android.dart';
 import 'package:day_night_time_picker/lib/day_night_timepicker_ios.dart';

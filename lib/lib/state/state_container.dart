@@ -16,6 +16,9 @@ class TimeModelBinding extends StatefulWidget {
   /// _`Optional`_ Return the new time the user picked as [DateTime].
   final void Function(DateTime)? onChangeDateTime;
 
+  /// Callback for the Cancel button
+  final void Function()? onCancel;
+
   /// Show the time in TimePicker in 24 hour format.
   final bool is24HrFormat;
 
@@ -110,6 +113,7 @@ class TimeModelBinding extends StatefulWidget {
     required this.child,
     required this.onChange,
     this.onChangeDateTime,
+    this.onCancel,
     this.is24HrFormat = false,
     this.displayHeader,
     this.accentColor,
@@ -250,6 +254,11 @@ class TimeModelBindingState extends State<TimeModelBinding> {
 
   /// Handler to close the picker
   onCancel({var result}) {
+    if (widget.onCancel != null) {
+      widget.onCancel!();
+      return;
+    }
+
     if (!widget.isInlineWidget) {
       Navigator.of(context).pop(result);
     }

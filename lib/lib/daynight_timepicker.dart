@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:day_night_time_picker/lib/day_night_timepicker_android.dart';
 import 'package:day_night_time_picker/lib/day_night_timepicker_ios.dart';
@@ -15,6 +17,8 @@ import 'package:flutter/material.dart';
 /// **onChange** - `Required` Return the new time the user picked as [TimeOfDay].
 ///
 /// **onChangeDateTime** - Return the new time the user picked as [DateTime].
+///
+/// **onCancel** - Custom callback for the Cancel button.
 ///
 /// **is24HrFormat** - Show the time in TimePicker in 24 hour format. Defaults to `false`.
 ///
@@ -76,6 +80,7 @@ PageRouteBuilder showPicker({
   required TimeOfDay value,
   required void Function(TimeOfDay) onChange,
   void Function(DateTime)? onChangeDateTime,
+  void Function()? onCancel,
   bool is24HrFormat = false,
   Color? accentColor,
   Color? unselectedColor,
@@ -158,6 +163,7 @@ PageRouteBuilder showPicker({
           isInlineWidget: false,
           onChange: onChange,
           onChangeDateTime: onChangeDateTime,
+          onCancel: onCancel,
           is24HrFormat: is24HrFormat,
           displayHeader: displayHeader,
           accentColor: accentColor,
@@ -205,6 +211,8 @@ PageRouteBuilder showPicker({
 /// **onChange** - `Required` Return the new time the user picked as [TimeOfDay].
 ///
 /// **onChangeDateTime** - Return the new time the user picked as [DateTime].
+///
+/// **onCancel** - Custom callback for the Cancel button.
 ///
 /// **is24HrFormat** - Show the time in TimePicker in 24 hour format. Defaults to `false`.
 ///
@@ -268,6 +276,7 @@ Widget createInlinePicker({
   required TimeOfDay value,
   required void Function(TimeOfDay) onChange,
   void Function(DateTime)? onChangeDateTime,
+  void Function()? onCancel,
   bool is24HrFormat = false,
   Color? accentColor,
   Color? unselectedColor,
@@ -323,6 +332,7 @@ Widget createInlinePicker({
   return TimeModelBinding(
     onChange: onChange,
     onChangeDateTime: onChangeDateTime,
+    onCancel: onCancel,
     is24HrFormat: is24HrFormat,
     accentColor: accentColor,
     unselectedColor: unselectedColor,

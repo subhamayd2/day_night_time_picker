@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 ///
 /// **onChangeDateTime** - Return the new time the user picked as [DateTime].
 ///
-/// **onCancel** - Custom callback for the Cancel button.
+/// **onCancel** - Custom callback for the Cancel button. Note: if provided, it will override the default behavior of the Cancel button.
 ///
 /// **is24HrFormat** - Show the time in TimePicker in 24 hour format. Defaults to `false`.
 ///
@@ -210,7 +210,7 @@ PageRouteBuilder showPicker({
 ///
 /// **onChangeDateTime** - Return the new time the user picked as [DateTime].
 ///
-/// **onCancel** - Custom callback for the Cancel button.
+/// **onCancel** - Custom callback for the Cancel button. Note: if provided, it will override the default behavior of the Cancel button.
 ///
 /// **is24HrFormat** - Show the time in TimePicker in 24 hour format. Defaults to `false`.
 ///

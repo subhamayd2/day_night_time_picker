@@ -1,3 +1,7 @@
+## [1.2.0] - 14th June 2022.
+
+- Added optional `onCancel` parameter as a callback for the Cancel button
+
 ## [1.1.0] - 27th May 2022.
 
 - Added Support for Flutter 3.0

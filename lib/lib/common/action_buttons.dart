@@ -34,6 +34,7 @@ class ActionButtons extends StatelessWidget {
               style: timeState.widget.cancelStyle,
             ),
           ),
+          SizedBox(width: timeState.widget.buttonsSpacing ?? 0),
           TextButton(
             onPressed: timeState.onOk,
             style: timeState.widget.buttonStyle ?? defaultButtonStyle,

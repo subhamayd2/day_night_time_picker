@@ -1,4 +1,4 @@
-## [1.2.0] - 14th June 2022.
+## [1.1.1] - 14th June 2022.
 
 - Added optional `onCancel` parameter as a callback for the Cancel button
 
@@ -6,13 +6,13 @@
 
 - Added Support for Flutter 3.0
 - Added ButtonStyle for `createInlinePicker` and `showPicker`
-- Fixed an issue with the ios style picker 
+- Fixed an issue with the ios style picker
 
 ## [1.0.5] - 3rd January 2022.
 
 - Fixed overflow issue on smaller devices
 - added Bool `ltrMode = true` for ltrMode `false = rtl` on Displaying the TextDirection
-- fixed issue where 24HrFormat is not used with iOS Styled Picker 
+- fixed issue where 24HrFormat is not used with iOS Styled Picker
 
 ## [1.0.4+1] - 29th December 2021.
 

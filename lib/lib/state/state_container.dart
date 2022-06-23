@@ -101,7 +101,14 @@ class TimeModelBinding extends StatefulWidget {
   TextStyle cancelStyle;
 
   /// [ButtonStyle] is used for the [createInlinePicker] and [showPicker] methods
+  /// If `cancelButtonStyle` is not provided, it applies to the ok and cancel buttons
   ButtonStyle? buttonStyle;
+
+  /// [ButtonStyle] is used for the [createInlinePicker] and [showPicker] methods
+  ButtonStyle? cancelButtonStyle;
+
+  /// Spacing between ok and cancel buttons
+  double? buttonsSpacing;
 
   /// The child [Widget] to render
   final Widget child;
@@ -142,6 +149,8 @@ class TimeModelBinding extends StatefulWidget {
     this.okStyle = const TextStyle(fontWeight: FontWeight.bold),
     this.cancelStyle = const TextStyle(fontWeight: FontWeight.bold),
     this.buttonStyle,
+    this.cancelButtonStyle,
+    this.buttonsSpacing,
   }) : super(key: key);
 
   @override

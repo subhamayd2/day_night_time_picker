@@ -10,6 +10,9 @@ class ActionButtons extends StatelessWidget {
     final timeState = TimeModelBinding.of(context);
     final color =
         timeState.widget.accentColor ?? Theme.of(context).colorScheme.secondary;
+    final defaultButtonStyle = TextButton.styleFrom(
+      textStyle: TextStyle(color: color),
+    );
 
     if (timeState.widget.isOnValueChangeMode) {
       return const SizedBox(
@@ -22,22 +25,19 @@ class ActionButtons extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           TextButton(
-            style: timeState.widget.buttonStyle ??
-                TextButton.styleFrom(
-                  textStyle: TextStyle(color: color),
-                ),
+            style: (timeState.widget.cancelButtonStyle ??
+                    timeState.widget.buttonStyle) ??
+                defaultButtonStyle,
             onPressed: timeState.onCancel,
             child: Text(
               timeState.widget.cancelText,
               style: timeState.widget.cancelStyle,
             ),
           ),
+          SizedBox(width: timeState.widget.buttonsSpacing ?? 0),
           TextButton(
             onPressed: timeState.onOk,
-            style: timeState.widget.buttonStyle ??
-                TextButton.styleFrom(
-                  textStyle: TextStyle(color: color),
-                ),
+            style: timeState.widget.buttonStyle ?? defaultButtonStyle,
             child: Text(
               timeState.widget.okText,
               style: timeState.widget.okStyle,

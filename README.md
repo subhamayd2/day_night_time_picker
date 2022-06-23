@@ -104,8 +104,9 @@ FlatButton(
 | **themeData**           | ThemeData to use for the widget.                                                                                                   |                    `Theme.of(context)`                   |
 | **okStyle**             | Ok button's text style.                                                                                                            |      `const TextStyle(fontWeight: FontWeight.bold)`      |
 | **cancelStyle**         | Cancel button's text style.                                                                                                        |      `const TextStyle(fontWeight: FontWeight.bold)`      |
-| **buttonStyle**         | Button's style.                                                                                                                    |         `Theme.of(context).colorScheme.secondary`        |
-
+| **buttonStyle**         | Button's style. If `cancelButtonStyle` not provided, it applies to ok and cancel buttons.                                                                                                                    |         `Theme.of(context).colorScheme.secondary`        |
+| **cancelButtonStyle**         | Cancel button style.                                                                                                                    |         `Theme.of(context).colorScheme.secondary`        |
+| **buttonsSpacing**         | Spacing between cancel and ok buttons.                                                                                                                   |         `0`        |
 
 ---
 

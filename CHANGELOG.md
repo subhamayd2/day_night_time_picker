@@ -1,3 +1,8 @@
+## [1.1.2] - 23th June 2022.
+
+- Added prop `cancelButtonStyle`
+- Added prop `buttonsSpacing`
+
 ## [1.1.1] - 14th June 2022.
 
 - Added optional `onCancel` parameter as a callback for the Cancel button

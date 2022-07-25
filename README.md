@@ -101,7 +101,7 @@ FlatButton(
 | **minMinute**           | Selectable minimum minute.                                                                                                         |                           `0`                            |
 | **maxMinute**           | Selectable maximum minute.                                                                                                         |                           `59`                           |
 | **displayHeader**       | Whether to display the sun moon animation.                                                                                         |                          `true`                          |
-| **isOnValueChangeMode** | Weather to hide okText, cancelText and return value on every onValueChange. **_Only for Inline widget_**                           |                         `false`                          |
+| **isOnChangeValueMode** | Weather to hide okText, cancelText and return value on every onValueChange. **_Only for Inline widget_**                           |                         `false`                          |
 | **focusMinutePicker**   | Whether or not the minute picker is auto focus/selected.                                                                           |                         `false`                          |
 | **themeData**           | ThemeData to use for the widget.                                                                                                   |                   `Theme.of(context)`                    |
 | **okStyle**             | Ok button's text style.                                                                                                            |      `const TextStyle(fontWeight: FontWeight.bold)`      |

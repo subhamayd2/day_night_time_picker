@@ -48,7 +48,7 @@ import 'package:day_night_time_picker/day_night_time_picker.dart';
 ## Example
 
 ```dart
-FlatButton(
+TextButton(
     onPressed: () {
         Navigator.of(context).push(
             showPicker(

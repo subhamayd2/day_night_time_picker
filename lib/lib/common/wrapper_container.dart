@@ -6,16 +6,22 @@ class WrapperContainer extends StatelessWidget {
   /// The child [Widget] to render
   final Widget child;
 
+  /// The height of the Wheel section
+  final double? heightOfWheel;
+
   /// Constructor for the [Widget]
   const WrapperContainer({
     Key? key,
     required this.child,
+    this.heightOfWheel,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final timeState = TimeModelBinding.of(context);
-    final height = timeState.widget.is24HrFormat ? 200.0 : 240.0;
+    final height = timeState.widget.is24HrFormat
+        ? 200.0
+        : timeState.widget.wheelHeight ?? 240.0;
 
     return Container(
       height: height,

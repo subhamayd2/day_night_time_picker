@@ -107,7 +107,7 @@ TextButton(
 | **buttonStyle**         | Button's style. If `cancelButtonStyle` not provided, it applies to ok and cancel buttons.                                          |        `Theme.of(context).colorScheme.secondary`         |
 | **cancelButtonStyle**   | Cancel button style.                                                                                                               |        `Theme.of(context).colorScheme.secondary`         |
 | **buttonsSpacing**      | Spacing between cancel and ok buttons.                                                                                             |                           `0`                            |
-
+| **wheelHeight**         | Only for `createInlinePicker` Height of the Wheel                                                                                  |                           `240`                          |
 ---
 
 ## Notes
@@ -163,7 +163,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 ## LICENCE
 
 ```
-Copyright 2020 Subhamay Dutta
+Copyright 2022 Subhamay Dutta
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -85,7 +85,7 @@ class TimeModelBinding extends StatefulWidget {
   /// Whether the widget is displayed as a popup or inline
   final bool isInlineWidget;
 
-  /// Weather to hide okText, cancelText and return value on every onValueChange.
+  /// Whether to hide okText, cancelText and return value on every onValueChange.
   final bool isOnValueChangeMode;
 
   /// Whether or not the minute picker is auto focus/selected.
@@ -112,6 +112,9 @@ class TimeModelBinding extends StatefulWidget {
 
   /// The child [Widget] to render
   final Widget child;
+
+  /// The height of the Wheel section
+  double? wheelHeight;
 
   /// Constructor for the [Widget]
   TimeModelBinding({
@@ -151,6 +154,7 @@ class TimeModelBinding extends StatefulWidget {
     this.buttonStyle,
     this.cancelButtonStyle,
     this.buttonsSpacing,
+    this.wheelHeight,
   }) : super(key: key);
 
   @override

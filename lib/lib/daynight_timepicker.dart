@@ -264,7 +264,7 @@ PageRouteBuilder showPicker({
 ///
 /// **displayHeader** - Whether to display the sun moon animation. Defaults to `true`.
 ///
-/// **isOnValueChangeMode** - Weather to hide okText, cancelText and return value on every onValueChange. Defaults to `false`.
+/// **isOnValueChangeMode** - Whether to hide okText, cancelText and return value on every onValueChange. Defaults to `false`.
 ///
 /// **focusMinutePicker** - Whether or not the minute picker is auto focus/selected. Defaults to `false`.
 ///
@@ -314,6 +314,7 @@ Widget createInlinePicker({
   ButtonStyle? buttonStyle,
   ButtonStyle? cancelButtonStyle,
   double? buttonsSpacing,
+  double? wheelHeight,
 }) {
   if (minHour == double.infinity) {
     minHour = 0;
@@ -368,6 +369,7 @@ Widget createInlinePicker({
     buttonsSpacing: buttonsSpacing,
     ltrMode: ltrMode,
     initialTime: timeValue,
+    wheelHeight: wheelHeight,
     child: Builder(
       builder: (context) {
         if (iosStylePicker) {

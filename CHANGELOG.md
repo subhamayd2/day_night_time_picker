@@ -1,3 +1,8 @@
+## [1.1.3] - 24th August 2022.
+
+- Added prop `wheelHeight` (only for `createInlinePicker`)
+- Fixed typo in README
+
 ## [1.1.2] - 23th June 2022.
 
 - Added prop `cancelButtonStyle`

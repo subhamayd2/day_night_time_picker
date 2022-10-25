@@ -274,6 +274,7 @@ PageRouteBuilder showPicker({
 ///
 /// **cancelStyle** - Cancel button's text style. Defaults to `const TextStyle(fontWeight: FontWeight.bold)`.
 Widget createInlinePicker({
+  key: UniqueKey(),
   BuildContext? context,
   required TimeOfDay value,
   required void Function(TimeOfDay) onChange,

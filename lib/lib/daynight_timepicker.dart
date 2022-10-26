@@ -73,6 +73,9 @@ import 'package:flutter/material.dart';
 /// **okStyle** - Ok button's text style. Defaults to `const TextStyle(fontWeight: FontWeight.bold)`.
 ///
 /// **cancelStyle** - Cancel button's text style. Defaults to `const TextStyle(fontWeight: FontWeight.bold)`.
+/// 
+/// **hideButtons** - Whether to hide the buttons (ok and cancel). Defaults to `false`.
+/// 
 PageRouteBuilder showPicker({
   BuildContext? context,
   required TimeOfDay value,
@@ -113,6 +116,7 @@ PageRouteBuilder showPicker({
   ButtonStyle? buttonStyle,
   ButtonStyle? cancelButtonStyle,
   double? buttonsSpacing,
+  bool hideButtons = false
 }) {
   if (minHour == double.infinity) {
     minHour = 0;
@@ -273,6 +277,9 @@ PageRouteBuilder showPicker({
 /// **okStyle** - Ok button's text style. Defaults to `const TextStyle(fontWeight: FontWeight.bold)`.
 ///
 /// **cancelStyle** - Cancel button's text style. Defaults to `const TextStyle(fontWeight: FontWeight.bold)`.
+///
+/// **hideButtons** - Whether to hide the buttons (ok and cancel). Defaults to `false`.
+/// 
 Widget createInlinePicker({
   BuildContext? context,
   required TimeOfDay value,
@@ -315,6 +322,7 @@ Widget createInlinePicker({
   ButtonStyle? cancelButtonStyle,
   double? buttonsSpacing,
   double? wheelHeight,
+  bool hideButtons = false
 }) {
   if (minHour == double.infinity) {
     minHour = 0;
@@ -370,6 +378,7 @@ Widget createInlinePicker({
     ltrMode: ltrMode,
     initialTime: timeValue,
     wheelHeight: wheelHeight,
+	hideButtons: hideButtons,
     child: Builder(
       builder: (context) {
         if (iosStylePicker) {

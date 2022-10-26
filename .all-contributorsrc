@@ -182,6 +182,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "leonschwanitz",
+      "name": "Leon Schwanitz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36971798?v=4",
+      "profile": "http://linkpop.com/leonschwanitz",
+      "contributions": [
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,

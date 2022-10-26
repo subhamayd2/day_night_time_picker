@@ -274,7 +274,6 @@ PageRouteBuilder showPicker({
 ///
 /// **cancelStyle** - Cancel button's text style. Defaults to `const TextStyle(fontWeight: FontWeight.bold)`.
 Widget createInlinePicker({
-  key: UniqueKey(),
   BuildContext? context,
   required TimeOfDay value,
   required void Function(TimeOfDay) onChange,
@@ -336,6 +335,7 @@ Widget createInlinePicker({
   final timeValue = Time.fromTimeOfDay(value);
 
   return TimeModelBinding(
+    key: UniqueKey(),
     onChange: onChange,
     onChangeDateTime: onChangeDateTime,
     onCancel: onCancel,

@@ -343,6 +343,7 @@ Widget createInlinePicker({
   final timeValue = Time.fromTimeOfDay(value);
 
   return TimeModelBinding(
+    key: UniqueKey(),
     onChange: onChange,
     onChangeDateTime: onChangeDateTime,
     onCancel: onCancel,

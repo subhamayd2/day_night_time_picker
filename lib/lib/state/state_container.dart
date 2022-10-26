@@ -116,6 +116,9 @@ class TimeModelBinding extends StatefulWidget {
   /// The height of the Wheel section
   double? wheelHeight;
 
+  /// Whether to hide the buttons (ok and cancel). Defaults to `false`.
+  bool hideButtons;
+
   /// Constructor for the [Widget]
   TimeModelBinding({
     Key? key,
@@ -155,6 +158,7 @@ class TimeModelBinding extends StatefulWidget {
     this.cancelButtonStyle,
     this.buttonsSpacing,
     this.wheelHeight,
+	this.hideButtons = false
   }) : super(key: key);
 
   @override

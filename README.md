@@ -1,7 +1,7 @@
 # DayNightTimePicker
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-19-orange.svg?style=flat)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-20-orange.svg?style=flat)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A day night time picker for Flutter with **Zero Dependencies**.
@@ -124,31 +124,34 @@ Thanks goes to these wonderful people:
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="https://github.com/subhamayd2"><img src="https://avatars.githubusercontent.com/u/23093995?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Subhamay Dutta</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=subhamayd2" title="Code">💻</a> <a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=subhamayd2" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/impure"><img src="https://avatars.githubusercontent.com/u/4359114?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Andrew Zuo</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=impure" title="Code">💻</a></td>
-    <td align="center"><a href="https://www.linkedin.com/in/oude-mohammad/"><img src="https://avatars.githubusercontent.com/u/6555426?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mohammad Odeh</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=MOOUDE" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/hashem78"><img src="https://avatars.githubusercontent.com/u/4525797?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hashem Alayan</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=hashem78" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/gohdong"><img src="https://avatars.githubusercontent.com/u/22044475?v=4?s=100" width="100px;" alt=""/><br /><sub><b>gohdong</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=gohdong" title="Code">💻</a></td>
-    <td align="center"><a href="https://achim.io/"><img src="https://avatars.githubusercontent.com/u/43643339?v=4?s=100" width="100px;" alt=""/><br /><sub><b>nohli</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=nohli" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/sander102907"><img src="https://avatars.githubusercontent.com/u/22891388?v=4?s=100" width="100px;" alt=""/><br /><sub><b>sander102907</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=sander102907" title="Code">💻</a></td>
-  </tr>
-  <tr>
-    <td align="center"><a href="https://asoteam.ir"><img src="https://avatars.githubusercontent.com/u/22625638?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sobhan Moradi</b></sub></a><br /><a href="#design-sobimor" title="Design">🎨</a></td>
-    <td align="center"><a href="https://github.com/iaskari"><img src="https://avatars.githubusercontent.com/u/3792357?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Omar Dahhane</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=iaskari" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/fatihy101"><img src="https://avatars.githubusercontent.com/u/34458068?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Fatih Yaman</b></sub></a><br /><a href="#design-fatihy101" title="Design">🎨</a></td>
-    <td align="center"><a href="https://www.awesomejerry.space"><img src="https://avatars.githubusercontent.com/u/6601073?v=4?s=100" width="100px;" alt=""/><br /><sub><b>JerryShen</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=awesomejerry" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/morio77"><img src="https://avatars.githubusercontent.com/u/68191253?v=4?s=100" width="100px;" alt=""/><br /><sub><b>本多健也</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=morio77" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/TheGlorySaint"><img src="https://avatars.githubusercontent.com/u/21318321?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tempelritter</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=TheGlorySaint" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/Silfalion"><img src="https://avatars.githubusercontent.com/u/23188369?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Silfalion</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=Silfalion" title="Code">💻</a></td>
-  </tr>
-  <tr>
-    <td align="center"><a href="https://github.com/guchengxi1994"><img src="https://avatars.githubusercontent.com/u/33513462?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Chengxi Gu</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=guchengxi1994" title="Code">💻</a></td>
-    <td align="center"><a href="https://www.saifbillah.com"><img src="https://avatars.githubusercontent.com/u/23041420?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Saif Billah</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=saifb" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/markszente"><img src="https://avatars.githubusercontent.com/u/29143275?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mark Szente</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=markszente" title="Code">💻</a></td>
-    <td align="center"><a href="https://linkedin.com/in/rcjuancarlosuwu"><img src="https://avatars.githubusercontent.com/u/67658540?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Juan Carlos Ramón Condezo</b></sub></a><br /><a href="#design-rcjuancarlosuwu" title="Design">🎨</a></td>
-    <td align="center"><a href="https://github.com/Likenttt"><img src="https://avatars.githubusercontent.com/u/26034018?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Chuanyi</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=Likenttt" title="Documentation">📖</a></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/subhamayd2"><img src="https://avatars.githubusercontent.com/u/23093995?v=4?s=100" width="100px;" alt="Subhamay Dutta"/><br /><sub><b>Subhamay Dutta</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=subhamayd2" title="Code">💻</a> <a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=subhamayd2" title="Documentation">📖</a></td>
+      <td align="center"><a href="https://github.com/impure"><img src="https://avatars.githubusercontent.com/u/4359114?v=4?s=100" width="100px;" alt="Andrew Zuo"/><br /><sub><b>Andrew Zuo</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=impure" title="Code">💻</a></td>
+      <td align="center"><a href="https://www.linkedin.com/in/oude-mohammad/"><img src="https://avatars.githubusercontent.com/u/6555426?v=4?s=100" width="100px;" alt="Mohammad Odeh"/><br /><sub><b>Mohammad Odeh</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=MOOUDE" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/hashem78"><img src="https://avatars.githubusercontent.com/u/4525797?v=4?s=100" width="100px;" alt="Hashem Alayan"/><br /><sub><b>Hashem Alayan</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=hashem78" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/gohdong"><img src="https://avatars.githubusercontent.com/u/22044475?v=4?s=100" width="100px;" alt="gohdong"/><br /><sub><b>gohdong</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=gohdong" title="Code">💻</a></td>
+      <td align="center"><a href="https://achim.io/"><img src="https://avatars.githubusercontent.com/u/43643339?v=4?s=100" width="100px;" alt="nohli"/><br /><sub><b>nohli</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=nohli" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/sander102907"><img src="https://avatars.githubusercontent.com/u/22891388?v=4?s=100" width="100px;" alt="sander102907"/><br /><sub><b>sander102907</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=sander102907" title="Code">💻</a></td>
+    </tr>
+    <tr>
+      <td align="center"><a href="https://asoteam.ir"><img src="https://avatars.githubusercontent.com/u/22625638?v=4?s=100" width="100px;" alt="Sobhan Moradi"/><br /><sub><b>Sobhan Moradi</b></sub></a><br /><a href="#design-sobimor" title="Design">🎨</a></td>
+      <td align="center"><a href="https://github.com/iaskari"><img src="https://avatars.githubusercontent.com/u/3792357?v=4?s=100" width="100px;" alt="Omar Dahhane"/><br /><sub><b>Omar Dahhane</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=iaskari" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/fatihy101"><img src="https://avatars.githubusercontent.com/u/34458068?v=4?s=100" width="100px;" alt="Fatih Yaman"/><br /><sub><b>Fatih Yaman</b></sub></a><br /><a href="#design-fatihy101" title="Design">🎨</a></td>
+      <td align="center"><a href="https://www.awesomejerry.space"><img src="https://avatars.githubusercontent.com/u/6601073?v=4?s=100" width="100px;" alt="JerryShen"/><br /><sub><b>JerryShen</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=awesomejerry" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/morio77"><img src="https://avatars.githubusercontent.com/u/68191253?v=4?s=100" width="100px;" alt="本多健也"/><br /><sub><b>本多健也</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=morio77" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/TheGlorySaint"><img src="https://avatars.githubusercontent.com/u/21318321?v=4?s=100" width="100px;" alt="Tempelritter"/><br /><sub><b>Tempelritter</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=TheGlorySaint" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/Silfalion"><img src="https://avatars.githubusercontent.com/u/23188369?v=4?s=100" width="100px;" alt="Silfalion"/><br /><sub><b>Silfalion</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=Silfalion" title="Code">💻</a></td>
+    </tr>
+    <tr>
+      <td align="center"><a href="https://github.com/guchengxi1994"><img src="https://avatars.githubusercontent.com/u/33513462?v=4?s=100" width="100px;" alt="Chengxi Gu"/><br /><sub><b>Chengxi Gu</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=guchengxi1994" title="Code">💻</a></td>
+      <td align="center"><a href="https://www.saifbillah.com"><img src="https://avatars.githubusercontent.com/u/23041420?v=4?s=100" width="100px;" alt="Saif Billah"/><br /><sub><b>Saif Billah</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=saifb" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/markszente"><img src="https://avatars.githubusercontent.com/u/29143275?v=4?s=100" width="100px;" alt="Mark Szente"/><br /><sub><b>Mark Szente</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=markszente" title="Code">💻</a></td>
+      <td align="center"><a href="https://linkedin.com/in/rcjuancarlosuwu"><img src="https://avatars.githubusercontent.com/u/67658540?v=4?s=100" width="100px;" alt="Juan Carlos Ramón Condezo"/><br /><sub><b>Juan Carlos Ramón Condezo</b></sub></a><br /><a href="#design-rcjuancarlosuwu" title="Design">🎨</a></td>
+      <td align="center"><a href="https://github.com/Likenttt"><img src="https://avatars.githubusercontent.com/u/26034018?v=4?s=100" width="100px;" alt="Chuanyi"/><br /><sub><b>Chuanyi</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=Likenttt" title="Documentation">📖</a></td>
+      <td align="center"><a href="http://linkpop.com/leonschwanitz"><img src="https://avatars.githubusercontent.com/u/36971798?v=4?s=100" width="100px;" alt="Leon Schwanitz"/><br /><sub><b>Leon Schwanitz</b></sub></a><br /><a href="#design-leonschwanitz" title="Design">🎨</a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->

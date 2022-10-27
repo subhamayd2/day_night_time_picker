@@ -1,3 +1,8 @@
+## [1.1.4] - 26th October 2022.
+
+- Added option to hide buttons
+- Fixed issue where newly selected time does not update UI
+
 ## [1.1.3] - 24th August 2022.
 
 - Added prop `wheelHeight` (only for `createInlinePicker`)

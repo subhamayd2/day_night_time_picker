@@ -120,46 +120,46 @@ class TimeModelBinding extends StatefulWidget {
   bool hideButtons;
 
   /// Constructor for the [Widget]
-  TimeModelBinding({
-    Key? key,
-    required this.initialTime,
-    required this.child,
-    required this.onChange,
-    this.onChangeDateTime,
-    this.onCancel,
-    this.is24HrFormat = false,
-    this.displayHeader,
-    this.accentColor,
-    this.ltrMode = true,
-    this.unselectedColor,
-    this.cancelText = "cancel",
-    this.okText = "ok",
-    this.isOnValueChangeMode = false,
-    this.sunAsset,
-    this.moonAsset,
-    this.blurredBackground = false,
-    this.borderRadius,
-    this.elevation,
-    this.dialogInsetPadding,
-    this.minuteInterval,
-    this.disableMinute,
-    this.disableHour,
-    this.maxHour,
-    this.maxMinute,
-    this.minHour,
-    this.minMinute,
-    this.hourLabel,
-    this.minuteLabel,
-    this.isInlineWidget = false,
-    this.focusMinutePicker = false,
-    this.okStyle = const TextStyle(fontWeight: FontWeight.bold),
-    this.cancelStyle = const TextStyle(fontWeight: FontWeight.bold),
-    this.buttonStyle,
-    this.cancelButtonStyle,
-    this.buttonsSpacing,
-    this.wheelHeight,
-	this.hideButtons = false
-  }) : super(key: key);
+  TimeModelBinding(
+      {Key? key,
+      required this.initialTime,
+      required this.child,
+      required this.onChange,
+      this.onChangeDateTime,
+      this.onCancel,
+      this.is24HrFormat = false,
+      this.displayHeader,
+      this.accentColor,
+      this.ltrMode = true,
+      this.unselectedColor,
+      this.cancelText = "cancel",
+      this.okText = "ok",
+      this.isOnValueChangeMode = false,
+      this.sunAsset,
+      this.moonAsset,
+      this.blurredBackground = false,
+      this.borderRadius,
+      this.elevation,
+      this.dialogInsetPadding,
+      this.minuteInterval,
+      this.disableMinute,
+      this.disableHour,
+      this.maxHour,
+      this.maxMinute,
+      this.minHour,
+      this.minMinute,
+      this.hourLabel,
+      this.minuteLabel,
+      this.isInlineWidget = false,
+      this.focusMinutePicker = false,
+      this.okStyle = const TextStyle(fontWeight: FontWeight.bold),
+      this.cancelStyle = const TextStyle(fontWeight: FontWeight.bold),
+      this.buttonStyle,
+      this.cancelButtonStyle,
+      this.buttonsSpacing,
+      this.wheelHeight,
+      this.hideButtons = false})
+      : super(key: key);
 
   @override
   TimeModelBindingState createState() => TimeModelBindingState();
@@ -225,6 +225,12 @@ class TimeModelBindingState extends State<TimeModelBinding> {
       lastPeriod = time.period;
       time = time.setPeriod(e);
     });
+
+    // If the mode is `onValueChange` then we need to alert
+    // the listeners that the value changed
+    if (widget.isOnValueChangeMode) {
+      onOk();
+    }
   }
 
   /// Change handler for picker

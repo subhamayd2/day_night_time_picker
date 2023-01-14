@@ -1,3 +1,7 @@
+## [1.1.5] - 14th January 2023.
+
+- Fixed where toggling AM/PM was not triggering the onChange
+
 ## [1.1.4] - 26th October 2022.
 
 - Added option to hide buttons

@@ -158,7 +158,7 @@ class TimeModelBinding extends StatefulWidget {
     this.cancelButtonStyle,
     this.buttonsSpacing,
     this.wheelHeight,
-	this.hideButtons = false
+    this.hideButtons = false,
   }) : super(key: key);
 
   @override
@@ -225,6 +225,12 @@ class TimeModelBindingState extends State<TimeModelBinding> {
       lastPeriod = time.period;
       time = time.setPeriod(e);
     });
+
+    // If the mode is `onValueChange` then we need to alert
+    // the listeners that the value changed
+    if (widget.isOnValueChangeMode) {
+      onOk();
+    }
   }
 
   /// Change handler for picker

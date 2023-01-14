@@ -191,6 +191,15 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "elmdecoste",
+      "name": "Liam DeCoste",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1967150?v=4",
+      "profile": "http://elmd.me",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,

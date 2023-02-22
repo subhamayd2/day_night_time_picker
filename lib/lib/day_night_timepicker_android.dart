@@ -50,7 +50,7 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
     final ltrMode =
         timeState.widget.ltrMode ? TextDirection.ltr : TextDirection.rtl;
 
-	final hideButtons = timeState.widget.hideButtons;
+    final hideButtons = timeState.widget.hideButtons;
 
     Orientation currentOrientation = MediaQuery.of(context).orientation;
 
@@ -105,6 +105,11 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                       ),
                       Slider(
                         onChangeEnd: (value) {
+                          if (timeState.hourIsSelected &&
+                              !timeState
+                                  .widget.disableAutoFocusMinuteAfterHour) {
+                            timeState.onHourIsSelectedChange(false);
+                          }
                           if (timeState.widget.isOnValueChangeMode) {
                             timeState.onOk();
                           }
@@ -119,7 +124,7 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                         activeColor: color,
                         inactiveColor: color.withAlpha(55),
                       ),
-					  if (!hideButtons) const ActionButtons(),
+                      if (!hideButtons) const ActionButtons(),
                     ],
                   ),
                 ),

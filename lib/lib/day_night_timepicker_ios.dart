@@ -80,9 +80,13 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
           ..addListener(() {
             _hourController!.position.isScrollingNotifier.addListener(() {
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                if (timeState!.widget.isOnValueChangeMode &&
-                    !_hourController!.position.isScrollingNotifier.value) {
-                  timeState!.onOk();
+                if (!_hourController!.position.isScrollingNotifier.value) {
+                  if (!timeState!.widget.disableAutoFocusMinuteAfterHour) {
+                    timeState!.onHourIsSelectedChange(false);
+                  }
+                  if (timeState!.widget.isOnValueChangeMode) {
+                    timeState!.onOk();
+                  }
                 }
               });
             });

@@ -119,6 +119,15 @@ class TimeModelBinding extends StatefulWidget {
   /// Whether to hide the buttons (ok and cancel). Defaults to `false`.
   bool hideButtons;
 
+  /// Whether to disable the auto focus to minute after hour is selected.
+  bool disableAutoFocusMinuteAfterHour;
+
+  /// Fixed width of the Picker container.
+  double width;
+
+  /// Fixed height of the Picker container.
+  double height;
+
   /// Constructor for the [Widget]
   TimeModelBinding({
     Key? key,
@@ -159,6 +168,9 @@ class TimeModelBinding extends StatefulWidget {
     this.buttonsSpacing,
     this.wheelHeight,
     this.hideButtons = false,
+    this.disableAutoFocusMinuteAfterHour = false,
+    this.width = 0,
+    this.height = 0,
   }) : super(key: key);
 
   @override

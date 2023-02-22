@@ -73,9 +73,15 @@ import 'package:flutter/material.dart';
 /// **okStyle** - Ok button's text style. Defaults to `const TextStyle(fontWeight: FontWeight.bold)`.
 ///
 /// **cancelStyle** - Cancel button's text style. Defaults to `const TextStyle(fontWeight: FontWeight.bold)`.
-/// 
+///
 /// **hideButtons** - Whether to hide the buttons (ok and cancel). Defaults to `false`.
-/// 
+///
+/// **disableAutoFocusMinuteAfterHour** - Whether to disable the auto focus to minute after hour is selected. Defaults to `false`.
+///
+/// **width** - Fixed width of the Picker container. Defaults to `250`.
+///
+/// **height** - Fixed height of the Picker container. Defaults to `400`.
+///
 PageRouteBuilder showPicker({
   BuildContext? context,
   required TimeOfDay value,
@@ -116,7 +122,10 @@ PageRouteBuilder showPicker({
   ButtonStyle? buttonStyle,
   ButtonStyle? cancelButtonStyle,
   double? buttonsSpacing,
-  bool hideButtons = false
+  bool hideButtons = false,
+  bool disableAutoFocusMinuteAfterHour = false,
+  double width = 250,
+  double height = 400,
 }) {
   if (minHour == double.infinity) {
     minHour = 0;
@@ -196,6 +205,9 @@ PageRouteBuilder showPicker({
           hourLabel: hourLabel,
           minuteLabel: minuteLabel,
           ltrMode: ltrMode,
+          disableAutoFocusMinuteAfterHour: disableAutoFocusMinuteAfterHour,
+          width: width,
+          height: height,
           child: child,
         ),
       ),
@@ -279,7 +291,13 @@ PageRouteBuilder showPicker({
 /// **cancelStyle** - Cancel button's text style. Defaults to `const TextStyle(fontWeight: FontWeight.bold)`.
 ///
 /// **hideButtons** - Whether to hide the buttons (ok and cancel). Defaults to `false`.
-/// 
+///
+/// **disableAutoFocusMinuteAfterHour** - Whether to disable the auto focus to minute after hour is selected. Defaults to `false`.
+///
+/// **width** - Fixed width of the Picker container. Defaults to `250`.
+///
+/// **height** - Fixed height of the Picker container. Defaults to `400`.
+///
 Widget createInlinePicker({
   BuildContext? context,
   required TimeOfDay value,
@@ -322,7 +340,10 @@ Widget createInlinePicker({
   ButtonStyle? cancelButtonStyle,
   double? buttonsSpacing,
   double? wheelHeight,
-  bool hideButtons = false
+  bool hideButtons = false,
+  bool disableAutoFocusMinuteAfterHour = false,
+  double width = 250,
+  double height = 400,
 }) {
   if (minHour == double.infinity) {
     minHour = 0;
@@ -379,7 +400,10 @@ Widget createInlinePicker({
     ltrMode: ltrMode,
     initialTime: timeValue,
     wheelHeight: wheelHeight,
-	hideButtons: hideButtons,
+    hideButtons: hideButtons,
+    disableAutoFocusMinuteAfterHour: disableAutoFocusMinuteAfterHour,
+    width: width,
+    height: height,
     child: Builder(
       builder: (context) {
         if (iosStylePicker) {

@@ -1,3 +1,8 @@
+## [1.1.6] - 22nd February 2023.
+
+- Added prop `width` and `height` for the picker
+- Added prop `disableAutoFocusMinuteAfterHour` to disable autofocus to minute after hour is selected
+
 ## [1.1.5] - 14th January 2023.
 
 - Fixed where toggling AM/PM was not triggering the onChange

@@ -38,9 +38,10 @@ class DisplayWheel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final timeState = TimeModelBinding.of(context);
-    final _commonTimeStyles = Theme.of(context).textTheme.headline2!.copyWith(
-          fontSize: 30,
-        );
+    final _commonTimeStyles =
+        Theme.of(context).textTheme.displayMedium!.copyWith(
+              fontSize: 30,
+            );
 
     final color =
         timeState.widget.accentColor ?? Theme.of(context).colorScheme.secondary;

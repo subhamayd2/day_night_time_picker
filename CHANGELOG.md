@@ -1,3 +1,11 @@
+## [1.2.0] - 23nd February 2023.
+
+- _**Includes breaking changes**_
+- Refactored code to only have one function i.e. `createPicker`.
+  - `createInlinePicker` is now deprecated.
+- Added support to `second` input as well
+- Renamed prop `disableAutoFocusMinuteAfterHour` to `disableAutoFocusToNextInput` to work with `second` input as well
+
 ## [1.1.6] - 22nd February 2023.
 
 - Added prop `width` and `height` for the picker

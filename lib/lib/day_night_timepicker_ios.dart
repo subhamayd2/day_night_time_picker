@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, no_leading_underscores_for_local_identifiers
 
+import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:day_night_time_picker/lib/common/action_buttons.dart';
 import 'package:day_night_time_picker/lib/common/display_wheel.dart';
 import 'package:day_night_time_picker/lib/common/wrapper_container.dart';
@@ -31,11 +32,17 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   /// Controller for `minute` list
   FixedExtentScrollController? _minuteController;
 
+  /// Controller for `second` list
+  FixedExtentScrollController? _secondController;
+
   /// List of hours to show
   List<int?> hours = [];
 
   /// List of minutes to show
   List<int?> minutes = [];
+
+  /// List of seconds to show
+  List<int?> seconds = [];
 
   /// Whether to display the time from left to right or right to left.(Standard: left to right)
   TextDirection? ltrMode;
@@ -50,30 +57,45 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
       timeState!.widget.maxHour,
     );
 
-    double minMinute = getMinMinute(
-        timeState!.widget.minMinute, timeState!.widget.minuteInterval);
-    double maxMinute = getMaxMinute(
-        timeState!.widget.maxMinute, timeState!.widget.minuteInterval);
+    double minMinute =
+        getMin(timeState!.widget.minMinute, timeState!.widget.minuteInterval);
+    double maxMinute =
+        getMax(timeState!.widget.maxMinute, timeState!.widget.minuteInterval);
+
+    double minSecond =
+        getMin(timeState!.widget.minSecond, timeState!.widget.secondInterval);
+    double maxSecond =
+        getMax(timeState!.widget.maxSecond, timeState!.widget.secondInterval);
 
     int minDiff = (maxMinute - minMinute).round();
-    final minuteDiv =
-        getMinuteDivisions(minDiff, timeState!.widget.minuteInterval);
-    List<int?> _minutes = generateMinutes(
+    int secDiff = (maxSecond - minSecond).round();
+
+    final minuteDiv = getDivisions(minDiff, timeState!.widget.minuteInterval);
+    List<int?> _minutes = generateMinutesOrSeconds(
       minuteDiv,
       timeState!.widget.minuteInterval,
       minMinute,
       maxMinute,
     );
 
+    final secondDiv = getDivisions(secDiff, timeState!.widget.secondInterval);
+    List<int?> _seconds = generateMinutesOrSeconds(
+      secondDiv,
+      timeState!.widget.secondInterval,
+      minSecond,
+      maxSecond,
+    );
+
     final h = timeState!.time.hour;
     final m = timeState!.time.minute;
+    final s = timeState!.time.second;
 
     _hourController =
         FixedExtentScrollController(initialItem: _hours.indexOf(h))
           ..addListener(() {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               if (mounted) {
-                timeState!.onHourIsSelectedChange(true);
+                timeState!.onSelectedInputChange(SelectedInput.HOUR);
               }
             });
           })
@@ -81,8 +103,8 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
             _hourController!.position.isScrollingNotifier.addListener(() {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 if (!_hourController!.position.isScrollingNotifier.value) {
-                  if (!timeState!.widget.disableAutoFocusMinuteAfterHour) {
-                    timeState!.onHourIsSelectedChange(false);
+                  if (!timeState!.widget.disableAutoFocusToNextInput) {
+                    timeState!.onSelectedInputChange(SelectedInput.MINUTE);
                   }
                   if (timeState!.widget.isOnValueChangeMode) {
                     timeState!.onOk();
@@ -91,15 +113,17 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
               });
             });
           });
+
     _minuteController =
         FixedExtentScrollController(initialItem: _minutes.indexOf(m))
           ..addListener(() {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               if (mounted) {
-                timeState!.onHourIsSelectedChange(false);
+                timeState!.onSelectedInputChange(SelectedInput.MINUTE);
                 setState(() {
                   hours = _hours;
                   minutes = _minutes;
+                  seconds = _seconds;
                 });
               }
             });
@@ -107,17 +131,47 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
           ..addListener(() {
             _minuteController!.position.isScrollingNotifier.addListener(() {
               WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (!_minuteController!.position.isScrollingNotifier.value) {
+                  if (!timeState!.widget.disableAutoFocusToNextInput) {
+                    timeState!.onSelectedInputChange(SelectedInput.SECOND);
+                  }
+                  if (timeState!.widget.isOnValueChangeMode) {
+                    timeState!.onOk();
+                  }
+                }
+              });
+            });
+          });
+
+    _secondController =
+        FixedExtentScrollController(initialItem: _seconds.indexOf(s))
+          ..addListener(() {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (mounted) {
+                timeState!.onSelectedInputChange(SelectedInput.SECOND);
+                setState(() {
+                  hours = _hours;
+                  minutes = _minutes;
+                  seconds = _seconds;
+                });
+              }
+            });
+          })
+          ..addListener(() {
+            _secondController!.position.isScrollingNotifier.addListener(() {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
                 if (timeState!.widget.isOnValueChangeMode &&
-                    !_minuteController!.position.isScrollingNotifier.value) {
+                    !_secondController!.position.isScrollingNotifier.value) {
                   timeState!.onOk();
                 }
               });
             });
           });
-    if (hours.isEmpty || minutes.isEmpty) {
+    if (hours.isEmpty || minutes.isEmpty || seconds.isEmpty) {
       setState(() {
         hours = _hours;
         minutes = _minutes;
+        seconds = _seconds;
       });
     }
 
@@ -177,7 +231,8 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                             DisplayWheel(
                               controller: _hourController!,
                               items: hours,
-                              isSelected: timeState!.hourIsSelected,
+                              isSelected:
+                                  timeState!.selected == SelectedInput.HOUR,
                               onChange: (int value) {
                                 timeState!.onHourChange(hours[value]! + 0.0);
                               },
@@ -188,7 +243,8 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                             DisplayWheel(
                               controller: _minuteController!,
                               items: minutes,
-                              isSelected: !timeState!.hourIsSelected,
+                              isSelected:
+                                  timeState!.selected == SelectedInput.MINUTE,
                               onChange: (int value) {
                                 timeState!
                                     .onMinuteChange(minutes[value]! + 0.0);
@@ -196,6 +252,17 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                               disabled: timeState!.widget.disableMinute!,
                             ),
                             Text(timeState!.widget.minuteLabel!),
+                            DisplayWheel(
+                              controller: _secondController!,
+                              items: seconds,
+                              isSelected:
+                                  timeState!.selected == SelectedInput.SECOND,
+                              onChange: (int value) {
+                                timeState!
+                                    .onSecondChange(seconds[value]! + 0.0);
+                              },
+                            ),
+                            Text(timeState!.widget.secondLabel!),
                           ],
                         ),
                       ),

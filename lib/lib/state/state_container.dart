@@ -1,8 +1,6 @@
 // ignore_for_file: must_be_immutable, no_leading_underscores_for_local_identifiers
 
 import 'package:day_night_time_picker/day_night_time_picker.dart';
-import 'package:day_night_time_picker/lib/constants.dart';
-import 'package:day_night_time_picker/lib/state/time.dart';
 import 'package:flutter/material.dart';
 
 /// Stateful [Widget] for [InheritedWidget]
@@ -10,8 +8,8 @@ class TimeModelBinding extends StatefulWidget {
   /// The initial time provided by the user
   final Time initialTime;
 
-  /// **`Required`** Return the new time the user picked as [TimeOfDay].
-  final void Function(TimeOfDay) onChange;
+  /// **`Required`** Return the new time the user picked as [Time].
+  final void Function(Time) onChange;
 
   /// _`Optional`_ Return the new time the user picked as [DateTime].
   final void Function(DateTime)? onChangeDateTime;
@@ -56,7 +54,10 @@ class TimeModelBinding extends StatefulWidget {
   final EdgeInsets? dialogInsetPadding;
 
   /// Steps interval while changing [minute].
-  final MinuteInterval? minuteInterval;
+  final TimePickerInterval? minuteInterval;
+
+  /// Steps interval while changing [secoond].
+  final TimePickerInterval? secondInterval;
 
   /// Disable minute picker
   final bool? disableMinute;
@@ -70,17 +71,26 @@ class TimeModelBinding extends StatefulWidget {
   /// Selectable maximum minute
   final double? maxMinute;
 
+  /// Selectable maximum second
+  final double? maxSecond;
+
   /// Selectable minimum hour
   final double? minHour;
 
   /// Selectable minimum minute
   final double? minMinute;
 
+  /// Selectable minimum second
+  final double? minSecond;
+
   /// Label for the `hour` text.
   final String? hourLabel;
 
   /// Label for the `minute` text.
   final String? minuteLabel;
+
+  /// Label for the `second` text.
+  final String? secondLabel;
 
   /// Whether the widget is displayed as a popup or inline
   final bool isInlineWidget;
@@ -120,13 +130,16 @@ class TimeModelBinding extends StatefulWidget {
   bool hideButtons;
 
   /// Whether to disable the auto focus to minute after hour is selected.
-  bool disableAutoFocusMinuteAfterHour;
+  bool disableAutoFocusToNextInput;
 
   /// Fixed width of the Picker container.
   double width;
 
   /// Fixed height of the Picker container.
   double height;
+
+  /// Whether to use the second selector as well.
+  bool showSecondSelector;
 
   /// Constructor for the [Widget]
   TimeModelBinding({
@@ -151,14 +164,18 @@ class TimeModelBinding extends StatefulWidget {
     this.elevation,
     this.dialogInsetPadding,
     this.minuteInterval,
+    this.secondInterval,
     this.disableMinute,
     this.disableHour,
     this.maxHour,
     this.maxMinute,
+    this.maxSecond,
     this.minHour,
     this.minMinute,
+    this.minSecond,
     this.hourLabel,
     this.minuteLabel,
+    this.secondLabel,
     this.isInlineWidget = false,
     this.focusMinutePicker = false,
     this.okStyle = const TextStyle(fontWeight: FontWeight.bold),
@@ -168,9 +185,10 @@ class TimeModelBinding extends StatefulWidget {
     this.buttonsSpacing,
     this.wheelHeight,
     this.hideButtons = false,
-    this.disableAutoFocusMinuteAfterHour = false,
+    this.disableAutoFocusToNextInput = false,
     this.width = 0,
     this.height = 0,
+    this.showSecondSelector = false,
   }) : super(key: key);
 
   @override
@@ -207,21 +225,21 @@ class TimeModelBindingState extends State<TimeModelBinding> {
   late Time time = widget.initialTime;
 
   /// Whether the hour is currently being selected/changed
-  bool hourIsSelected = true;
+  SelectedInput selected = SelectedInput.HOUR;
 
   /// The last [DayPeriod] value
   DayPeriod lastPeriod = DayPeriod.am;
 
   @override
   void initState() {
-    bool _hourIsSelected = true;
+    SelectedInput _selected = SelectedInput.HOUR;
 
     if (widget.focusMinutePicker || widget.disableHour!) {
-      _hourIsSelected = false;
+      _selected = SelectedInput.MINUTE;
     }
 
     setState(() {
-      hourIsSelected = _hourIsSelected;
+      selected = _selected;
     });
     super.initState();
   }
@@ -247,10 +265,12 @@ class TimeModelBindingState extends State<TimeModelBinding> {
 
   /// Change handler for picker
   onTimeChange(double value) {
-    if (hourIsSelected) {
+    if (selected == SelectedInput.HOUR) {
       onHourChange(value);
-    } else {
+    } else if (selected == SelectedInput.MINUTE) {
       onMinuteChange(value);
+    } else {
+      onSecondChange(value);
     }
   }
 
@@ -268,23 +288,30 @@ class TimeModelBindingState extends State<TimeModelBinding> {
     });
   }
 
-  /// Change handler for `hourIsSelected`
-  void onHourIsSelectedChange(bool newValue) {
+  /// Change handler for the `second`
+  void onSecondChange(double value) {
     setState(() {
-      hourIsSelected = newValue;
+      time = time.replacing(second: value.ceil());
+    });
+  }
+
+  /// Change handler for `hourIsSelected`
+  void onSelectedInputChange(SelectedInput newValue) {
+    setState(() {
+      selected = newValue;
     });
   }
 
   /// [onChange] handler. Return [TimeOfDay]
   onOk() {
-    widget.onChange(time.toTimeOfDay());
+    widget.onChange(time);
     if (widget.onChangeDateTime != null) {
       final now = DateTime.now();
       final dateTime =
           DateTime(now.year, now.month, now.day, time.hour, time.minute);
       widget.onChangeDateTime!(dateTime);
     }
-    onCancel(result: time.toTimeOfDay());
+    onCancel(result: time);
   }
 
   /// Handler to close the picker
@@ -304,7 +331,11 @@ class TimeModelBindingState extends State<TimeModelBinding> {
   /// Example: if user provided [minHour] as `9` and [maxHour] as `21`,
   /// then the user should only be able to toggle `AM/PM` for `9am` and `9pm`
   bool checkIfWithinRange(DayPeriod other) {
-    final tempTime = Time(time.hour, time.minute).setPeriod(other);
+    final tempTime = Time(
+      hour: time.hour,
+      minute: time.minute,
+      second: time.second,
+    ).setPeriod(other);
     final expectedHour = tempTime.hour;
     return widget.minHour! <= expectedHour && expectedHour <= widget.maxHour!;
   }

@@ -19,8 +19,6 @@ class WrapperDialog extends StatelessWidget {
     final borderRadius = timeState.widget.borderRadius ?? BORDER_RADIUS;
     final elevation = timeState.widget.elevation ?? ELEVATION;
 
-    debugPrint("width: ${timeState.widget.width}");
-
     return Dialog(
       insetPadding: timeState.widget.dialogInsetPadding,
       shape: RoundedRectangleBorder(

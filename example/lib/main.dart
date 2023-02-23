@@ -1,5 +1,4 @@
 import 'package:day_night_time_picker/day_night_time_picker.dart';
-import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -29,10 +28,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  TimeOfDay _time = TimeOfDay.now().replacing(hour: 11, minute: 30);
+  Time _time = Time(hour: 11, minute: 30, second: 20);
   bool iosStyle = true;
 
-  void onTimeChanged(TimeOfDay newTime) {
+  void onTimeChanged(Time newTime) {
     setState(() {
       _time = newTime;
     });
@@ -52,7 +51,8 @@ class _HomeState extends State<Home> {
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Text(
-                  _time.format(context),
+                  "${_time.hour}:${_time.minute}:${_time.second} ${_time.period.name}"
+                      .toUpperCase(),
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.displayLarge,
                 ),
@@ -64,10 +64,11 @@ class _HomeState extends State<Home> {
                   onPressed: () {
                     Navigator.of(context).push(
                       showPicker(
+                        showSecondSelector: true,
                         context: context,
                         value: _time,
                         onChange: onTimeChanged,
-                        minuteInterval: MinuteInterval.FIVE,
+                        minuteInterval: TimePickerInterval.FIVE,
                         // Optional onChange to receive value as DateTime
                         onChangeDateTime: (DateTime dateTime) {
                           // print(dateTime);
@@ -89,11 +90,12 @@ class _HomeState extends State<Home> {
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 // Render inline widget
-                createInlinePicker(
+                showPicker(
+                  isInlinePicker: true,
                   elevation: 1,
                   value: _time,
                   onChange: onTimeChanged,
-                  minuteInterval: MinuteInterval.FIVE,
+                  minuteInterval: TimePickerInterval.FIVE,
                   iosStylePicker: iosStyle,
                   minHour: 9,
                   maxHour: 21,

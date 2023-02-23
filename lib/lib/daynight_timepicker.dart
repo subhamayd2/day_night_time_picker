@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 ///
 /// **onChange** - `Required` Return the new time the user picked as [TimeOfDay].
 ///
+/// **isInlinePicker** - Whether to render an inline widget. Defaults to `false`.
+///
 /// **onChangeDateTime** - Return the new time the user picked as [DateTime].
 ///
 /// **onCancel** - Custom callback for the Cancel button. Note: if provided, it will override the default behavior of the Cancel button.
@@ -52,7 +54,11 @@ import 'package:flutter/material.dart';
 ///
 /// **minuteLabel** - The label to be displayed for `minute` picker. Only for _iosStylePicker_. Defaults to `'minutes'`.
 ///
-/// **minuteInterval** - Steps interval while changing `minute`. Accepts `MinuteInterval` enum. Defaults to `MinuteInterval.ONE`.
+/// **secondLabel** - The label to be displayed for `second` picker. Only for _iosStylePicker_. Defaults to `'seconds'`.
+///
+/// **minuteInterval** - Steps interval while changing `minute`. Accepts `TimePickerInterval` enum. Defaults to `TimePickerInterval.ONE`.
+///
+/// **secondInterval** - Steps interval while changing `second`. Accepts `TimePickerInterval` enum. Defaults to `TimePickerInterval.ONE`.
 ///
 /// **disableMinute** - Disables the minute picker. Defaults to `false`.
 ///
@@ -62,9 +68,13 @@ import 'package:flutter/material.dart';
 ///
 /// **maxMinute** - Selectable maximum minute. Defaults to `59`.
 ///
+/// **maxSecond** - Selectable maximum second. Defaults to `59`.
+///
 /// **minHour** - Selectable minimum hour. Defaults to `0` | `1`.
 ///
 /// **minMinute** - Selectable minimum minute. Defaults to `0`.
+///
+/// **minSecond** - Selectable minimum second. Defaults to `0`.
 ///
 /// **focusMinutePicker** - Whether or not the minute picker is auto focus/selected. Defaults to `false`.
 ///
@@ -76,21 +86,25 @@ import 'package:flutter/material.dart';
 ///
 /// **hideButtons** - Whether to hide the buttons (ok and cancel). Defaults to `false`.
 ///
-/// **disableAutoFocusMinuteAfterHour** - Whether to disable the auto focus to minute after hour is selected. Defaults to `false`.
+/// **disableAutoFocusToNextInput** - Whether to disable the auto focus to the next input after current input is selected. Defaults to `false`.
 ///
-/// **width** - Fixed width of the Picker container. Defaults to `250`.
+/// **width** - Fixed width of the Picker container. Defaults to `300` but `350` for `iosStyle`.
 ///
 /// **height** - Fixed height of the Picker container. Defaults to `400`.
 ///
-PageRouteBuilder showPicker({
+/// **showSecondSelector** - Whether to use the second selector as well. Defaults to `false`.
+///
+dynamic showPicker({
   BuildContext? context,
-  required TimeOfDay value,
-  required void Function(TimeOfDay) onChange,
+  required Time value,
+  required void Function(Time) onChange,
+  bool isInlinePicker = false,
   void Function(DateTime)? onChangeDateTime,
   void Function()? onCancel,
   bool is24HrFormat = false,
   Color? accentColor,
   Color? unselectedColor,
+  bool isOnChangeValueMode = false,
   String cancelText = "Cancel",
   String okText = "Ok",
   Image? sunAsset,
@@ -107,11 +121,15 @@ PageRouteBuilder showPicker({
   bool displayHeader = true,
   String hourLabel = 'hours',
   String minuteLabel = 'minutes',
-  MinuteInterval minuteInterval = MinuteInterval.ONE,
+  String secondLabel = 'seconds',
+  TimePickerInterval minuteInterval = TimePickerInterval.ONE,
+  TimePickerInterval secondInterval = TimePickerInterval.ONE,
   bool disableMinute = false,
   bool disableHour = false,
   double minMinute = 0,
   double maxMinute = 59,
+  double minSecond = 0,
+  double maxSecond = 59,
   ThemeData? themeData,
   bool focusMinutePicker = false,
   // Infinity is used so that we can assert whether or not the user actually set a value
@@ -123,15 +141,21 @@ PageRouteBuilder showPicker({
   ButtonStyle? cancelButtonStyle,
   double? buttonsSpacing,
   bool hideButtons = false,
-  bool disableAutoFocusMinuteAfterHour = false,
-  double width = 250,
+  bool disableAutoFocusToNextInput = false,
+  double width = 300,
   double height = 400,
+  bool showSecondSelector = false,
+  double? wheelHeight,
 }) {
   if (minHour == double.infinity) {
     minHour = 0;
   }
   if (maxHour == double.infinity) {
     maxHour = 23;
+  }
+
+  if (iosStylePicker) {
+    width = 350;
   }
 
   assert(!(disableHour == true && disableMinute == true),
@@ -143,7 +167,84 @@ PageRouteBuilder showPicker({
   assert(maxHour <= 23 && minHour >= 0,
       "\"minHour\" and \"maxHour\" should be between 0-23");
 
-  final timeValue = Time.fromTimeOfDay(value);
+  final timeValue = Time.fromTimeOfDay(value, value.second);
+
+  TimeModelBinding timeModelBinding(child) => TimeModelBinding(
+        key: UniqueKey(),
+        initialTime: timeValue,
+        isInlineWidget: isInlinePicker,
+        onChange: onChange,
+        onChangeDateTime: onChangeDateTime,
+        onCancel: onCancel,
+        is24HrFormat: is24HrFormat,
+        displayHeader: displayHeader,
+        accentColor: accentColor,
+        unselectedColor: unselectedColor,
+        cancelText: cancelText,
+        okText: okText,
+        sunAsset: sunAsset,
+        moonAsset: moonAsset,
+        blurredBackground: blurredBackground,
+        borderRadius: borderRadius,
+        elevation: elevation,
+        dialogInsetPadding: dialogInsetPadding,
+        minuteInterval: minuteInterval,
+        secondInterval: secondInterval,
+        disableMinute: disableMinute,
+        disableHour: disableHour,
+        maxHour: maxHour,
+        maxMinute: maxMinute,
+        maxSecond: maxSecond,
+        minHour: minHour,
+        minMinute: minMinute,
+        minSecond: minSecond,
+        focusMinutePicker: focusMinutePicker,
+        okStyle: okStyle,
+        cancelStyle: cancelStyle,
+        buttonStyle: buttonStyle,
+        cancelButtonStyle: cancelButtonStyle,
+        buttonsSpacing: buttonsSpacing,
+        hourLabel: hourLabel,
+        minuteLabel: minuteLabel,
+        secondLabel: secondLabel,
+        ltrMode: ltrMode,
+        disableAutoFocusToNextInput: disableAutoFocusToNextInput,
+        width: width,
+        height: height,
+        showSecondSelector: showSecondSelector,
+        wheelHeight: wheelHeight,
+        isOnValueChangeMode: isOnChangeValueMode,
+        hideButtons: hideButtons,
+        child: child,
+      );
+
+  if (isInlinePicker) {
+    return timeModelBinding(
+      Builder(
+        builder: (context) {
+          if (iosStylePicker) {
+            return Builder(
+              builder: (context) {
+                return Theme(
+                  data: themeData ?? Theme.of(context),
+                  child: const DayNightTimePickerIos(),
+                );
+              },
+            );
+          } else {
+            return Builder(
+              builder: (context) {
+                return Theme(
+                  data: themeData ?? Theme.of(context),
+                  child: const DayNightTimePickerAndroid(),
+                );
+              },
+            );
+          }
+        },
+      ),
+    );
+  }
 
   return PageRouteBuilder(
     pageBuilder: (context, _, __) {
@@ -171,45 +272,7 @@ PageRouteBuilder showPicker({
       ),
       child: FadeTransition(
         opacity: anim,
-        child: TimeModelBinding(
-          initialTime: timeValue,
-          isInlineWidget: false,
-          onChange: onChange,
-          onChangeDateTime: onChangeDateTime,
-          onCancel: onCancel,
-          is24HrFormat: is24HrFormat,
-          displayHeader: displayHeader,
-          accentColor: accentColor,
-          unselectedColor: unselectedColor,
-          cancelText: cancelText,
-          okText: okText,
-          sunAsset: sunAsset,
-          moonAsset: moonAsset,
-          blurredBackground: blurredBackground,
-          borderRadius: borderRadius,
-          elevation: elevation,
-          dialogInsetPadding: dialogInsetPadding,
-          minuteInterval: minuteInterval,
-          disableMinute: disableMinute,
-          disableHour: disableHour,
-          maxHour: maxHour,
-          maxMinute: maxMinute,
-          minHour: minHour,
-          minMinute: minMinute,
-          focusMinutePicker: focusMinutePicker,
-          okStyle: okStyle,
-          cancelStyle: cancelStyle,
-          buttonStyle: buttonStyle,
-          cancelButtonStyle: cancelButtonStyle,
-          buttonsSpacing: buttonsSpacing,
-          hourLabel: hourLabel,
-          minuteLabel: minuteLabel,
-          ltrMode: ltrMode,
-          disableAutoFocusMinuteAfterHour: disableAutoFocusMinuteAfterHour,
-          width: width,
-          height: height,
-          child: child,
-        ),
+        child: timeModelBinding(child),
       ),
     ),
     barrierDismissible: barrierDismissible,
@@ -218,214 +281,6 @@ PageRouteBuilder showPicker({
   );
 }
 
-/// This method is used to render an inline version of the picker.
-///
-/// The function that shows the *DayNightTimePicker*
-///
-/// This function takes in the following parameters:
-///
-/// **value** - `Required` Display value. It takes in [TimeOfDay].
-///
-/// **onChange** - `Required` Return the new time the user picked as [TimeOfDay].
-///
-/// **onChangeDateTime** - Return the new time the user picked as [DateTime].
-///
-/// **onCancel** - Custom callback for the Cancel button. Note: if provided, it will override the default behavior of the Cancel button.
-///
-/// **is24HrFormat** - Show the time in TimePicker in 24 hour format. Defaults to `false`.
-///
-/// **accentColor** - Accent color of the TimePicker. Defaults to `Theme.of(context).accentColor`.
-///
-/// **unselectedColor** - Color applied unselected options (am/pm, hour/minute). Defaults to `Colors.grey`.
-///
-/// **cancelText** - Text displayed for the Cancel button. Defaults to `cancel`.
-///
-/// **okText** - Text displayed for the Ok button. Defaults to `ok`.
-///
-/// **sunAsset** - Image asset used for the Sun. Default asset provided.
-///
-/// **moonAsset** - Image asset used for the Moon. Default asset provided.
-///
-/// **blurredBackground** - Whether to blur the background of the [Modal]. Defaults to `false`.
-///
-/// **barrierColor** - Color of the background of the [Modal]. Defaults to `Colors.black45`.
-///
-/// **borderRadius** - Border radius of the [Container] in `double`. Defaults to `10.0`.
-///
-/// **elevation** - Elevation of the [Modal] in double. Defaults to `12.0`.
-///
-/// **dialogInsetPadding** - Inset padding of the [Modal] in EdgeInsets. Defaults to `EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0)`.
-///
-/// **barrierDismissible** - Whether clicking outside should dismiss the [Modal]. Defaults to `true`.
-///
-/// **iosStylePicker** - Whether to display a IOS style picker (Not exactly the same). Defaults to `false`.
-///
-/// **hourLabel** - The label to be displayed for `hour` picker. Only for _iosStylePicker_. Defaults to `'hours'`.
-///
-/// **minuteLabel** - The label to be displayed for `minute` picker. Only for _iosStylePicker_. Defaults to `'minutes'`.
-///
-/// **minuteInterval** - Steps interval while changing `minute`. Accepts `MinuteInterval` enum. Defaults to `MinuteInterval.ONE`.
-///
-/// **disableMinute** - Disables/hides the minute picker. Defaults to `false`.
-///
-/// **disableHour** - Disables/hides the hour picker. Defaults to `false`.
-///
-/// **maxHour** - Selectable maximum hour. Defaults to `12` | `23`.
-///
-/// **maxMinute** - Selectable maximum minute. Defaults to `59`.
-///
-/// **minHour** - Selectable minimum hour. Defaults to `0` | `1`.
-///
-/// **minMinute** - Selectable minimum minute. Defaults to `0`.
-///
-/// **displayHeader** - Whether to display the sun moon animation. Defaults to `true`.
-///
-/// **isOnValueChangeMode** - Whether to hide okText, cancelText and return value on every onValueChange. Defaults to `false`.
-///
-/// **focusMinutePicker** - Whether or not the minute picker is auto focus/selected. Defaults to `false`.
-///
-/// **themeData** - ThemeData to use for the widget.
-///
-/// **okStyle** - Ok button's text style. Defaults to `const TextStyle(fontWeight: FontWeight.bold)`.
-///
-/// **cancelStyle** - Cancel button's text style. Defaults to `const TextStyle(fontWeight: FontWeight.bold)`.
-///
-/// **hideButtons** - Whether to hide the buttons (ok and cancel). Defaults to `false`.
-///
-/// **disableAutoFocusMinuteAfterHour** - Whether to disable the auto focus to minute after hour is selected. Defaults to `false`.
-///
-/// **width** - Fixed width of the Picker container. Defaults to `250`.
-///
-/// **height** - Fixed height of the Picker container. Defaults to `400`.
-///
-Widget createInlinePicker({
-  BuildContext? context,
-  required TimeOfDay value,
-  required void Function(TimeOfDay) onChange,
-  void Function(DateTime)? onChangeDateTime,
-  void Function()? onCancel,
-  bool is24HrFormat = false,
-  Color? accentColor,
-  Color? unselectedColor,
-  String cancelText = "Cancel",
-  String okText = "Ok",
-  bool isOnChangeValueMode = false,
-  bool ltrMode = true,
-  Image? sunAsset,
-  Image? moonAsset,
-  bool blurredBackground = false,
-  Color barrierColor = Colors.black45,
-  double? borderRadius,
-  double? elevation,
-  EdgeInsets? dialogInsetPadding =
-      const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
-  bool barrierDismissible = true,
-  bool iosStylePicker = false,
-  String hourLabel = 'hours',
-  String minuteLabel = 'minutes',
-  MinuteInterval minuteInterval = MinuteInterval.ONE,
-  bool disableMinute = false,
-  bool disableHour = false,
-  double minMinute = 0,
-  double maxMinute = 59,
-  bool displayHeader = true,
-  ThemeData? themeData,
-  bool focusMinutePicker = false,
-  // Infinity is used so that we can assert whether or not the user actually set a value
-  double minHour = double.infinity,
-  double maxHour = double.infinity,
-  TextStyle okStyle = const TextStyle(fontWeight: FontWeight.bold),
-  TextStyle cancelStyle = const TextStyle(fontWeight: FontWeight.bold),
-  ButtonStyle? buttonStyle,
-  ButtonStyle? cancelButtonStyle,
-  double? buttonsSpacing,
-  double? wheelHeight,
-  bool hideButtons = false,
-  bool disableAutoFocusMinuteAfterHour = false,
-  double width = 250,
-  double height = 400,
-}) {
-  if (minHour == double.infinity) {
-    minHour = 0;
-  }
-  if (maxHour == double.infinity) {
-    maxHour = 23;
-  }
-
-  assert(!(disableHour == true && disableMinute == true),
-      "Both \"disableMinute\" and \"disableHour\" cannot be true.");
-  assert(!(disableMinute == true && focusMinutePicker == true),
-      "Both \"disableMinute\" and \"focusMinutePicker\" cannot be true.");
-  assert(maxMinute <= 59, "\"maxMinute\" must be less than or equal to 59");
-  assert(minMinute >= 0, "\"minMinute\" must be greater than or equal to 0");
-  assert(maxHour <= 23 && minHour >= 0,
-      "\"minHour\" and \"maxHour\" should be between 0-23");
-
-  final timeValue = Time.fromTimeOfDay(value);
-
-  return TimeModelBinding(
-    key: UniqueKey(),
-    onChange: onChange,
-    onChangeDateTime: onChangeDateTime,
-    onCancel: onCancel,
-    is24HrFormat: is24HrFormat,
-    accentColor: accentColor,
-    unselectedColor: unselectedColor,
-    cancelText: cancelText,
-    okText: okText,
-    sunAsset: sunAsset,
-    moonAsset: moonAsset,
-    blurredBackground: blurredBackground,
-    borderRadius: borderRadius,
-    elevation: elevation,
-    dialogInsetPadding: dialogInsetPadding,
-    minuteInterval: minuteInterval,
-    disableMinute: disableMinute,
-    disableHour: disableHour,
-    maxHour: maxHour,
-    maxMinute: maxMinute,
-    minHour: minHour,
-    minMinute: minMinute,
-    isInlineWidget: true,
-    displayHeader: displayHeader,
-    isOnValueChangeMode: isOnChangeValueMode,
-    focusMinutePicker: focusMinutePicker,
-    okStyle: okStyle,
-    cancelStyle: cancelStyle,
-    hourLabel: hourLabel,
-    minuteLabel: minuteLabel,
-    buttonStyle: buttonStyle,
-    cancelButtonStyle: cancelButtonStyle,
-    buttonsSpacing: buttonsSpacing,
-    ltrMode: ltrMode,
-    initialTime: timeValue,
-    wheelHeight: wheelHeight,
-    hideButtons: hideButtons,
-    disableAutoFocusMinuteAfterHour: disableAutoFocusMinuteAfterHour,
-    width: width,
-    height: height,
-    child: Builder(
-      builder: (context) {
-        if (iosStylePicker) {
-          return Builder(
-            builder: (context) {
-              return Theme(
-                data: themeData ?? Theme.of(context),
-                child: const DayNightTimePickerIos(),
-              );
-            },
-          );
-        } else {
-          return Builder(
-            builder: (context) {
-              return Theme(
-                data: themeData ?? Theme.of(context),
-                child: const DayNightTimePickerAndroid(),
-              );
-            },
-          );
-        }
-      },
-    ),
-  );
-}
+@Deprecated(
+    "Please pass boolean prop `isInlinePicker` to `showPicker` to render an inline picker")
+void createInlinePicker() {}

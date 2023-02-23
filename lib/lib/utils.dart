@@ -11,15 +11,15 @@ double mapRange(
   return ((value - iMin) * (oMax - oMin)) / (iMax - iMin) + oMin;
 }
 
-int getIntFromMinuteIntervalEnum(MinuteInterval? interval) {
+int getIntFromTimePickerIntervalEnum(TimePickerInterval? interval) {
   switch (interval) {
-    case MinuteInterval.FIVE:
+    case TimePickerInterval.FIVE:
       return 5;
-    case MinuteInterval.TEN:
+    case TimePickerInterval.TEN:
       return 10;
-    case MinuteInterval.FIFTEEN:
+    case TimePickerInterval.FIFTEEN:
       return 15;
-    case MinuteInterval.THIRTY:
+    case TimePickerInterval.THIRTY:
       return 30;
     default:
       return 1;
@@ -27,18 +27,18 @@ int getIntFromMinuteIntervalEnum(MinuteInterval? interval) {
 }
 
 /// Map MinuteInterval enum to division values
-int getMinuteDivisions(int diff, MinuteInterval? interval) {
+int getDivisions(int diff, TimePickerInterval? interval) {
   switch (interval) {
-    case MinuteInterval.FIVE:
+    case TimePickerInterval.FIVE:
       // 12
       return (diff / 5).round();
-    case MinuteInterval.TEN:
+    case TimePickerInterval.TEN:
       // 6
       return (diff / 10).round();
-    case MinuteInterval.FIFTEEN:
+    case TimePickerInterval.FIFTEEN:
       // 4
       return (diff / 15).round();
-    case MinuteInterval.THIRTY:
+    case TimePickerInterval.THIRTY:
       // 2
       return (diff / 30).round();
     default:
@@ -47,11 +47,11 @@ int getMinuteDivisions(int diff, MinuteInterval? interval) {
 }
 
 /// Get the minimum minute from interval
-double getMinMinute(double? minMinute, MinuteInterval? interval) {
+double getMin(double? minMinute, TimePickerInterval? interval) {
   if (minMinute == 0) {
     return 0;
   }
-  int step = getIntFromMinuteIntervalEnum(interval);
+  int step = getIntFromTimePickerIntervalEnum(interval);
 
   double min = -1;
   double i = 1;
@@ -66,11 +66,11 @@ double getMinMinute(double? minMinute, MinuteInterval? interval) {
 }
 
 /// Get the maximum minute from interval
-double getMaxMinute(double? maxMinute, MinuteInterval? interval) {
+double getMax(double? maxMinute, TimePickerInterval? interval) {
   if (maxMinute == 59) {
     return 59;
   }
-  int step = getIntFromMinuteIntervalEnum(interval);
+  int step = getIntFromTimePickerIntervalEnum(interval);
 
   double max = 60;
   double i = 1;
@@ -85,9 +85,11 @@ double getMaxMinute(double? maxMinute, MinuteInterval? interval) {
 }
 
 /// Generate a List of minutes
-List<int?> generateMinutes(int divisions, MinuteInterval? interval, min, max) {
+List<int?> generateMinutesOrSeconds(
+    int divisions, TimePickerInterval? interval, min, max) {
   final minutes = List<int?>.generate(divisions + 1, (index) {
-    final val = min.round() + (getIntFromMinuteIntervalEnum(interval) * index);
+    final val =
+        min.round() + (getIntFromTimePickerIntervalEnum(interval) * index);
     if (val >= max) {
       return max.round();
     }

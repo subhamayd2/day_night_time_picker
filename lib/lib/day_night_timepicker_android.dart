@@ -1,3 +1,4 @@
+import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:day_night_time_picker/lib/ampm.dart';
 import 'package:day_night_time_picker/lib/common/action_buttons.dart';
 import 'package:day_night_time_picker/lib/common/display_value.dart';
@@ -25,16 +26,15 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
   Widget build(BuildContext context) {
     final timeState = TimeModelBinding.of(context);
 
-    double min = getMinMinute(
-        timeState.widget.minMinute, timeState.widget.minuteInterval);
-    double max = getMaxMinute(
-        timeState.widget.maxMinute, timeState.widget.minuteInterval);
+    double min =
+        getMin(timeState.widget.minMinute, timeState.widget.minuteInterval);
+    double max =
+        getMax(timeState.widget.maxMinute, timeState.widget.minuteInterval);
 
     int minDiff = (max - min).round();
-    int divisions =
-        getMinuteDivisions(minDiff, timeState.widget.minuteInterval);
+    int divisions = getDivisions(minDiff, timeState.widget.minuteInterval);
 
-    if (timeState.hourIsSelected) {
+    if (timeState.selected == SelectedInput.HOUR) {
       min = timeState.widget.minHour!;
       max = timeState.widget.maxHour!;
       divisions = (max - min).round();
@@ -53,6 +53,13 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
     final hideButtons = timeState.widget.hideButtons;
 
     Orientation currentOrientation = MediaQuery.of(context).orientation;
+
+    double value = timeState.time.hour.roundToDouble();
+    if (timeState.selected == SelectedInput.MINUTE) {
+      value = timeState.time.minute.roundToDouble();
+    } else if (timeState.selected == SelectedInput.SECOND) {
+      value = timeState.time.second.roundToDouble();
+    }
 
     return Center(
       child: SingleChildScrollView(
@@ -81,10 +88,12 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                               onTap: timeState.widget.disableHour!
                                   ? null
                                   : () {
-                                      timeState.onHourIsSelectedChange(true);
+                                      timeState.onSelectedInputChange(
+                                          SelectedInput.HOUR);
                                     },
                               value: hourValue.toString().padLeft(2, '0'),
-                              isSelected: timeState.hourIsSelected,
+                              isSelected:
+                                  timeState.selected == SelectedInput.HOUR,
                             ),
                             const DisplayValue(
                               value: ":",
@@ -93,30 +102,53 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                               onTap: timeState.widget.disableMinute!
                                   ? null
                                   : () {
-                                      timeState.onHourIsSelectedChange(false);
+                                      timeState.onSelectedInputChange(
+                                          SelectedInput.MINUTE);
                                     },
                               value: timeState.time.minute
                                   .toString()
                                   .padLeft(2, '0'),
-                              isSelected: !timeState.hourIsSelected,
+                              isSelected:
+                                  timeState.selected == SelectedInput.MINUTE,
                             ),
+                            ...timeState.widget.showSecondSelector
+                                ? [
+                                    const DisplayValue(
+                                      value: ":",
+                                    ),
+                                    DisplayValue(
+                                      onTap: () {
+                                        timeState.onSelectedInputChange(
+                                            SelectedInput.SECOND);
+                                      },
+                                      value: timeState.time.second
+                                          .toString()
+                                          .padLeft(2, '0'),
+                                      isSelected: timeState.selected ==
+                                          SelectedInput.SECOND,
+                                    ),
+                                  ]
+                                : []
                           ],
                         ),
                       ),
                       Slider(
                         onChangeEnd: (value) {
-                          if (timeState.hourIsSelected &&
-                              !timeState
-                                  .widget.disableAutoFocusMinuteAfterHour) {
-                            timeState.onHourIsSelectedChange(false);
+                          if (!timeState.widget.disableAutoFocusToNextInput) {
+                            if (timeState.selected == SelectedInput.HOUR) {
+                              timeState
+                                  .onSelectedInputChange(SelectedInput.MINUTE);
+                            } else if (timeState.selected ==
+                                SelectedInput.MINUTE) {
+                              timeState
+                                  .onSelectedInputChange(SelectedInput.SECOND);
+                            }
                           }
                           if (timeState.widget.isOnValueChangeMode) {
                             timeState.onOk();
                           }
                         },
-                        value: timeState.hourIsSelected
-                            ? timeState.time.hour.roundToDouble()
-                            : timeState.time.minute.roundToDouble(),
+                        value: value,
                         onChanged: timeState.onTimeChange,
                         min: min,
                         max: max,

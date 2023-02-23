@@ -9,5 +9,7 @@ const ELEVATION = 12.0;
 /// Width of the sun/moon asset
 const SUN_MOON_WIDTH = 100.0;
 
-/// Minute interval enum
-enum MinuteInterval { ONE, FIVE, TEN, FIFTEEN, THIRTY }
+/// interval enum
+enum TimePickerInterval { ONE, FIVE, TEN, FIFTEEN, THIRTY }
+
+enum SelectedInput { HOUR, MINUTE, SECOND }

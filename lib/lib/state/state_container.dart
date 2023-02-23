@@ -110,11 +110,11 @@ class TimeModelBinding extends StatefulWidget {
   /// Cancel button's text style [TextStyle]
   TextStyle cancelStyle;
 
-  /// [ButtonStyle] is used for the [createInlinePicker] and [showPicker] methods
+  /// [ButtonStyle] is used for the [showPicker] methods
   /// If `cancelButtonStyle` is not provided, it applies to the ok and cancel buttons
   ButtonStyle? buttonStyle;
 
-  /// [ButtonStyle] is used for the [createInlinePicker] and [showPicker] methods
+  /// [ButtonStyle] is used for the [showPicker] methods
   ButtonStyle? cancelButtonStyle;
 
   /// Spacing between ok and cancel buttons

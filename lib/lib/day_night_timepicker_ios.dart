@@ -252,17 +252,21 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                               disabled: timeState!.widget.disableMinute!,
                             ),
                             Text(timeState!.widget.minuteLabel!),
-                            DisplayWheel(
-                              controller: _secondController!,
-                              items: seconds,
-                              isSelected:
-                                  timeState!.selected == SelectedInput.SECOND,
-                              onChange: (int value) {
-                                timeState!
-                                    .onSecondChange(seconds[value]! + 0.0);
-                              },
-                            ),
-                            Text(timeState!.widget.secondLabel!),
+                            ...(timeState!.widget.showSecondSelector
+                                ? [
+                                    DisplayWheel(
+                                      controller: _secondController!,
+                                      items: seconds,
+                                      isSelected: timeState!.selected ==
+                                          SelectedInput.SECOND,
+                                      onChange: (int value) {
+                                        timeState!.onSecondChange(
+                                            seconds[value]! + 0.0);
+                                      },
+                                    ),
+                                    Text(timeState!.widget.secondLabel!),
+                                  ]
+                                : []),
                           ],
                         ),
                       ),

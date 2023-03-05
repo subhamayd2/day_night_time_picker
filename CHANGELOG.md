@@ -1,3 +1,7 @@
+## [1.2.0+1] - 5th March 2023.
+
+- Minor bug fix. **IMPORTANT** for people using the `iosStyle`.
+
 ## [1.2.0] - 23nd February 2023.
 
 - _**Includes breaking changes**_

@@ -143,30 +143,32 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
             });
           });
 
-    _secondController =
-        FixedExtentScrollController(initialItem: _seconds.indexOf(s))
-          ..addListener(() {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (mounted) {
-                timeState!.onSelectedInputChange(SelectedInput.SECOND);
-                setState(() {
-                  hours = _hours;
-                  minutes = _minutes;
-                  seconds = _seconds;
-                });
-              }
-            });
-          })
-          ..addListener(() {
-            _secondController!.position.isScrollingNotifier.addListener(() {
+    if (timeState!.widget.showSecondSelector) {
+      _secondController =
+          FixedExtentScrollController(initialItem: _seconds.indexOf(s))
+            ..addListener(() {
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                if (timeState!.widget.isOnValueChangeMode &&
-                    !_secondController!.position.isScrollingNotifier.value) {
-                  timeState!.onOk();
+                if (mounted) {
+                  timeState!.onSelectedInputChange(SelectedInput.SECOND);
+                  setState(() {
+                    hours = _hours;
+                    minutes = _minutes;
+                    seconds = _seconds;
+                  });
                 }
               });
+            })
+            ..addListener(() {
+              _secondController!.position.isScrollingNotifier.addListener(() {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  if (timeState!.widget.isOnValueChangeMode &&
+                      !_secondController!.position.isScrollingNotifier.value) {
+                    timeState!.onOk();
+                  }
+                });
+              });
             });
-          });
+    }
     if (hours.isEmpty || minutes.isEmpty || seconds.isEmpty) {
       setState(() {
         hours = _hours;

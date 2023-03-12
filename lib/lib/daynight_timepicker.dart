@@ -95,6 +95,7 @@ import 'package:flutter/material.dart';
 /// **showSecondSelector** - Whether to use the second selector as well. Defaults to `false`.
 ///
 dynamic showPicker({
+  Key? key,
   BuildContext? context,
   required Time value,
   required void Function(Time) onChange,
@@ -170,7 +171,7 @@ dynamic showPicker({
   final timeValue = Time.fromTimeOfDay(value, value.second);
 
   TimeModelBinding timeModelBinding(child) => TimeModelBinding(
-        key: UniqueKey(),
+        key: key,
         initialTime: timeValue,
         isInlineWidget: isInlinePicker,
         onChange: onChange,

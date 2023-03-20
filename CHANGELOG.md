@@ -1,3 +1,6 @@
+## [1.3.0] - 20th March 2023.
+
+- added `showCancelButton` to display the cancel button or not
 ## [1.2.0+2] - 12th March 2023.
 
 - Minor bug fix.

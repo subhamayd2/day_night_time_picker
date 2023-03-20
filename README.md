@@ -1,9 +1,7 @@
 # DayNightTimePicker
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-21-orange.svg?style=flat)](#contributors)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-22-orange.svg?style=flat)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A day night time picker for Flutter with **Zero Dependencies**.
@@ -154,8 +152,11 @@ Thanks goes to these wonderful people:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/markszente"><img src="https://avatars.githubusercontent.com/u/29143275?v=4?s=100" width="100px;" alt="Mark Szente"/><br /><sub><b>Mark Szente</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=markszente" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://linkedin.com/in/rcjuancarlosuwu"><img src="https://avatars.githubusercontent.com/u/67658540?v=4?s=100" width="100px;" alt="Juan Carlos Ramón Condezo"/><br /><sub><b>Juan Carlos Ramón Condezo</b></sub></a><br /><a href="#design-rcjuancarlosuwu" title="Design">🎨</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Likenttt"><img src="https://avatars.githubusercontent.com/u/26034018?v=4?s=100" width="100px;" alt="Chuanyi"/><br /><sub><b>Chuanyi</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=Likenttt" title="Documentation">📖</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://linkpop.com/leonschwanitz"><img src="https://avatars.githubusercontent.com/u/36971798?v=4?s=100" width="100px;" alt="Leon Schwanitz"/><br /><sub><b>Leon Schwanitz</b></sub></a><br /><a href="#design-leonschwanitz" title="Design">🎨</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://elmd.me"><img src="https://avatars.githubusercontent.com/u/1967150?v=4?s=100" width="100px;" alt="Liam DeCoste"/><br /><sub><b>Liam DeCoste</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/issues?q=author%3Aelmdecoste" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://linkpop.com/leonschwanitz"><img src="https://avatars.githubusercontent.com/u/36971798?v=4?s=100" width="100px;" alt="Leon Schwanitz"/><br /><sub><b>Leon Schwanitz</b></sub></a><br /><a href="#design-leonschwanitz" title="Design">🎨</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://elmd.me"><img src="https://avatars.githubusercontent.com/u/1967150?v=4?s=100" width="100px;" alt="Liam DeCoste"/><br /><sub><b>Liam DeCoste</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/issues?q=author%3Aelmdecoste" title="Bug reports">🐛</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/qqjjjj"><img src="https://avatars.githubusercontent.com/u/67450840?v=4?s=100" width="100px;" alt="qqjjjj"/><br /><sub><b>qqjjjj</b></sub></a><br /><a href="https://github.com/subhamayd2/day_night_time_picker/commits?author=qqjjjj" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

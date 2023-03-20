@@ -141,6 +141,9 @@ class TimeModelBinding extends StatefulWidget {
   /// Whether to use the second selector as well.
   bool showSecondSelector;
 
+  /// Whether to have the Cancel Button Widget.
+  bool showCancelButton;
+
   /// Constructor for the [Widget]
   TimeModelBinding({
     Key? key,
@@ -189,6 +192,7 @@ class TimeModelBinding extends StatefulWidget {
     this.width = 0,
     this.height = 0,
     this.showSecondSelector = false,
+    this.showCancelButton = true,
   }) : super(key: key);
 
   @override

@@ -20,6 +20,24 @@ class ActionButtons extends StatelessWidget {
       );
     }
 
+    if (!timeState.widget.showCancelButton) {
+      return Expanded(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            TextButton(
+              onPressed: timeState.onOk,
+              style: timeState.widget.buttonStyle ?? defaultButtonStyle,
+              child: Text(
+                timeState.widget.okText,
+                style: timeState.widget.okStyle,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     return Expanded(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,

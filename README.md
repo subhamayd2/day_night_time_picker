@@ -89,6 +89,7 @@ TextButton(
 | **elevation**                   | Elevation of the [Modal] in [double].                                                                                              |                          `12.0`                          |
 | **dialogInsetPadding**          | Inset padding of the [Modal] in EdgeInsets.                                                                                        | `EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0)` |
 | **barrierDismissible**          | Whether clicking outside should dismiss the [Modal].                                                                               |                          `true`                          |
+| **showCancelButton**            | Whether to show the cancel button or not                                                                                           |                          `true`                          |
 | **iosStylePicker**              | Whether to display a IOS style picker (Not exactly the same).                                                                      |                         `false`                          |
 | **hourLabel**                   | The label to be displayed for `hour` picker. Only for _iosStylePicker_.                                                            |                        `'hours'`                         |
 | **minuteLabel**                 | The label to be displayed for `minute` picker. Only for _iosStylePicker_.                                                          |                       `'minutes'`                        |
@@ -173,7 +174,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 ## LICENCE
 
 ```
-Copyright 2022 Subhamay Dutta
+Copyright 2023 Subhamay Dutta
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

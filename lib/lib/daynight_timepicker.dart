@@ -147,6 +147,7 @@ dynamic showPicker({
   double height = 400,
   bool showSecondSelector = false,
   double? wheelHeight,
+  bool showCancelButton = true,
 }) {
   if (minHour == double.infinity) {
     minHour = 0;
@@ -216,6 +217,7 @@ dynamic showPicker({
         wheelHeight: wheelHeight,
         isOnValueChangeMode: isOnChangeValueMode,
         hideButtons: hideButtons,
+        showCancelButton: showCancelButton,
         child: child,
       );
 

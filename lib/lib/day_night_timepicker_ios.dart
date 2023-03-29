@@ -3,11 +3,12 @@
 import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:day_night_time_picker/lib/common/action_buttons.dart';
 import 'package:day_night_time_picker/lib/common/display_wheel.dart';
-import 'package:day_night_time_picker/lib/common/wrapper_container.dart';
 import 'package:day_night_time_picker/lib/common/filter_wrapper.dart';
+import 'package:day_night_time_picker/lib/common/wrapper_container.dart';
 import 'package:day_night_time_picker/lib/common/wrapper_dialog.dart';
 import 'package:day_night_time_picker/lib/state/state_container.dart';
 import 'package:flutter/material.dart';
+
 import 'ampm.dart';
 import 'daynight_banner.dart';
 import 'utils.dart';
@@ -15,7 +16,15 @@ import 'utils.dart';
 /// Private class. [StatefulWidget] that renders the content of the picker.
 // ignore: must_be_immutable
 class DayNightTimePickerIos extends StatefulWidget {
-  const DayNightTimePickerIos({Key? key}) : super(key: key);
+  const DayNightTimePickerIos(
+      {Key? key,
+      required this.sunrise,
+      required this.sunset,
+      required this.duskSpanInMinutes})
+      : super(key: key);
+  final TimeOfDay sunrise;
+  final TimeOfDay sunset;
+  final int duskSpanInMinutes;
 
   @override
   _DayNightTimePickerIosState createState() => _DayNightTimePickerIosState();
@@ -218,7 +227,10 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                const DayNightBanner(),
+                DayNightBanner(
+                    sunrise: widget.sunrise,
+                    sunset: widget.sunset,
+                    duskSpanInMinutes: widget.duskSpanInMinutes),
                 WrapperContainer(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,

@@ -144,6 +144,15 @@ class TimeModelBinding extends StatefulWidget {
   /// Whether to have the Cancel Button Widget.
   bool showCancelButton;
 
+  /// Sunrise time.
+  TimeOfDay? sunrise;
+
+  /// Sunset time.
+  TimeOfDay? sunset;
+
+  /// Dusk span of time in minutes.
+  int? duskSpanInMinutes;
+
   /// Constructor for the [Widget]
   TimeModelBinding({
     Key? key,
@@ -193,6 +202,9 @@ class TimeModelBinding extends StatefulWidget {
     this.height = 0,
     this.showSecondSelector = false,
     this.showCancelButton = true,
+    this.sunrise,
+    this.sunset,
+    this.duskSpanInMinutes
   }) : super(key: key);
 
   @override

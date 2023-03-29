@@ -12,13 +12,13 @@ import './sun_moon.dart';
 class DayNightBanner extends StatelessWidget {
   final TimeOfDay sunrise;
   final TimeOfDay sunset;
-  final int duskPeriodMinutes;
+  final int duskSpanInMinutes;
 
   const DayNightBanner(
       {Key? key,
-      this.sunrise = const TimeOfDay(hour: 6, minute: 0),
-      this.sunset = const TimeOfDay(hour: 18, minute: 0),
-      this.duskPeriodMinutes = 120})
+      required this.sunrise,
+      required this.sunset,
+      required this.duskSpanInMinutes})
       : super(key: key);
 
   /// Get the background color of the container, representing the time of day
@@ -37,8 +37,8 @@ class DayNightBanner extends StatelessWidget {
     final timeState = TimeModelBinding.of(context);
     final hour = timeState.time.hour;
     final minute = timeState.time.minute;
-    var duskHours = duskPeriodMinutes / 60;
-    var duskMinutes = duskPeriodMinutes % 60;
+    var duskHours = duskSpanInMinutes / 60;
+    var duskMinutes = duskSpanInMinutes % 60;
 
     final isDay = hour >= sunrise.hour &&
         minute >= sunrise.minute &&

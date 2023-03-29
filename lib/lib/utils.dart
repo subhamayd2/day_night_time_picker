@@ -1,4 +1,5 @@
 import 'package:day_night_time_picker/lib/constants.dart';
+import 'package:flutter/material.dart';
 
 /// Map a given value between a range
 double mapRange(
@@ -109,3 +110,6 @@ List<int?> generateHours(int divisions, min, max) {
   });
   return hours;
 }
+
+/// Convert TimeOfDay to double for comparison
+double timeOfDayToDouble(TimeOfDay myTime) => myTime.hour + myTime.minute / 60.0;

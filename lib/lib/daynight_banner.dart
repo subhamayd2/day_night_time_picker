@@ -41,14 +41,16 @@ class DayNightBanner extends StatelessWidget {
     var duskMinutes = duskSpanInMinutes % 60;
 
     TimeOfDay currentTime = TimeOfDay(hour: hour, minute: minute);
-    TimeOfDay duskTime = TimeOfDay(hour: hour - duskHours.toInt(), minute: minute - duskMinutes);
+    TimeOfDay duskTime = TimeOfDay(
+        hour: sunset.hour - duskHours.toInt(),
+        minute: sunset.minute - duskMinutes);
 
     final isDay =
         timeOfDayToDouble(currentTime) >= timeOfDayToDouble(sunrise) &&
             timeOfDayToDouble(currentTime) <= timeOfDayToDouble(sunset);
     final isDusk =
-        timeOfDayToDouble(duskTime) >= timeOfDayToDouble(sunrise) &&
-            timeOfDayToDouble(duskTime) <= timeOfDayToDouble(sunset);
+        timeOfDayToDouble(currentTime) >= timeOfDayToDouble(duskTime) &&
+            timeOfDayToDouble(currentTime) <= timeOfDayToDouble(sunset);
 
     if (!timeState.widget.displayHeader!) {
       return Container(height: 25, color: Theme.of(context).cardColor);

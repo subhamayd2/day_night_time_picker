@@ -94,63 +94,64 @@ import 'package:flutter/material.dart';
 ///
 /// **showSecondSelector** - Whether to use the second selector as well. Defaults to `false`.
 ///
-dynamic showPicker(
-    {Key? key,
-    BuildContext? context,
-    required Time value,
-    required void Function(Time) onChange,
-    bool isInlinePicker = false,
-    void Function(DateTime)? onChangeDateTime,
-    void Function()? onCancel,
-    bool is24HrFormat = false,
-    Color? accentColor,
-    Color? unselectedColor,
-    bool isOnChangeValueMode = false,
-    String cancelText = "Cancel",
-    String okText = "Ok",
-    Image? sunAsset,
-    Image? moonAsset,
-    bool blurredBackground = false,
-    bool ltrMode = true,
-    Color barrierColor = Colors.black45,
-    double? borderRadius,
-    double? elevation,
-    EdgeInsets? dialogInsetPadding =
-        const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
-    bool barrierDismissible = true,
-    bool iosStylePicker = false,
-    bool displayHeader = true,
-    String hourLabel = 'hours',
-    String minuteLabel = 'minutes',
-    String secondLabel = 'seconds',
-    TimePickerInterval minuteInterval = TimePickerInterval.ONE,
-    TimePickerInterval secondInterval = TimePickerInterval.ONE,
-    bool disableMinute = false,
-    bool disableHour = false,
-    double minMinute = 0,
-    double maxMinute = 59,
-    double minSecond = 0,
-    double maxSecond = 59,
-    ThemeData? themeData,
-    bool focusMinutePicker = false,
-    // Infinity is used so that we can assert whether or not the user actually set a value
-    double minHour = double.infinity,
-    double maxHour = double.infinity,
-    TextStyle okStyle = const TextStyle(fontWeight: FontWeight.bold),
-    TextStyle cancelStyle = const TextStyle(fontWeight: FontWeight.bold),
-    ButtonStyle? buttonStyle,
-    ButtonStyle? cancelButtonStyle,
-    double? buttonsSpacing,
-    bool hideButtons = false,
-    bool disableAutoFocusToNextInput = false,
-    double width = 300,
-    double height = 400,
-    bool showSecondSelector = false,
-    double? wheelHeight,
-    bool showCancelButton = true,
-    sunrise = const TimeOfDay(hour: 6, minute: 0),
-    sunset = const TimeOfDay(hour: 18, minute: 0),
-    duskSpanInMinutes = 120}) {
+dynamic showPicker({
+  Key? key,
+  BuildContext? context,
+  required Time value,
+  required void Function(Time) onChange,
+  bool isInlinePicker = false,
+  void Function(DateTime)? onChangeDateTime,
+  void Function()? onCancel,
+  bool is24HrFormat = false,
+  Color? accentColor,
+  Color? unselectedColor,
+  bool isOnChangeValueMode = false,
+  String cancelText = 'Cancel',
+  String okText = 'Ok',
+  Image? sunAsset,
+  Image? moonAsset,
+  bool blurredBackground = false,
+  bool ltrMode = true,
+  Color barrierColor = Colors.black45,
+  double? borderRadius,
+  double? elevation,
+  EdgeInsets? dialogInsetPadding =
+      const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+  bool barrierDismissible = true,
+  bool iosStylePicker = false,
+  bool displayHeader = true,
+  String hourLabel = 'hours',
+  String minuteLabel = 'minutes',
+  String secondLabel = 'seconds',
+  TimePickerInterval minuteInterval = TimePickerInterval.ONE,
+  TimePickerInterval secondInterval = TimePickerInterval.ONE,
+  bool disableMinute = false,
+  bool disableHour = false,
+  double minMinute = 0,
+  double maxMinute = 59,
+  double minSecond = 0,
+  double maxSecond = 59,
+  ThemeData? themeData,
+  bool focusMinutePicker = false,
+  // Infinity is used so that we can assert whether or not the user actually set a value
+  double minHour = double.infinity,
+  double maxHour = double.infinity,
+  TextStyle okStyle = const TextStyle(fontWeight: FontWeight.bold),
+  TextStyle cancelStyle = const TextStyle(fontWeight: FontWeight.bold),
+  ButtonStyle? buttonStyle,
+  ButtonStyle? cancelButtonStyle,
+  double? buttonsSpacing,
+  bool hideButtons = false,
+  bool disableAutoFocusToNextInput = false,
+  double width = 300,
+  double height = 400,
+  bool showSecondSelector = false,
+  double? wheelHeight,
+  bool showCancelButton = true,
+  sunrise = const TimeOfDay(hour: 6, minute: 0),
+  sunset = const TimeOfDay(hour: 18, minute: 0),
+  duskSpanInMinutes = 120,
+}) {
   if (minHour == double.infinity) {
     minHour = 0;
   }
@@ -162,14 +163,20 @@ dynamic showPicker(
     width = 350;
   }
 
-  assert(!(disableHour == true && disableMinute == true),
-      "Both \"disableMinute\" and \"disableHour\" cannot be true.");
-  assert(!(disableMinute == true && focusMinutePicker == true),
-      "Both \"disableMinute\" and \"focusMinutePicker\" cannot be true.");
-  assert(maxMinute <= 59, "\"maxMinute\" must be less than or equal to 59");
-  assert(minMinute >= 0, "\"minMinute\" must be greater than or equal to 0");
-  assert(maxHour <= 23 && minHour >= 0,
-      "\"minHour\" and \"maxHour\" should be between 0-23");
+  assert(
+    !(disableHour == true && disableMinute == true),
+    'Both "disableMinute" and "disableHour" cannot be true.',
+  );
+  assert(
+    !(disableMinute == true && focusMinutePicker == true),
+    'Both "disableMinute" and "focusMinutePicker" cannot be true.',
+  );
+  assert(maxMinute <= 59, '"maxMinute" must be less than or equal to 59');
+  assert(minMinute >= 0, '"minMinute" must be greater than or equal to 0');
+  assert(
+    maxHour <= 23 && minHour >= 0,
+    '"minHour" and "maxHour" should be between 0-23',
+  );
 
   final timeValue = Time.fromTimeOfDay(value, value.second);
 
@@ -236,9 +243,10 @@ dynamic showPicker(
                 return Theme(
                   data: themeData ?? Theme.of(context),
                   child: DayNightTimePickerIos(
-                      sunrise: sunrise,
-                      sunset: sunset,
-                      duskSpanInMinutes: duskSpanInMinutes),
+                    sunrise: sunrise,
+                    sunset: sunset,
+                    duskSpanInMinutes: duskSpanInMinutes,
+                  ),
                 );
               },
             );
@@ -248,9 +256,10 @@ dynamic showPicker(
                 return Theme(
                   data: themeData ?? Theme.of(context),
                   child: DayNightTimePickerAndroid(
-                      sunrise: sunrise,
-                      sunset: sunset,
-                      duskSpanInMinutes: duskSpanInMinutes),
+                    sunrise: sunrise,
+                    sunset: sunset,
+                    duskSpanInMinutes: duskSpanInMinutes,
+                  ),
                 );
               },
             );
@@ -266,17 +275,19 @@ dynamic showPicker(
         return Theme(
           data: themeData ?? Theme.of(context),
           child: DayNightTimePickerIos(
-              sunrise: sunrise,
-              sunset: sunset,
-              duskSpanInMinutes: duskSpanInMinutes),
+            sunrise: sunrise,
+            sunset: sunset,
+            duskSpanInMinutes: duskSpanInMinutes,
+          ),
         );
       } else {
         return Theme(
           data: themeData ?? Theme.of(context),
           child: DayNightTimePickerAndroid(
-              sunrise: sunrise,
-              sunset: sunset,
-              duskSpanInMinutes: duskSpanInMinutes),
+            sunrise: sunrise,
+            sunset: sunset,
+            duskSpanInMinutes: duskSpanInMinutes,
+          ),
         );
       }
     },
@@ -302,5 +313,6 @@ dynamic showPicker(
 }
 
 @Deprecated(
-    "Please pass boolean prop `isInlinePicker` to `showPicker` to render an inline picker")
+  'Please pass boolean prop `isInlinePicker` to `showPicker` to render an inline picker',
+)
 void createInlinePicker() {}

@@ -43,9 +43,10 @@ class DisplayValue extends StatelessWidget {
           onTap: onTap,
           child: Text(
             value,
-            textScaleFactor: 1.0,
+            textScaleFactor: 0.85,
             style: _commonTimeStyles.copyWith(
-                color: isSelected ? color : unselectedColor),
+              color: isSelected ? color : unselectedColor,
+            ),
           ),
         ),
       ),

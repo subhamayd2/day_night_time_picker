@@ -87,7 +87,11 @@ double getMax(double? maxMinute, TimePickerInterval? interval) {
 
 /// Generate a List of minutes
 List<int?> generateMinutesOrSeconds(
-    int divisions, TimePickerInterval? interval, min, max) {
+  int divisions,
+  TimePickerInterval? interval,
+  min,
+  max,
+) {
   final minutes = List<int?>.generate(divisions + 1, (index) {
     final val =
         min.round() + (getIntFromTimePickerIntervalEnum(interval) * index);
@@ -112,4 +116,5 @@ List<int?> generateHours(int divisions, min, max) {
 }
 
 /// Convert TimeOfDay to double for comparison
-double timeOfDayToDouble(TimeOfDay myTime) => myTime.hour + myTime.minute / 60.0;
+double timeOfDayToDouble(TimeOfDay myTime) =>
+    myTime.hour + myTime.minute / 60.0;

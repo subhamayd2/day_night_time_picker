@@ -44,7 +44,7 @@ class AmPm extends StatelessWidget {
               child: Opacity(
                 opacity: !isAm ? unselectedOpacity : 1,
                 child: Text(
-                  "am",
+                  'am',
                   style: _style.copyWith(
                     color: isAm ? accentColor : unselectedColor,
                     fontWeight: isAm ? FontWeight.bold : null,
@@ -67,7 +67,7 @@ class AmPm extends StatelessWidget {
               child: Opacity(
                 opacity: isAm ? unselectedOpacity : 1,
                 child: Text(
-                  "pm",
+                  'pm',
                   style: _style.copyWith(
                     color: !isAm ? accentColor : unselectedColor,
                     fontWeight: !isAm ? FontWeight.bold : null,

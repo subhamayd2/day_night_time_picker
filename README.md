@@ -54,6 +54,9 @@ TextButton(
             showPicker(
                 context: context,
                 value: _time,
+                sunrise: TimeOfDay(hour: 6, minute: 0), // optional
+                sunset: TimeOfDay(hour: 18, minute: 0), // optional
+                duskSpanInMinutes: 120, // optional
                 onChange: onTimeChanged,
             ),
         );
@@ -70,7 +73,7 @@ TextButton(
 ## Props
 
 | Name                            | Description                                                                                                                        |                         Default                          |
-| :------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------: |
+|:--------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------| :------------------------------------------------------: |
 | **value**                       | **`Required`** Display value. It takes in [Time].                                                                                  |                                                          |
 | **onChange**                    | **`Required`** Return the new time the user picked as [Time].                                                                      |                                                          |
 | **isInlinePicker**              | Whether to render an inline widget.                                                                                                |                         `false`                          |
@@ -117,6 +120,9 @@ TextButton(
 | **disableAutoFocusToNextInput** | Whether to disable the auto focus to the next input after current input is selected.                                               |                         `false`                          |
 | **width**                       | Fixed width of the Picker container.                                                                                               |                `300` (`350` for iosStyle)                |
 | **height**                      | Fixed height of the Picker container.                                                                                              |                          `400`                           |
+| **sunrise**                     | Sunrise time.                                                                                                                      |                          `400`                           |
+| **sunset**                      | Sunset time.                                                                                                                       |                          `400`                           |
+| **duskSpanInMinutes**           | Dusk span in minutes.                                                                                                              |                          `400`                           |
 
 ---
 

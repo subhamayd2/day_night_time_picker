@@ -13,12 +13,12 @@ import 'package:flutter/material.dart';
 /// Private class. [StatefulWidget] that renders the content of the picker.
 // ignore: must_be_immutable
 class DayNightTimePickerAndroid extends StatefulWidget {
-  const DayNightTimePickerAndroid(
-      {Key? key,
-      required this.sunrise,
-      required this.sunset,
-      required this.duskSpanInMinutes})
-      : super(key: key);
+  const DayNightTimePickerAndroid({
+    Key? key,
+    required this.sunrise,
+    required this.sunset,
+    required this.duskSpanInMinutes,
+  }) : super(key: key);
   final TimeOfDay sunrise;
   final TimeOfDay sunset;
   final int duskSpanInMinutes;
@@ -81,9 +81,10 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 DayNightBanner(
-                    sunrise: widget.sunrise,
-                    sunset: widget.sunset,
-                    duskSpanInMinutes: widget.duskSpanInMinutes),
+                  sunrise: widget.sunrise,
+                  sunset: widget.sunset,
+                  duskSpanInMinutes: widget.duskSpanInMinutes,
+                ),
                 WrapperContainer(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -100,21 +101,23 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                                   ? null
                                   : () {
                                       timeState.onSelectedInputChange(
-                                          SelectedInput.HOUR);
+                                        SelectedInput.HOUR,
+                                      );
                                     },
                               value: hourValue.toString().padLeft(2, '0'),
                               isSelected:
                                   timeState.selected == SelectedInput.HOUR,
                             ),
                             const DisplayValue(
-                              value: ":",
+                              value: ':',
                             ),
                             DisplayValue(
                               onTap: timeState.widget.disableMinute!
                                   ? null
                                   : () {
                                       timeState.onSelectedInputChange(
-                                          SelectedInput.MINUTE);
+                                        SelectedInput.MINUTE,
+                                      );
                                     },
                               value: timeState.time.minute
                                   .toString()
@@ -125,12 +128,13 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                             ...timeState.widget.showSecondSelector
                                 ? [
                                     const DisplayValue(
-                                      value: ":",
+                                      value: ':',
                                     ),
                                     DisplayValue(
                                       onTap: () {
                                         timeState.onSelectedInputChange(
-                                            SelectedInput.SECOND);
+                                          SelectedInput.SECOND,
+                                        );
                                       },
                                       value: timeState.time.second
                                           .toString()

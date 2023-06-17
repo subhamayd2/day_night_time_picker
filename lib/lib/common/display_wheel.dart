@@ -66,10 +66,11 @@ class DisplayWheel extends StatelessWidget {
               final val =
                   (getModifiedLabel?.call(items[index]!) ?? (items[index]!))
                       .toString()
-                      .padLeft(2, "0");
+                      .padLeft(2, '0');
               return Center(
                 child: Text(
                   val,
+                  textScaleFactor: 0.85,
                   style: _commonTimeStyles.copyWith(
                     color: isSelected ? color : unselectedColor,
                   ),

@@ -166,8 +166,8 @@ class TimeModelBinding extends StatefulWidget {
     this.accentColor,
     this.ltrMode = true,
     this.unselectedColor,
-    this.cancelText = "cancel",
-    this.okText = "ok",
+    this.cancelText = 'cancel',
+    this.okText = 'ok',
     this.isOnValueChangeMode = false,
     this.sunAsset,
     this.moonAsset,
@@ -204,7 +204,7 @@ class TimeModelBinding extends StatefulWidget {
     this.showCancelButton = true,
     this.sunrise,
     this.sunset,
-    this.duskSpanInMinutes
+    this.duskSpanInMinutes,
   }) : super(key: key);
 
   @override

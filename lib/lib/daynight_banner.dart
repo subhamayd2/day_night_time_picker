@@ -14,12 +14,12 @@ class DayNightBanner extends StatelessWidget {
   final TimeOfDay sunset;
   final int duskSpanInMinutes;
 
-  const DayNightBanner(
-      {Key? key,
-      required this.sunrise,
-      required this.sunset,
-      required this.duskSpanInMinutes})
-      : super(key: key);
+  const DayNightBanner({
+    Key? key,
+    required this.sunrise,
+    required this.sunset,
+    required this.duskSpanInMinutes,
+  }) : super(key: key);
 
   /// Get the background color of the container, representing the time of day
   Color? getColor(bool isDay, bool isDusk) {
@@ -42,8 +42,9 @@ class DayNightBanner extends StatelessWidget {
 
     TimeOfDay currentTime = TimeOfDay(hour: hour, minute: minute);
     TimeOfDay duskTime = TimeOfDay(
-        hour: sunset.hour - duskHours.toInt(),
-        minute: sunset.minute - duskMinutes);
+      hour: sunset.hour - duskHours.toInt(),
+      minute: sunset.minute - duskMinutes,
+    );
 
     final isDay =
         timeOfDayToDouble(currentTime) >= timeOfDayToDouble(sunrise) &&

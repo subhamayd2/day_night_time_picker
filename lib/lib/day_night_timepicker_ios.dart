@@ -16,12 +16,12 @@ import 'utils.dart';
 /// Private class. [StatefulWidget] that renders the content of the picker.
 // ignore: must_be_immutable
 class DayNightTimePickerIos extends StatefulWidget {
-  const DayNightTimePickerIos(
-      {Key? key,
-      required this.sunrise,
-      required this.sunset,
-      required this.duskSpanInMinutes})
-      : super(key: key);
+  const DayNightTimePickerIos({
+    Key? key,
+    required this.sunrise,
+    required this.sunset,
+    required this.duskSpanInMinutes,
+  }) : super(key: key);
   final TimeOfDay sunrise;
   final TimeOfDay sunset;
   final int duskSpanInMinutes;
@@ -228,9 +228,10 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 DayNightBanner(
-                    sunrise: widget.sunrise,
-                    sunset: widget.sunset,
-                    duskSpanInMinutes: widget.duskSpanInMinutes),
+                  sunrise: widget.sunrise,
+                  sunset: widget.sunset,
+                  duskSpanInMinutes: widget.duskSpanInMinutes,
+                ),
                 WrapperContainer(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -275,7 +276,8 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                                           SelectedInput.SECOND,
                                       onChange: (int value) {
                                         timeState!.onSecondChange(
-                                            seconds[value]! + 0.0);
+                                          seconds[value]! + 0.0,
+                                        );
                                       },
                                     ),
                                     Text(timeState!.widget.secondLabel!),

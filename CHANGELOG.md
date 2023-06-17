@@ -1,6 +1,10 @@
-## [1.3.0] - 20th March 2023.
+## [1.3.0] - 17th June 2023.
 
+- added prop to set the sunrise/sunset/dusk timing
 - added `showCancelButton` to display the cancel button or not
+- auto focus next selector bug fixed
+- added linting
+
 ## [1.2.0+2] - 12th March 2023.
 
 - Minor bug fix.

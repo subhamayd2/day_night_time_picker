@@ -141,7 +141,8 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
             _minuteController!.position.isScrollingNotifier.addListener(() {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 if (!_minuteController!.position.isScrollingNotifier.value) {
-                  if (!timeState!.widget.disableAutoFocusToNextInput) {
+                  if (!timeState!.widget.disableAutoFocusToNextInput &&
+                      timeState!.widget.showSecondSelector) {
                     timeState!.onSelectedInputChange(SelectedInput.SECOND);
                   }
                   if (timeState!.widget.isOnValueChangeMode) {

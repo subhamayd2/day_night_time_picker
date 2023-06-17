@@ -154,7 +154,8 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                               timeState
                                   .onSelectedInputChange(SelectedInput.MINUTE);
                             } else if (timeState.selected ==
-                                SelectedInput.MINUTE) {
+                                    SelectedInput.MINUTE &&
+                                timeState.widget.showSecondSelector) {
                               timeState
                                   .onSelectedInputChange(SelectedInput.SECOND);
                             }

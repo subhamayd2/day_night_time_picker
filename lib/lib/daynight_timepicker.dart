@@ -151,6 +151,7 @@ dynamic showPicker({
   sunrise = const TimeOfDay(hour: 6, minute: 0),
   sunset = const TimeOfDay(hour: 18, minute: 0),
   duskSpanInMinutes = 120,
+  RouteSettings? settings,
 }) {
   if (minHour == double.infinity) {
     minHour = 0;
@@ -309,6 +310,7 @@ dynamic showPicker({
     barrierDismissible: barrierDismissible,
     opaque: false,
     barrierColor: barrierColor,
+    settings: settings,
   );
 }
 

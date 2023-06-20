@@ -123,6 +123,7 @@ TextButton(
 | **sunrise**                     | Sunrise time.                                                                                                                      |                          `400`                           |
 | **sunset**                      | Sunset time.                                                                                                                       |                          `400`                           |
 | **duskSpanInMinutes**           | Dusk span in minutes.                                                                                                              |                          `400`                           |
+| **settings**                    | _`Optional`_ Data that might be useful in constructing a [Route].                                                                  |                                                          |
 
 ---
 

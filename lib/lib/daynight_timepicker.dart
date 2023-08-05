@@ -94,6 +94,8 @@ import 'package:flutter/material.dart';
 ///
 /// **showSecondSelector** - Whether to use the second selector as well. Defaults to `false`.
 ///
+/// **displayBanner** - Display or hide the animated header banner.
+///
 dynamic showPicker({
   Key? key,
   BuildContext? context,

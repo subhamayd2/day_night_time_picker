@@ -100,7 +100,6 @@ class _HomeState extends State<Home> {
                   minHour: 9,
                   maxHour: 21,
                   is24HrFormat: false,
-                  displayBanner: false
                 ),
                 Text(
                   "IOS Style",

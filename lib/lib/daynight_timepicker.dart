@@ -94,8 +94,6 @@ import 'package:flutter/material.dart';
 ///
 /// **showSecondSelector** - Whether to use the second selector as well. Defaults to `false`.
 ///
-/// **displayBanner** - Display or hide the animated header banner.
-///
 dynamic showPicker({
   Key? key,
   BuildContext? context,
@@ -153,7 +151,6 @@ dynamic showPicker({
   sunrise = const TimeOfDay(hour: 6, minute: 0),
   sunset = const TimeOfDay(hour: 18, minute: 0),
   duskSpanInMinutes = 120,
-  bool displayBanner = true,
 }) {
   if (minHour == double.infinity) {
     minHour = 0;
@@ -234,7 +231,6 @@ dynamic showPicker({
         sunrise: sunrise,
         sunset: sunset,
         duskSpanInMinutes: duskSpanInMinutes,
-        displayBanner: displayBanner,
       );
 
   if (isInlinePicker) {

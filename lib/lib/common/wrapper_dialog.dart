@@ -29,7 +29,7 @@ class WrapperDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadius),
         child: SizedBox(
           width: timeState.widget.width,
-          height:  timeState.widget.displayBanner! ? timeState.widget.height : null,
+          height: timeState.widget.height,
           child: child,
         ),
       ),

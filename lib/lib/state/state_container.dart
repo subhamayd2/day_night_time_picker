@@ -153,9 +153,6 @@ class TimeModelBinding extends StatefulWidget {
   /// Dusk span of time in minutes.
   int? duskSpanInMinutes;
 
-  /// Display or hide the animated header banner
-  bool? displayBanner;
-
   /// Constructor for the [Widget]
   TimeModelBinding({
     Key? key,
@@ -208,7 +205,6 @@ class TimeModelBinding extends StatefulWidget {
     this.sunrise,
     this.sunset,
     this.duskSpanInMinutes,
-    this.displayBanner,
   }) : super(key: key);
 
   @override

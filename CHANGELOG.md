@@ -1,3 +1,7 @@
+## [1.3.0+1] - 15th August 2023.
+
+- added `settings` prop to pass [RouteSettings] to the [PageRouteBuilder]
+
 ## [1.3.0] - 17th June 2023.
 
 - added prop to set the sunrise/sunset/dusk timing

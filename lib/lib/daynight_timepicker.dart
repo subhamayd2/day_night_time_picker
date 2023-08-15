@@ -94,6 +94,8 @@ import 'package:flutter/material.dart';
 ///
 /// **showSecondSelector** - Whether to use the second selector as well. Defaults to `false`.
 ///
+/// **settings** - Data that might be useful in constructing a [Route].
+///
 dynamic showPicker({
   Key? key,
   BuildContext? context,

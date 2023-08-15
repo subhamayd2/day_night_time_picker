@@ -94,6 +94,8 @@ import 'package:flutter/material.dart';
 ///
 /// **showSecondSelector** - Whether to use the second selector as well. Defaults to `false`.
 ///
+/// **settings** - Data that might be useful in constructing a [Route].
+///
 dynamic showPicker({
   Key? key,
   BuildContext? context,
@@ -151,6 +153,7 @@ dynamic showPicker({
   sunrise = const TimeOfDay(hour: 6, minute: 0),
   sunset = const TimeOfDay(hour: 18, minute: 0),
   duskSpanInMinutes = 120,
+  RouteSettings? settings,
 }) {
   if (minHour == double.infinity) {
     minHour = 0;
@@ -309,6 +312,7 @@ dynamic showPicker({
     barrierDismissible: barrierDismissible,
     opaque: false,
     barrierColor: barrierColor,
+    settings: settings,
   );
 }
 

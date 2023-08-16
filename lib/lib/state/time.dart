@@ -17,6 +17,11 @@ class Time extends TimeOfDay {
     return Time(hour: time.hour, minute: time.minute, second: secondVal);
   }
 
+  /// Get [Time] instance from [DateTime]
+  factory Time.fromDateTime(DateTime time) {
+    return Time(hour: time.hour, minute: time.minute, second: time.second);
+  }
+
   /// Get [TimeOfDay] instance from [Time]
   TimeOfDay toTimeOfDay() {
     return TimeOfDay(hour: hour, minute: minute);

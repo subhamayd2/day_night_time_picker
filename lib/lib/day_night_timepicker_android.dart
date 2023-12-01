@@ -61,6 +61,7 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
     final hideButtons = timeState.widget.hideButtons;
 
     Orientation currentOrientation = MediaQuery.of(context).orientation;
+    double height = TimeModelBinding.of(context).widget.height;
 
     double value = timeState.time.hour.roundToDouble();
     if (timeState.selected == SelectedInput.MINUTE) {
@@ -91,61 +92,61 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       const AmPm(),
-                      Expanded(
-                        child: Row(
-                          textDirection: ltrMode,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            DisplayValue(
-                              onTap: timeState.widget.disableHour!
-                                  ? null
-                                  : () {
+                      const SizedBox(height: 8),
+                      const Spacer(),
+                      Row(
+                        textDirection: ltrMode,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          DisplayValue(
+                            onTap: timeState.widget.disableHour!
+                                ? null
+                                : () {
+                                    timeState.onSelectedInputChange(
+                                      SelectedInput.HOUR,
+                                    );
+                                  },
+                            value: hourValue.toString().padLeft(2, '0'),
+                            isSelected:
+                                timeState.selected == SelectedInput.HOUR,
+                          ),
+                          const DisplayValue(
+                            value: ':',
+                          ),
+                          DisplayValue(
+                            onTap: timeState.widget.disableMinute!
+                                ? null
+                                : () {
+                                    timeState.onSelectedInputChange(
+                                      SelectedInput.MINUTE,
+                                    );
+                                  },
+                            value: timeState.time.minute
+                                .toString()
+                                .padLeft(2, '0'),
+                            isSelected:
+                                timeState.selected == SelectedInput.MINUTE,
+                          ),
+                          ...timeState.widget.showSecondSelector
+                              ? [
+                                  const DisplayValue(
+                                    value: ':',
+                                  ),
+                                  DisplayValue(
+                                    onTap: () {
                                       timeState.onSelectedInputChange(
-                                        SelectedInput.HOUR,
+                                        SelectedInput.SECOND,
                                       );
                                     },
-                              value: hourValue.toString().padLeft(2, '0'),
-                              isSelected:
-                                  timeState.selected == SelectedInput.HOUR,
-                            ),
-                            const DisplayValue(
-                              value: ':',
-                            ),
-                            DisplayValue(
-                              onTap: timeState.widget.disableMinute!
-                                  ? null
-                                  : () {
-                                      timeState.onSelectedInputChange(
-                                        SelectedInput.MINUTE,
-                                      );
-                                    },
-                              value: timeState.time.minute
-                                  .toString()
-                                  .padLeft(2, '0'),
-                              isSelected:
-                                  timeState.selected == SelectedInput.MINUTE,
-                            ),
-                            ...timeState.widget.showSecondSelector
-                                ? [
-                                    const DisplayValue(
-                                      value: ':',
-                                    ),
-                                    DisplayValue(
-                                      onTap: () {
-                                        timeState.onSelectedInputChange(
-                                          SelectedInput.SECOND,
-                                        );
-                                      },
-                                      value: timeState.time.second
-                                          .toString()
-                                          .padLeft(2, '0'),
-                                      isSelected: timeState.selected ==
-                                          SelectedInput.SECOND,
-                                    ),
-                                  ]
-                                : []
-                          ],
-                        ),
+                                    value: timeState.time.second
+                                        .toString()
+                                        .padLeft(2, '0'),
+                                    isSelected: timeState.selected ==
+                                        SelectedInput.SECOND,
+                                  ),
+                                ]
+                              : []
+                        ],
                       ),
                       Slider(
                         onChangeEnd: (value) {
@@ -172,7 +173,9 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                         activeColor: color,
                         inactiveColor: color.withAlpha(55),
                       ),
+                      const Spacer(),
                       if (!hideButtons) const ActionButtons(),
+                      const SizedBox(height: 6),
                     ],
                   ),
                 ),

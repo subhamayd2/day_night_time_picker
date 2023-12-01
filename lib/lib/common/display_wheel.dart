@@ -56,9 +56,10 @@ class DisplayWheel extends StatelessWidget {
           itemExtent: 36,
           physics: disabled
               ? const NeverScrollableScrollPhysics()
-              : const FixedExtentScrollPhysics(),
+              : const FixedExtentScrollPhysics(parent: BouncingScrollPhysics()),
           overAndUnderCenterOpacity: disabled ? 0 : 0.25,
           perspective: 0.01,
+          magnification: timeState.widget.wheelMagnification,
           onSelectedItemChanged: onChange,
           childDelegate: ListWheelChildBuilderDelegate(
             childCount: items.length,

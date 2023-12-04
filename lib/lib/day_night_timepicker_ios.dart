@@ -301,7 +301,6 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                       ),
                       const Spacer(),
                       if (!timeState!.widget.hideButtons) const ActionButtons(),
-                      const SizedBox(height: 6),
                     ],
                   ),
                 ),

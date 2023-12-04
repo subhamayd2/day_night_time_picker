@@ -50,6 +50,8 @@ import 'package:flutter/material.dart';
 ///
 /// **dialogInsetPadding** - Inset padding of the [Modal] in EdgeInsets. Defaults to `EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0)`.
 ///
+/// **contentPadding** - Inset padding of the time content (exclude the night/sun animation) in EdgeInsets. Defaults to `EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0)`.
+///
 /// **barrierDismissible** - Whether clicking outside should dismiss the [Modal]. Defaults to `true`.
 ///
 /// **iosStylePicker** - Whether to display a IOS style picker (Not exactly the same). Defaults to `false`.
@@ -131,6 +133,8 @@ dynamic showPicker({
   double? elevation,
   EdgeInsets? dialogInsetPadding =
       const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+  EdgeInsets contentPadding =
+      const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
   bool barrierDismissible = true,
   bool iosStylePicker = false,
   bool displayHeader = true,
@@ -220,6 +224,7 @@ dynamic showPicker({
         borderRadius: borderRadius,
         elevation: elevation,
         dialogInsetPadding: dialogInsetPadding,
+        contentPadding: contentPadding,
         minuteInterval: minuteInterval,
         secondInterval: secondInterval,
         disableMinute: disableMinute,

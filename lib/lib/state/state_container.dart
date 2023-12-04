@@ -56,6 +56,9 @@ class TimeModelBinding extends StatefulWidget {
   /// Inset padding of the [Modal] in [EdgeInsets].
   final EdgeInsets? dialogInsetPadding;
 
+  /// Inset padding of the content in [EdgeInsets].
+  final EdgeInsets? contentPadding;
+
   /// Steps interval while changing [minute].
   final TimePickerInterval? minuteInterval;
 
@@ -191,6 +194,7 @@ class TimeModelBinding extends StatefulWidget {
     this.borderRadius,
     this.elevation,
     this.dialogInsetPadding,
+    this.contentPadding,
     this.minuteInterval,
     this.secondInterval,
     this.disableMinute,
@@ -225,7 +229,7 @@ class TimeModelBinding extends StatefulWidget {
     this.sunrise,
     this.sunset,
     this.duskSpanInMinutes,
-  })  : height = height ?? 245,
+  })  : height = height ?? 260,
         wheelHeight = wheelHeight ?? 100,
         wheelMagnification = wheelMagnification ?? 1.0,
         backgroundColor = backgroundColor ?? Colors.white,

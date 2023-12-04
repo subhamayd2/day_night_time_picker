@@ -175,7 +175,6 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                       ),
                       const Spacer(),
                       if (!hideButtons) const ActionButtons(),
-                      const SizedBox(height: 6),
                     ],
                   ),
                 ),

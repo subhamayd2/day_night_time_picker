@@ -21,11 +21,7 @@ class WrapperContainer extends StatelessWidget {
       child: Container(
         height: height,
         color: backgroundColor,
-        padding: const EdgeInsets.only(
-          left: 12.0,
-          top: 12.0,
-          right: 12.0,
-        ),
+        padding: timeState.widget.contentPadding,
         child: child,
       ),
     );

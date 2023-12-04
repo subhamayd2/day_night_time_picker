@@ -30,10 +30,16 @@ class DayNightTimePickerAndroid extends StatefulWidget {
 
 /// Picker state class
 class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
+  late TimeModelBindingState timeState;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    timeState = TimeModelBinding.of(context);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final timeState = TimeModelBinding.of(context);
-
     double min =
         getMin(timeState.widget.minMinute, timeState.widget.minuteInterval);
     double max =
@@ -61,7 +67,6 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
     final hideButtons = timeState.widget.hideButtons;
 
     Orientation currentOrientation = MediaQuery.of(context).orientation;
-    double height = TimeModelBinding.of(context).widget.height;
 
     double value = timeState.time.hour.roundToDouble();
     if (timeState.selected == SelectedInput.MINUTE) {
@@ -149,22 +154,7 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                         ],
                       ),
                       Slider(
-                        onChangeEnd: (value) {
-                          if (!timeState.widget.disableAutoFocusToNextInput) {
-                            if (timeState.selected == SelectedInput.HOUR) {
-                              timeState
-                                  .onSelectedInputChange(SelectedInput.MINUTE);
-                            } else if (timeState.selected ==
-                                    SelectedInput.MINUTE &&
-                                timeState.widget.showSecondSelector) {
-                              timeState
-                                  .onSelectedInputChange(SelectedInput.SECOND);
-                            }
-                          }
-                          if (timeState.widget.isOnValueChangeMode) {
-                            timeState.onOk();
-                          }
-                        },
+                        onChangeEnd: (_) => onChangedSlider(),
                         value: value,
                         onChanged: timeState.onTimeChange,
                         min: min,
@@ -184,5 +174,23 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
         ),
       ),
     );
+  }
+
+  onChangedSlider() {
+    if (!timeState.widget.disableAutoFocusToNextInput) {
+      if (timeState.selected == SelectedInput.HOUR) {
+        if (!(timeState.widget.disableMinute ?? false)) {
+          timeState.onSelectedInputChange(SelectedInput.MINUTE);
+        } else if (timeState.widget.showSecondSelector) {
+          timeState.onSelectedInputChange(SelectedInput.SECOND);
+        }
+      } else if (timeState.selected == SelectedInput.MINUTE &&
+          timeState.widget.showSecondSelector) {
+        timeState.onSelectedInputChange(SelectedInput.SECOND);
+      }
+    }
+    if (timeState.widget.isOnValueChangeMode) {
+      timeState.onOk();
+    }
   }
 }

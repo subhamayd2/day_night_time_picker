@@ -6,32 +6,24 @@ class WrapperContainer extends StatelessWidget {
   /// The child [Widget] to render
   final Widget child;
 
-  /// The height of the Wheel section
-  final double? heightOfWheel;
-
   /// Constructor for the [Widget]
   const WrapperContainer({
     Key? key,
     required this.child,
-    this.heightOfWheel,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final timeState = TimeModelBinding.of(context);
-    final height = timeState.widget.is24HrFormat
-        ? 200.0
-        : timeState.widget.wheelHeight ?? 240.0;
-
-    return Container(
-      height: height,
-      color: Theme.of(context).cardColor,
-      padding: const EdgeInsets.only(
-        left: 12.0,
-        top: 12.0,
-        right: 12.0,
+    var timeState = TimeModelBinding.of(context);
+    double height = timeState.widget.height;
+    Color backgroundColor = timeState.widget.backgroundColor;
+    return Expanded(
+      child: Container(
+        height: height,
+        color: backgroundColor,
+        padding: timeState.widget.contentPadding,
+        child: child,
       ),
-      child: child,
     );
   }
 }

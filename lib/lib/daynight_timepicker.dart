@@ -26,15 +26,21 @@ import 'package:flutter/material.dart';
 ///
 /// **unselectedColor** - Color applied unselected options (am/pm, hour/minute). Defaults to `Colors.grey`.
 ///
-/// **cancelText** - Text displayed for the Cancel button. Defaults to `cancel`.
+/// **cancelText** - Text displayed for the Cancel button. Defaults to `Cancel`.
 ///
-/// **okText** - Text displayed for the Ok button. Defaults to `ok`.
+/// **okText** - Text displayed for the Ok button. Defaults to `Ok`.
+///
+/// **amLabel** - Text displayed for the 'am' text. Defaults to `am`.
+///
+/// **pmLabel** - Text displayed for the 'pm' text. Defaults to `pm`.
 ///
 /// **sunAsset** - Image asset used for the Sun. Default asset provided.
 ///
 /// **moonAsset** - Image asset used for the Moon. Default asset provided.
 ///
 /// **blurredBackground** - Whether to blur the background of the [Modal]. Defaults to `false`.
+///
+/// **backgroundColor** - Set to the background of the [Modal]. Defaults to `Colors.white`.
 ///
 /// **barrierColor** - Color of the background of the [Modal]. Defaults to `Colors.black45`.
 ///
@@ -43,6 +49,8 @@ import 'package:flutter/material.dart';
 /// **elevation** - Elevation of the [Modal] in double. Defaults to `12.0`.
 ///
 /// **dialogInsetPadding** - Inset padding of the [Modal] in EdgeInsets. Defaults to `EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0)`.
+///
+/// **contentPadding** - Inset padding of the time content (exclude the night/sun animation) in EdgeInsets. Defaults to `EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0)`.
 ///
 /// **barrierDismissible** - Whether clicking outside should dismiss the [Modal]. Defaults to `true`.
 ///
@@ -84,13 +92,17 @@ import 'package:flutter/material.dart';
 ///
 /// **cancelStyle** - Cancel button's text style. Defaults to `const TextStyle(fontWeight: FontWeight.bold)`.
 ///
+/// **hmsStyle** - Set text style of 'hours', 'minutes', and 'seconds'. Defaults to `null`.
+///
 /// **hideButtons** - Whether to hide the buttons (ok and cancel). Defaults to `false`.
 ///
 /// **disableAutoFocusToNextInput** - Whether to disable the auto focus to the next input after current input is selected. Defaults to `false`.
 ///
 /// **width** - Fixed width of the Picker container. Defaults to `300` but `350` for `iosStyle`.
 ///
-/// **height** - Fixed height of the Picker container. Defaults to `400`.
+/// **height** - Fixed height of the Picker container. Defaults to `245`.
+///
+/// **wheelHeight** - Fixed height of the iOS style scrolling wheel. Defaults to `100`.
 ///
 /// **showSecondSelector** - Whether to use the second selector as well. Defaults to `false`.
 ///
@@ -110,6 +122,8 @@ dynamic showPicker({
   bool isOnChangeValueMode = false,
   String cancelText = 'Cancel',
   String okText = 'Ok',
+  String amLabel = 'am',
+  String pmLabel = 'pm',
   Image? sunAsset,
   Image? moonAsset,
   bool blurredBackground = false,
@@ -119,6 +133,8 @@ dynamic showPicker({
   double? elevation,
   EdgeInsets? dialogInsetPadding =
       const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+  EdgeInsets contentPadding =
+      const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
   bool barrierDismissible = true,
   bool iosStylePicker = false,
   bool displayHeader = true,
@@ -140,20 +156,23 @@ dynamic showPicker({
   double maxHour = double.infinity,
   TextStyle okStyle = const TextStyle(fontWeight: FontWeight.bold),
   TextStyle cancelStyle = const TextStyle(fontWeight: FontWeight.bold),
+  TextStyle? hmsStyle,
   ButtonStyle? buttonStyle,
   ButtonStyle? cancelButtonStyle,
   double? buttonsSpacing,
   bool hideButtons = false,
   bool disableAutoFocusToNextInput = false,
   double width = 300,
-  double height = 400,
+  double? height,
   bool showSecondSelector = false,
   double? wheelHeight,
+  double? wheelMagnification,
   bool showCancelButton = true,
   sunrise = const TimeOfDay(hour: 6, minute: 0),
   sunset = const TimeOfDay(hour: 18, minute: 0),
   duskSpanInMinutes = 120,
   RouteSettings? settings,
+  Color? backgroundColor,
 }) {
   if (minHour == double.infinity) {
     minHour = 0;
@@ -196,12 +215,16 @@ dynamic showPicker({
         unselectedColor: unselectedColor,
         cancelText: cancelText,
         okText: okText,
+        amLabel: amLabel,
+        pmLabel: pmLabel,
         sunAsset: sunAsset,
         moonAsset: moonAsset,
         blurredBackground: blurredBackground,
+        backgroundColor: backgroundColor,
         borderRadius: borderRadius,
         elevation: elevation,
         dialogInsetPadding: dialogInsetPadding,
+        contentPadding: contentPadding,
         minuteInterval: minuteInterval,
         secondInterval: secondInterval,
         disableMinute: disableMinute,
@@ -215,6 +238,7 @@ dynamic showPicker({
         focusMinutePicker: focusMinutePicker,
         okStyle: okStyle,
         cancelStyle: cancelStyle,
+        hmsStyle: hmsStyle,
         buttonStyle: buttonStyle,
         cancelButtonStyle: cancelButtonStyle,
         buttonsSpacing: buttonsSpacing,
@@ -227,6 +251,7 @@ dynamic showPicker({
         height: height,
         showSecondSelector: showSecondSelector,
         wheelHeight: wheelHeight,
+        wheelMagnification: wheelMagnification,
         isOnValueChangeMode: isOnChangeValueMode,
         hideButtons: hideButtons,
         showCancelButton: showCancelButton,

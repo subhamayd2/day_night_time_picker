@@ -30,10 +30,16 @@ class DayNightTimePickerAndroid extends StatefulWidget {
 
 /// Picker state class
 class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
+  late TimeModelBindingState timeState;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    timeState = TimeModelBinding.of(context);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final timeState = TimeModelBinding.of(context);
-
     double min =
         getMin(timeState.widget.minMinute, timeState.widget.minuteInterval);
     double max =
@@ -91,79 +97,64 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       const AmPm(),
-                      Expanded(
-                        child: Row(
-                          textDirection: ltrMode,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            DisplayValue(
-                              onTap: timeState.widget.disableHour!
-                                  ? null
-                                  : () {
+                      const SizedBox(height: 8),
+                      const Spacer(),
+                      Row(
+                        textDirection: ltrMode,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          DisplayValue(
+                            onTap: timeState.widget.disableHour!
+                                ? null
+                                : () {
+                                    timeState.onSelectedInputChange(
+                                      SelectedInput.HOUR,
+                                    );
+                                  },
+                            value: hourValue.toString().padLeft(2, '0'),
+                            isSelected:
+                                timeState.selected == SelectedInput.HOUR,
+                          ),
+                          const DisplayValue(
+                            value: ':',
+                          ),
+                          DisplayValue(
+                            onTap: timeState.widget.disableMinute!
+                                ? null
+                                : () {
+                                    timeState.onSelectedInputChange(
+                                      SelectedInput.MINUTE,
+                                    );
+                                  },
+                            value: timeState.time.minute
+                                .toString()
+                                .padLeft(2, '0'),
+                            isSelected:
+                                timeState.selected == SelectedInput.MINUTE,
+                          ),
+                          ...timeState.widget.showSecondSelector
+                              ? [
+                                  const DisplayValue(
+                                    value: ':',
+                                  ),
+                                  DisplayValue(
+                                    onTap: () {
                                       timeState.onSelectedInputChange(
-                                        SelectedInput.HOUR,
+                                        SelectedInput.SECOND,
                                       );
                                     },
-                              value: hourValue.toString().padLeft(2, '0'),
-                              isSelected:
-                                  timeState.selected == SelectedInput.HOUR,
-                            ),
-                            const DisplayValue(
-                              value: ':',
-                            ),
-                            DisplayValue(
-                              onTap: timeState.widget.disableMinute!
-                                  ? null
-                                  : () {
-                                      timeState.onSelectedInputChange(
-                                        SelectedInput.MINUTE,
-                                      );
-                                    },
-                              value: timeState.time.minute
-                                  .toString()
-                                  .padLeft(2, '0'),
-                              isSelected:
-                                  timeState.selected == SelectedInput.MINUTE,
-                            ),
-                            ...timeState.widget.showSecondSelector
-                                ? [
-                                    const DisplayValue(
-                                      value: ':',
-                                    ),
-                                    DisplayValue(
-                                      onTap: () {
-                                        timeState.onSelectedInputChange(
-                                          SelectedInput.SECOND,
-                                        );
-                                      },
-                                      value: timeState.time.second
-                                          .toString()
-                                          .padLeft(2, '0'),
-                                      isSelected: timeState.selected ==
-                                          SelectedInput.SECOND,
-                                    ),
-                                  ]
-                                : []
-                          ],
-                        ),
+                                    value: timeState.time.second
+                                        .toString()
+                                        .padLeft(2, '0'),
+                                    isSelected: timeState.selected ==
+                                        SelectedInput.SECOND,
+                                  ),
+                                ]
+                              : []
+                        ],
                       ),
                       Slider(
-                        onChangeEnd: (value) {
-                          if (!timeState.widget.disableAutoFocusToNextInput) {
-                            if (timeState.selected == SelectedInput.HOUR) {
-                              timeState
-                                  .onSelectedInputChange(SelectedInput.MINUTE);
-                            } else if (timeState.selected ==
-                                    SelectedInput.MINUTE &&
-                                timeState.widget.showSecondSelector) {
-                              timeState
-                                  .onSelectedInputChange(SelectedInput.SECOND);
-                            }
-                          }
-                          if (timeState.widget.isOnValueChangeMode) {
-                            timeState.onOk();
-                          }
-                        },
+                        onChangeEnd: (_) => onChangedSlider(),
                         value: value,
                         onChanged: timeState.onTimeChange,
                         min: min,
@@ -172,6 +163,7 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
                         activeColor: color,
                         inactiveColor: color.withAlpha(55),
                       ),
+                      const Spacer(),
                       if (!hideButtons) const ActionButtons(),
                     ],
                   ),
@@ -182,5 +174,23 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
         ),
       ),
     );
+  }
+
+  onChangedSlider() {
+    if (!timeState.widget.disableAutoFocusToNextInput) {
+      if (timeState.selected == SelectedInput.HOUR) {
+        if (!(timeState.widget.disableMinute ?? false)) {
+          timeState.onSelectedInputChange(SelectedInput.MINUTE);
+        } else if (timeState.widget.showSecondSelector) {
+          timeState.onSelectedInputChange(SelectedInput.SECOND);
+        }
+      } else if (timeState.selected == SelectedInput.MINUTE &&
+          timeState.widget.showSecondSelector) {
+        timeState.onSelectedInputChange(SelectedInput.SECOND);
+      }
+    }
+    if (timeState.widget.isOnValueChangeMode) {
+      timeState.onOk();
+    }
   }
 }

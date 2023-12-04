@@ -113,7 +113,11 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 if (!_hourController!.position.isScrollingNotifier.value) {
                   if (!timeState!.widget.disableAutoFocusToNextInput) {
-                    timeState!.onSelectedInputChange(SelectedInput.MINUTE);
+                    if (!(timeState!.widget.disableMinute ?? false)) {
+                      timeState!.onSelectedInputChange(SelectedInput.MINUTE);
+                    } else if (timeState!.widget.showSecondSelector) {
+                      timeState!.onSelectedInputChange(SelectedInput.SECOND);
+                    }
                   }
                   if (timeState!.widget.isOnValueChangeMode) {
                     timeState!.onOk();
@@ -216,6 +220,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   @override
   Widget build(BuildContext context) {
     Orientation currentOrientation = MediaQuery.of(context).orientation;
+    double wheelHeight = TimeModelBinding.of(context).widget.wheelHeight;
 
     return Center(
       child: SingleChildScrollView(
@@ -239,7 +244,9 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       const AmPm(),
-                      Expanded(
+                      const Spacer(),
+                      SizedBox(
+                        height: wheelHeight,
                         child: Row(
                           textDirection: ltrMode,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -255,7 +262,10 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                               disabled: timeState!.widget.disableHour!,
                               getModifiedLabel: getModifiedLabel,
                             ),
-                            Text(timeState!.widget.hourLabel!),
+                            Text(
+                              timeState!.widget.hourLabel!,
+                              style: timeState!.widget.hmsStyle,
+                            ),
                             DisplayWheel(
                               controller: _minuteController!,
                               items: minutes,
@@ -267,7 +277,10 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                               },
                               disabled: timeState!.widget.disableMinute!,
                             ),
-                            Text(timeState!.widget.minuteLabel!),
+                            Text(
+                              timeState!.widget.minuteLabel!,
+                              style: timeState!.widget.hmsStyle,
+                            ),
                             ...(timeState!.widget.showSecondSelector
                                 ? [
                                     DisplayWheel(
@@ -281,13 +294,17 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
                                         );
                                       },
                                     ),
-                                    Text(timeState!.widget.secondLabel!),
+                                    Text(
+                                      timeState!.widget.secondLabel!,
+                                      style: timeState!.widget.hmsStyle,
+                                    ),
                                   ]
                                 : []),
                           ],
                         ),
                       ),
-                      if (!timeState!.widget.hideButtons) const ActionButtons()
+                      const Spacer(),
+                      if (!timeState!.widget.hideButtons) const ActionButtons(),
                     ],
                   ),
                 ),

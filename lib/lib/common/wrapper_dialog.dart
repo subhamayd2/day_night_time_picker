@@ -18,6 +18,7 @@ class WrapperDialog extends StatelessWidget {
     final timeState = TimeModelBinding.of(context);
     final borderRadius = timeState.widget.borderRadius ?? BORDER_RADIUS;
     final elevation = timeState.widget.elevation ?? ELEVATION;
+    final backgroundColor = timeState.widget.backgroundColor;
 
     return Dialog(
       insetPadding: timeState.widget.dialogInsetPadding,
@@ -27,9 +28,7 @@ class WrapperDialog extends StatelessWidget {
       elevation: elevation,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(borderRadius),
-        child: SizedBox(
-          width: timeState.widget.width,
-          height: timeState.widget.height,
+        child: IntrinsicHeight(
           child: child,
         ),
       ),

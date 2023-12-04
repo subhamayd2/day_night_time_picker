@@ -44,6 +44,9 @@ class TimeModelBinding extends StatefulWidget {
   /// Whether to blur the background of the [Modal].
   final bool blurredBackground;
 
+  /// Set the background color of the [Modal].
+  final Color backgroundColor;
+
   /// Border radius of the [Container] in [double].
   final double? borderRadius;
 
@@ -52,6 +55,9 @@ class TimeModelBinding extends StatefulWidget {
 
   /// Inset padding of the [Modal] in [EdgeInsets].
   final EdgeInsets? dialogInsetPadding;
+
+  /// Inset padding of the content in [EdgeInsets].
+  final EdgeInsets? contentPadding;
 
   /// Steps interval while changing [minute].
   final TimePickerInterval? minuteInterval;
@@ -92,6 +98,15 @@ class TimeModelBinding extends StatefulWidget {
   /// Label for the `second` text.
   final String? secondLabel;
 
+  /// Label for the 'am' text.
+  final String amLabel;
+
+  /// Label for the 'pm' text.
+  final String pmLabel;
+
+  /// Text style for the 'hours', 'minutes', and 'seconds'
+  final TextStyle? hmsStyle;
+
   /// Whether the widget is displayed as a popup or inline
   final bool isInlineWidget;
 
@@ -124,7 +139,10 @@ class TimeModelBinding extends StatefulWidget {
   final Widget child;
 
   /// The height of the Wheel section
-  double? wheelHeight;
+  double wheelHeight;
+
+  /// The magnification of the Wheel section
+  double wheelMagnification;
 
   /// Whether to hide the buttons (ok and cancel). Defaults to `false`.
   bool hideButtons;
@@ -172,9 +190,11 @@ class TimeModelBinding extends StatefulWidget {
     this.sunAsset,
     this.moonAsset,
     this.blurredBackground = false,
+    Color? backgroundColor,
     this.borderRadius,
     this.elevation,
     this.dialogInsetPadding,
+    this.contentPadding,
     this.minuteInterval,
     this.secondInterval,
     this.disableMinute,
@@ -188,24 +208,32 @@ class TimeModelBinding extends StatefulWidget {
     this.hourLabel,
     this.minuteLabel,
     this.secondLabel,
+    this.amLabel = 'am',
+    this.pmLabel = 'pm',
     this.isInlineWidget = false,
     this.focusMinutePicker = false,
     this.okStyle = const TextStyle(fontWeight: FontWeight.bold),
     this.cancelStyle = const TextStyle(fontWeight: FontWeight.bold),
+    this.hmsStyle,
     this.buttonStyle,
     this.cancelButtonStyle,
     this.buttonsSpacing,
-    this.wheelHeight,
+    double? wheelHeight,
+    double? wheelMagnification,
     this.hideButtons = false,
     this.disableAutoFocusToNextInput = false,
     this.width = 0,
-    this.height = 0,
+    double? height,
     this.showSecondSelector = false,
     this.showCancelButton = true,
     this.sunrise,
     this.sunset,
     this.duskSpanInMinutes,
-  }) : super(key: key);
+  })  : height = height ?? 260,
+        wheelHeight = wheelHeight ?? 100,
+        wheelMagnification = wheelMagnification ?? 1.0,
+        backgroundColor = backgroundColor ?? Colors.white,
+        super(key: key);
 
   @override
   TimeModelBindingState createState() => TimeModelBindingState();
